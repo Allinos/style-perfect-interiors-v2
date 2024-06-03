@@ -1,0 +1,235 @@
+.main .total-amount {
+    background: var(--green);
+}
+
+.main .total-amount::before {
+    content: '';
+    position: absolute;
+    top: -38px;
+    right: -42px;
+    width: 100px;
+    height: 100px;
+    background: hsl(160, 100%, 40%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.main .total-amount::after {
+    content: '';
+    position: absolute;
+    top: -42px;
+    right: -15px;
+    width: 100px;
+    height: 100px;
+    background: hsl(160, 100%, 40%);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.main .amount_in-bank {
+    background: var(--primary-color);
+}
+
+.main .amount_in-bank::before {
+    content: '';
+    position: absolute;
+    top: -38px;
+    right: -42px;
+    width: 100px;
+    height: 100px;
+    background: hsl(255, 61%, 39%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.main .amount_in-bank::after {
+    content: '';
+    position: absolute;
+    top: -42px;
+    right: -15px;
+    width: 100px;
+    height: 100px;
+    background: hsl(255, 61%, 39%);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.main .cash_in-hand {
+    background: var(--secondary-color);
+}
+
+.main .cash_in-hand::before {
+    content: '';
+    position: absolute;
+    top: -38px;
+    right: -42px;
+    width: 100px;
+    height: 100px;
+    background: hsl(212, 80%, 42%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.main .cash_in-hand::after {
+    content: '';
+    position: absolute;
+    top: -42px;
+    right: -15px;
+    width: 100px;
+    height: 100px;
+    background: hsl(212, 80%, 42%);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+/* --------FINANCE TABLE------------ */
+.data-info .finegrid {
+    display: grid;
+    /* grid-template-columns: 4rem repeat(5, minmax(0, 1fr)) 1.5rem; */
+    grid-template-columns: 4rem repeat(5, minmax(0, 1fr)) 4.5rem;
+    align-items: center;
+    justify-items: flex-start;
+    gap: 10px;
+}
+
+.accordion-content .action-icons {
+    display: flex;
+    gap: 15px;
+    fill:var(--primary-color);
+}
+.fdata.open {
+    margin-top: 0;
+}
+
+.main-dropdown .finance-dropdown {
+    background: var(--white);
+    padding: 10px;
+    border-radius: var(--border-radius-1);
+    /* width: 300px; */
+}
+
+.main-dropdown .finance-dropdown .flex:not(.drop-btn) {
+    margin-top: 16px;
+}
+
+.main-dropdown .finance-dropdown .flex p {
+    width: 100%;
+    color: black;
+    font-weight: 600;
+}
+
+.main-dropdown :is(.finance-dropdown, .advance_dropdown) :is(input, select) {
+    height: 2rem;
+    width: 100%;
+    border-radius: var(--border-radius-1);
+    background: var(--bg-2);
+    outline: 1px solid var(--black-light);
+    animation: var(--animation-1);
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.main-dropdown :is(.finance-dropdown, .advance_dropdown) input:hover {
+    outline: 1px solid var(--black-light-2);
+}
+
+.main-dropdown :is(.finance-dropdown, .advance_dropdown) input:focus {
+    outline: 2px solid var(--secondary-color);
+}
+
+.advance_dropdown .field :is(p:first-child, label) {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--grey);
+    line-height: 2.5;
+}
+
+.advance_dropdown .field {
+    flex-grow: 1;
+}
+
+.advance_dropdown .field p:last-child {
+    font-weight: 600;
+}
+
+.totalf {
+    position: relative;
+}
+
+.totalf span.maka {
+    /* width: 15px; */
+    /* display: inline-block; */
+    /* position: absolute; */
+    /* top: 1px; */
+    font-size: 10px;
+    display: block;
+    color: var(--grey);
+    user-select: none;
+}
+
+.totalf span.btn {
+    position: absolute;
+    top: 0;
+    right: -30px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.totalf span.btn svg {
+    width: 13px;
+}
+
+.adata .finance_expand {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.finance_expand .installment {
+    justify-content: space-between;
+    outline: 1px solid var(--primary-outline);
+    background: var(--primary-bg);
+    padding: 0.5rem;
+    border-radius: var(--border-radius-1);
+}
+
+.installment .field {}
+
+.installment .field :is(p:first-child) {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.installment .field p:last-child {
+    font-size: 14px;
+}
+
+.installment .field button {
+    padding: 3px 5px;
+    color: var(--secondary-color);
+    font-weight: 500;
+    border-radius: var(--border-radius-1);
+    outline: 1px solid var(--sec-outline);
+    background: var(--sec-light-color);
+}
+.installment .field button:last-child{
+    outline: 1px solid var(--ter-outline);
+    background: var(--ter-light-color);
+    color: var(--ter-dark-color);
+}
+/* ------------RESONSIVE KIHINI IYAT LIKHISU DEII-------------------- */
+@media only screen and (max-width : 768px) {
+    .data-info :is(.finegrid) {
+        grid-template-columns: 1fr;
+    }
+
+    .data-info .misgrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
