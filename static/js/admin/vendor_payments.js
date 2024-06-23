@@ -39,7 +39,7 @@ async function openDick(data) {
         </div></form></div>`}
 
 
-async function openEdit(e, o) {
+async function OpenAddPayment_toSupply(e, o) {
     document.getElementsByClassName('main')[0].classList.add('flow')
     let mainCtn = e.parentElement.parentElement;
     let amount = mainCtn.querySelector('.amount');

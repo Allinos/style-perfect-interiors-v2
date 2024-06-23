@@ -89,7 +89,7 @@
 .data-info .finegrid {
     display: grid;
     /* grid-template-columns: 4rem repeat(5, minmax(0, 1fr)) 1.5rem; */
-    grid-template-columns: 4rem repeat(6, minmax(0, 1fr)) 1.5rem;
+    grid-template-columns: 4rem repeat(6, minmax(0, 1fr)) 2.5rem;
     align-items: center;
     justify-items: flex-start;
     gap: 10px;
@@ -97,7 +97,6 @@
 
 .accordion-content .action-icons {
     display: flex;
-    gap: 15px;
     fill:var(--primary-color);
 }
 .fdata.open {

@@ -64,7 +64,7 @@
                                         <%= e?.total_amount %>/-
                                     </span>
                                 </p>
-                               
+
                                 <p class="emp_date">
                                     <span class="uppercase hide block phead"></span>
                                     <span>
@@ -86,6 +86,13 @@
                                 </p>
 
                                 <p class="arrow-down action-icons">
+                                    <svg onclick="OpenAddPayment_toSupply({dealid: <%= e?.id %>})" viewBox="0 0 48 48" width="25"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M38 6H10c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4V10c0-2.21-1.79-4-4-4zm-4 20h-8v8h-4v-8h-8v-4h8v-8h4v8h8v4z" />
+                                        <path d="M0 0h48v48H0z" fill="none" />
+                                    </svg>
+
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down"
                                         class="svg">
                                         <path fill="##000000"
@@ -117,7 +124,7 @@
                                             <p class="uppercase">Date</p>
                                             <p class="date"></p>
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                                 <!-- ---------------  -->
@@ -137,7 +144,7 @@
         <!-- JAVASCRIPT -->
         <script src="../../js/admin/header.js"></script>
         <script src="../../js/admin/common.js"></script>
-        <script src="../../js/admin/project.finance.js"></script>
+        <script src="../../js/admin/vendor_payments.js"></script>
 </body>
 
 </html>
