@@ -48,7 +48,7 @@
                     </svg>
                     <div class="total_user_data">
                         <p class="size">&#8377;<span>
-                                <% if (typeof data[1] !=='undefined' && Array.isArray(data[1]) ) {    %>
+                                <% if (typeof data[1] !=='undefined' && Array.isArray(data[1]) ) { %>
                                     <% var cash=(data[1][0]?.cash_sum) %>
                                         <%= cash %>
                                             <% } else { %>
@@ -212,29 +212,29 @@
                                     </p>
                                 </div>
                                 <div class="expense-remarks">
-                                    <p class="uppercase exp-rem">category</p>
-                                    <p class="exp-rem-content">
+                                    <p class="uppercase exp-cat">category</p>
+                                    <p class="exp-category-data">
                                         <%= (exps.categories)?exps?.categories:'N/A' %>
                                     </p>
                                 </div>
-                                <%  if((exps.project_id)){  %>
-                                <div class="expense-remarks">
-                                    <p class="uppercase exp-rem">Project</p>
-                                    <p class="exp-rem-content">
-                                        <%= exps.project_id %>
-                                    </p>
-                                </div>
-                                <% }%>
-                                <!-- ---------------------------------  -->
-                                <div class="expense-edit">
-                                    <a class="eicon" onclick="Opn_ExpenseCtn('.editexpense',this)"><svg
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pen">
-                                            <path fill="##000000"
-                                                d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z">
-                                            </path>
-                                        </svg></a>
-                                    <span class="edit">Edit</span>
-                                </div>
+                                <% if((exps.project_id)){ %>
+                                    <div class="expense-remarks">
+                                        <p class="uppercase exp-pro">Project</p>
+                                        <p class="exp-project-data">
+                                            <%= exps.project_id %>
+                                        </p>
+                                    </div>
+                                    <% }%>
+                                        <!-- ---------------------------------  -->
+                                        <div class="expense-edit">
+                                            <a class="eicon" onclick="Opn_ExpenseCtn('.editexpense',this)"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pen">
+                                                    <path fill="##000000"
+                                                        d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z">
+                                                    </path>
+                                                </svg></a>
+                                            <span class="edit">Edit</span>
+                                        </div>
                             </div>
                             <hr>
                             <% }) %>
@@ -275,6 +275,23 @@
                             <label for="date">Date of Expense</label>
                             <input type="date" name="date" id="date">
                         </div>
+                        <div class="field">
+                            <label for="date">Category</label>
+                            <select name="cat" id="category">
+                                <option value=""> Select</option>
+                                <option value="project">Project</option>
+                                <option value="personal">Personal</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="date">Project</label>
+                            <select name="project" id="project">
+                                <option value="">Select</option>
+                                <option value=""> no data</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="field">
                         <label for="remarks">Remarks</label>
@@ -311,6 +328,23 @@
                         <div class="field">
                             <label for="date">Date of Expense</label>
                             <input type="date" name="date" id="date">
+                        </div>
+                        <div class="field">
+                            <label for="date">Category</label>
+                            <select name="" id="category">
+                                <option value=""> Select</option>
+                                <option value="project">Project</option>
+                                <option value="personal">Personal</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="date">Project</label>
+                            <select name="" id="project">
+                                <option value="">Select</option>
+                                <option value=""> no data</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
                         </div>
                     </div>
                     <div class="field">

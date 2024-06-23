@@ -24,6 +24,10 @@ function setExpenseToModel(e) {
     editCtn.querySelector('#date').value = date_Split(`${ExpsCtn.querySelector('.exp-date-data').innerText}`, '/', false)
     editCtn.querySelector('#mode').value = ExpsCtn.querySelector('.exp-mode-data').innerText
     editCtn.querySelector('#remark').value = ExpsCtn.querySelector('.exp-rem-content').innerText
+    editCtn.querySelector('#category').options[0].value = ExpsCtn.querySelector('.exp-category-data').innerText
+    editCtn.querySelector('#category').options[0].innerText = ExpsCtn.querySelector('.exp-category-data').innerText
+    editCtn.querySelector('#project').options[0].value = (ExpsCtn.querySelector('.exp-project-data').innerText)
+    editCtn.querySelector('#project').options[0].innerText = (ExpsCtn.querySelector('.exp-project-data').innerText)
 }
 function addExpense() {
     let expAddCtn = document.getElementsByClassName('addexpense')[0]
@@ -32,6 +36,8 @@ function addExpense() {
         amount: expAddCtn.querySelector('#amount').value,
         mode: expAddCtn.querySelector('#mode').value,
         remark: expAddCtn.querySelector('#remark').value,
+        category: expAddCtn.querySelector('#category').value,
+        project: expAddCtn.querySelector('#project').value,
         date: date_Split(expAddCtn.querySelector('#date').value, '-', true),
     }
     ReqHandler.POST(ReqURI.addExps, dataObj).then((res) => {
@@ -59,6 +65,8 @@ function updExpense() {
         amount: editCtn.querySelector('#amount').value,
         mode: editCtn.querySelector('#mode').value,
         remark: editCtn.querySelector('#remark').value,
+        category: editCtn.querySelector('#category').value,
+        project: editCtn.querySelector('#project').value,
         date: date_Split(editCtn.querySelector('#date').value, '-', true)
     }
     ReqHandler.PUT(ReqURI.updExps + exp_id, dataObj)
@@ -98,6 +106,10 @@ function ChangeExpsByMonths(e) {
                <div class="expense-mode"> <p class="uppercase exp-mode">mode of payment</p> <p class="exp-mode-data"> ${e.md_type} </p> </div>
                <!-- ---------------------------------  -->
                <div class="expense-remarks"> <p class="uppercase exp-rem">remarks</p> <p class="exp-rem-content"> ${e.remark}</p></div>
+               <!-- ---------------------------------  -->
+               <div class="expense-remarks"> <p class="uppercase exp-cat">Category</p> <p class="exp-category-data"> ${e.categories}</p></div>
+               <!-- ---------------------------------  -->
+               <div class="expense-remarks"> <p class="uppercase exp-pro">Project</p> <p class="exp-project-data"> ${(e.project_id)?e.project_id:'No Project'}</p></div>
                <!-- ---------------------------------  -->
                <div class="expense-edit"><a class="eicon" onclick="Opn_ExpenseCtn('.editexpense',this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pen"><path fill="##000000"   d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z">
                </path> </svg></a> <span class="edit">Edit</span></div> </div>`

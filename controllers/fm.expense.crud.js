@@ -7,7 +7,7 @@ exports.addExpense = (req, res) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully Expense Added' })
         } else {
-            res.status(500).send({ status: false, msg: "Internal error occurs! \n " })
+            res.status(500).send({ status: false, msg: "Internal error occurs! \n "+err })
         }
     })
 
