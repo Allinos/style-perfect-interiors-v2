@@ -20,13 +20,15 @@ app.use(session({
 
 // Administrator 
 const auth = require('./controllers/adminAuth')
-const indexRoutes = require('./routes/admin/indexRoutes')
+const indexRoutes = require('./routes/admin/indexRoutes.js')
 const userManager = require('./routes/admin/userManagerRoute.js')
 const settings = require('./routes/admin/settingRoute.js')
 const finance = require('./routes/admin/financeRoute')
 const financeExpense = require('./routes/admin/financeRoute.expance')
 const notify = require('./routes/admin/notificationRoute')
 const materialRouter = require('./routes/admin/materialsRoute.js');
+const vendor_supply_paymentRouter = require('./routes/admin/supplies_paymentsRoute.vendor.js');
+const client_vendorUserRouter = require('./routes/admin/client_vendorRoute.user.js');
 
 const apiRoute = require('./routes/admin/projectRoute.js');
 
@@ -53,10 +55,12 @@ app.use(cookieParser());
 app.use('/admin', auth)
 app.use('/admin', indexRoutes)
 app.use('/admin/user-manager', userManager)
+app.use('/admin/user-manager', client_vendorUserRouter)
 app.use('/admin/settings', settings)
 app.use('/admin/finance', finance)
 app.use('/admin/finance/expenses', financeExpense)
 app.use('/admin/inventory', materialRouter) 
+app.use('/admin/inventory/vendor', vendor_supply_paymentRouter) 
 
 // app.use('/apiV1', tasks)
 app.use('/apiv1', apiRoute)

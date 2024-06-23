@@ -178,7 +178,7 @@
                                 </div>
                                 <!-- -------------------  -->
                                 <div class="expense-name">
-                                    <p class="uppercase exp-name">expense name</p>
+                                    <p class="uppercase exp-name">expense</p>
                                     <p class="exp-name-data">
                                         <%= exps.title %>
                                     </p>
@@ -199,7 +199,7 @@
                                 </div>
                                 <!-- ----------------------------------  -->
                                 <div class="expense-mode">
-                                    <p class="uppercase exp-mode">mode of payment</p>
+                                    <p class="uppercase exp-mode">mode</p>
                                     <p class="exp-mode-data">
                                         <%= exps.md_type %>
                                     </p>
@@ -210,8 +210,21 @@
                                     <p class="exp-rem-content">
                                         <%= exps.remark %>
                                     </p>
-
                                 </div>
+                                <div class="expense-remarks">
+                                    <p class="uppercase exp-rem">category</p>
+                                    <p class="exp-rem-content">
+                                        <%= (exps.categories)?exps?.categories:'N/A' %>
+                                    </p>
+                                </div>
+                                <%  if((exps.project_id)){  %>
+                                <div class="expense-remarks">
+                                    <p class="uppercase exp-rem">Project</p>
+                                    <p class="exp-rem-content">
+                                        <%= exps.project_id %>
+                                    </p>
+                                </div>
+                                <% }%>
                                 <!-- ---------------------------------  -->
                                 <div class="expense-edit">
                                     <a class="eicon" onclick="Opn_ExpenseCtn('.editexpense',this)"><svg
