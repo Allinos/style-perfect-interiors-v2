@@ -22,13 +22,14 @@
         <main class="main" data-app-page="clients_vendors">
             <!-- ----------- Clients TABLE----------- -->
             <div class="flex">
-                <buttton class="btn">Clients</buttton>
-                <buttton class="btn">Vendors</buttton>
+                <button onclick="displayCtn('.ClientCtn')">Clients</buttton>
+                    <button onclick="displayCtn('.VendorCtn')">Vendors</buttton>
             </div>
-            <button class="uppercase" onclick="Opn_ExpenseCtn('.addexpense')">
-                <span>Add expense</span>
+            <button class="uppercase" onclick="openAddClientsVendors('.adduserCtn')">
+                <span>Add Client/Vendor</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
-                    <path fill="##000000" d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                    <path fill="##000000"
+                        d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
                     </path>
                 </svg>
             </button>
@@ -45,42 +46,53 @@
                 </div>
                 <!-- ----------Clients information----------- -->
                 <div class="info-content ClientCtn">
-                    <% data[0]?.forEach((e)=>{ %>
-                        <div class="accordion-content" data-dealId="<%= data.id %>">
+                    <% data[1]?.forEach((e)=>{ %>
+                        <div class="accordion-content" data-id="<%= data.id %>" data-type="client">
                             <div class="ahead finegrid">
                                 <p class="ref">
-                                    <span class="uppercase hide block phead">Ref. No.</span>
                                     <span>
                                         <%= e?.id %>
                                     </span>
                                 </p>
-                                <p class="pro">
-                                    <span class="uppercase hide block phead">name of work</span>
+                                <p class="name">
                                     <span>
                                         <%= e?.name %>
                                     </span>
                                 </p>
-                                <p class="emp_date">
-                                    <!-- <span class="uppercase hide block phead">location</span> -->
+                                <p class="contact">
                                     <span>
                                         <%= e?.contact %>
                                     </span>
                                 </p>
-                                <p class="totalf">
-                                    <span class="uppercase hide block phead">project amount</span>
-                                    &#8377;<span>
+                                <p class="location">
+                                    <span>
                                         <%= e?.location %>
                                     </span>
                                 </p>
 
-                                <p class="totalf none ">
-                                    &#8377;<span>
+                                <p class="details none ">
+                                    <span>
                                         <%= e?.oth_details %>
                                     </span>
                                 </p>
+                                <p class="flex user-action-icons ">
+                                    <!-- edit -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="svg"
+                                        onclick="openUpdateClientsVendors(this)">
+                                        <path
+                                            d="M6 34.5V42h7.5l22.13-22.13-7.5-7.5L6 34.5zm35.41-20.41c.78-.78.78-2.05 0-2.83l-4.67-4.67c-.78-.78-2.05-.78-2.83 0l-3.66 3.66 7.5 7.5 3.66-3.66z" />
+                                    </svg>
+                                    <!-- delete -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="svg" onclick="DeleteClientsVendors(<%= e?.id %>)">
+                                        <path
+                                            d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z" />
+                                    </svg>
+
+                                </p>
                                 <p class="arrow-down action-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                        id="angle-double-down" class="svg">
+                                    <!-- arrow-down -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down"
+                                        class="svg">
                                         <path fill="##000000"
                                             d="M11.29,11.46a1,1,0,0,0,1.42,0l3-3A1,1,0,1,0,14.29,7L12,9.34,9.71,7A1,1,0,1,0,8.29,8.46Zm3,1.08L12,14.84l-2.29-2.3A1,1,0,0,0,8.29,14l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z">
                                         </path>
@@ -91,20 +103,20 @@
                             <div class="adata data">
                                 <!-- --Dropdown Details-- -->
                                 <div class="finance_expand">
-                                        <div class="installment flex">
-                                            <div class="field">
-                                                <p class="uppercase">Email</p>
-                                                <p class="amount">
-                                                    <%= e?.email %>
-                                                </p>
-                                            </div>
-                                            <div class="field">
-                                                <p class="uppercase">Alt. Contact</p>
-                                                <p class="date">
-                                                    <%= e?.contact2 %>
-                                                </p>
-                                            </div>
+                                    <div class="installment flex">
+                                        <div class="field">
+                                            <p class="uppercase">Email</p>
+                                            <p class="email">
+                                                <%= e?.email %>
+                                            </p>
                                         </div>
+                                        <div class="field">
+                                            <p class="uppercase">Alt. Contact</p>
+                                            <p class="alt_contact">
+                                                <%= e?.contact2 %>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- ---------------  -->
                             </div>
@@ -113,43 +125,54 @@
                             <!-- ------------------------------ -->
                 </div>
                 <!-- -----///// Vendor information----------- -->
-                <div style="display: none;" class="info-content VendorCtn">
+                <div class="info-content VendorCtn hide">
                     <% data[0]?.forEach((e)=>{ %>
-                        <div class="accordion-content" data-dealId="<%= data.id %>">
+                        <div class="accordion-content" data-id="<%= data.id %>" data-type="vendor">
                             <div class="ahead finegrid">
                                 <p class="ref">
-                                    <span class="uppercase hide block phead">Ref. No.</span>
                                     <span>
                                         <%= e?.id %>
                                     </span>
                                 </p>
-                                <p class="pro">
-                                    <span class="uppercase hide block phead">name of work</span>
+                                <p class="name">
                                     <span>
                                         <%= e?.name %>
                                     </span>
                                 </p>
-                                <p class="emp_date">
-                                    <!-- <span class="uppercase hide block phead">location</span> -->
+                                <p class="contact">
                                     <span>
                                         <%= e?.contact %>
                                     </span>
                                 </p>
-                                <p class="totalf">
-                                    <span class="uppercase hide block phead">project amount</span>
-                                    &#8377;<span>
+                                <p class="location">
+                                    <span>
                                         <%= e?.location %>
                                     </span>
                                 </p>
 
-                                <p class="totalf none ">
-                                    &#8377;<span>
+                                <p class="details none ">
+                                    <span>
                                         <%= e?.oth_details %>
                                     </span>
                                 </p>
+                                <p class="flex user-action-icons ">
+                                    <!-- edit -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="svg"
+                                        onclick="openUpdateClientsVendors(this)">
+                                        <path
+                                            d="M6 34.5V42h7.5l22.13-22.13-7.5-7.5L6 34.5zm35.41-20.41c.78-.78.78-2.05 0-2.83l-4.67-4.67c-.78-.78-2.05-.78-2.83 0l-3.66 3.66 7.5 7.5 3.66-3.66z" />
+                                    </svg>
+                                    <!-- delete -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="svg" onclick="DeleteClientsVendors(<%= e?.id %>)">
+                                        <path
+                                            d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z" />
+                                    </svg>
+
+                                </p>
                                 <p class="arrow-down action-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                        id="angle-double-down" class="svg">
+                                    <!-- arrow-down -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down"
+                                        class="svg">
                                         <path fill="##000000"
                                             d="M11.29,11.46a1,1,0,0,0,1.42,0l3-3A1,1,0,1,0,14.29,7L12,9.34,9.71,7A1,1,0,1,0,8.29,8.46Zm3,1.08L12,14.84l-2.29-2.3A1,1,0,0,0,8.29,14l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z">
                                         </path>
@@ -160,20 +183,20 @@
                             <div class="adata data">
                                 <!-- --Dropdown Details-- -->
                                 <div class="finance_expand">
-                                        <div class="installment flex">
-                                            <div class="field">
-                                                <p class="uppercase">Email</p>
-                                                <p class="amount">
-                                                    <%= e?.email %>
-                                                </p>
-                                            </div>
-                                            <div class="field">
-                                                <p class="uppercase">Alt. Contact</p>
-                                                <p class="date">
-                                                    <%= e?.contact2 %>
-                                                </p>
-                                            </div>
+                                    <div class="installment flex">
+                                        <div class="field">
+                                            <p class="uppercase">Email</p>
+                                            <p class="email">
+                                                <%= e?.email %>
+                                            </p>
                                         </div>
+                                        <div class="field">
+                                            <p class="uppercase">Alt. Contact</p>
+                                            <p class="alt_contact">
+                                                <%= e?.contact2 %>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- ---------------  -->
                             </div>
@@ -181,18 +204,107 @@
                         <% }) %>
                             <!-- ------------------------------ -->
                 </div>
+                <div class="addcilent-vendor hide">
+                    <div class="cilent-vendor-grid" data-id="">
+                        <h3 class="uppercase">Add cilent/vendor</h3>
+                        <hr>
+                        <div class="field">
+                            <label for="date">Category</label>
+                            <select name="cat" id="category">
+                                <option value=""> Select Type</option>
+                                <option value="client">Client</option>
+                                <option value="vendor">Vendor</option>
+                            </select>
+                        </div>
+                        <div class="egrid">
+                            <div class="field">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" placeholder="Name">
+                            </div>
+                            <div class="field">
+                                <label for="cnumber">Contact</label>
+                                <input type="text" name="contact" id="contact" placeholder="Contact">
+                            </div>
+                            <div class="field">
+                                <label for="email">Alt. Contact</label>
+                                <input type="text" name="alt_contact" id="alt_contact" placeholder="Alternate Contact">
+                            </div>
+                            <div class="field">
+                                <label for="date">Location</label>
+                                <input type="text" name="location" id="location" placeholder="Location">
+                            </div>
+                            <div class="field">
+                                <label for="date">Other Details</label>
+                                <input type="text" name="details" id="details" placeholder="Other Details">
+                            </div>
+                            <div class="field">
+                                <label for="date">Email</label>
+                                <input type="text" name="email" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="flex user-btns">
+                            <button class="uppercase" onclick="AddClientsVendors(this)">add</button>
+                            <button class="uppercase" onclick="closeDropdown('.addcilent-vendor')">Close</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="updatecilent-vendor hide">
+                    <div class="cilent-vendor-grid" data-id="">
+                        <h3 class="uppercase">Update cilent/vendor</h3>
+                        <hr>
+                        <div class="field">
+                            <label for="date">Category</label>
+                            <select name="cat" id="category">
+                                <option value=""> Select Type</option>
+                                <option value="client">Client</option>
+                                <option value="vendor">Vendor</option>
+                            </select>
+                        </div>
+                        <div class="egrid">
+                            <div class="field">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" placeholder="Name">
+                            </div>
+                            <div class="field">
+                                <label for="cnumber">Contact</label>
+                                <input type="text" name="contact" id="contact" placeholder="Contact">
+                            </div>
+                            <div class="field">
+                                <label for="email">Alt. Contact</label>
+                                <input type="text" name="alt_contact" id="alt_contact" placeholder="Alternate Contact">
+                            </div>
+                            <div class="field">
+                                <label for="date">Location</label>
+                                <input type="text" name="location" id="location" placeholder="Location">
+                            </div>
+                            <div class="field">
+                                <label for="date">Other Details</label>
+                                <input type="text" name="details" id="details" placeholder="Other Details">
+                            </div>
+                            <div class="field">
+                                <label for="date">Email</label>
+                                <input type="text" name="email" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="flex user-btns">
+                            <button class="uppercase" onclick="UpdateClientsVendors(this)">Update</button>
+                            <button class="uppercase" onclick="closeDropdown('.updatecilent-vendor')">Close</button>
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- ----------PAGINATION--------- -->
                 <%- include('../partials/pagin.ejs') %>
             </div>
         </main>
-</section>
+        </section>
 
 
         <!-- JAVASCRIPT -->
         <script src="../../js/admin/header.js"></script>
         <script src="../../js/admin/common.js"></script>
-        <script src="../../js/admin/project.finance.js"></script>
+        <script src="../../js/admin/clients_vendors.js"></script>
 </body>
 
 </html>

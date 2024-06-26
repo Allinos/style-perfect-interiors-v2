@@ -81,7 +81,7 @@ exports.vendor_supplies = (req, res) => {
 
 exports.supply_payments = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT COALESCE(SUM(vendor_payments.amount), 0) AS total_payments, vendor_supplies.id, vendor_supplies.item_name, vendor_supplies.quantity, vendor_supplies.rate, vendor_supplies.sgst, vendor_supplies.cgst, vendor_supplies.uom, vendor_supplies.total_amount, vendor_supplies.date, vendors.name, vendors.contact, vendors.location FROM vendor_supplies JOIN vendors ON vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_supplies.vendor_id`
+        const query = `SELECT COALESCE(SUM(vendor_payments.amount), 0) AS total_payments, vendor_supplies.id, vendor_supplies.item_name, vendor_supplies.quantity, vendor_supplies.rate, vendor_supplies.sgst, vendor_supplies.cgst, vendor_supplies.uom, vendor_supplies.total_amount, vendor_supplies.date, vendors.name, vendors.contact, vendors.location FROM vendor_supplies JOIN vendors ON vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_supplies.vendor_id;`
         db.query(query, (err, result, field) => {
             res.status(200).render('../views/admin/vendor_payments.ejs', { data: result })
             // res.send(result)

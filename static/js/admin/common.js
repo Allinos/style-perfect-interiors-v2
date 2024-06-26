@@ -101,6 +101,7 @@ let ReqHandler = {
         });
         return response.json();
     }, POST: async function (url, data) {
+        console.log(url);
         const response = await fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json; charset=UTF-8" },

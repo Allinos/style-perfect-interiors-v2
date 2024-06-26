@@ -38,8 +38,8 @@
                 <div class="info-content">
                     <!-- --------1st project---------  -->
                     <% data?.forEach((e)=>{ %>
-                        <div class="accordion-content" data-dealId="<%= data.id %>">
-                            <div class="ahead finegrid">
+                        <div class="accordion-content"  data-supplyId="<%= e.id %>">
+                            <div class="ahead finegrid" >
                                 <p class="ref">
                                     <span class="uppercase hide block phead">Ref. No.</span>
                                     <span>
@@ -86,14 +86,14 @@
                                 </p>
 
                                 <p class="arrow-down action-icons">
-                                    <svg onclick="OpenAddPayment_toSupply({dealid: <%= e?.id %>})" viewBox="0 0 48 48" width="25"
+                                    <svg onclick="OpenAddPayment({supplyId: <%= e?.id %>})" viewBox="0 0 48 48" width="25"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M38 6H10c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4V10c0-2.21-1.79-4-4-4zm-4 20h-8v8h-4v-8h-8v-4h8v-8h4v8h8v4z" />
                                         <path d="M0 0h48v48H0z" fill="none" />
                                     </svg>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down"
+                                    <svg onclick="getAllpaymentById(this,<%= e.id %>)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down"
                                         class="svg">
                                         <path fill="##000000"
                                             d="M11.29,11.46a1,1,0,0,0,1.42,0l3-3A1,1,0,1,0,14.29,7L12,9.34,9.71,7A1,1,0,1,0,8.29,8.46Zm3,1.08L12,14.84l-2.29-2.3A1,1,0,0,0,8.29,14l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z">
@@ -107,25 +107,6 @@
                             <div class="adata data">
                                 <!-- --INSTALLMENT-- -->
                                 <div class="finance_expand">
-                                    <div class="installment flex">
-                                        <div class="field">
-                                            <p class="uppercase">Title</p>
-                                            <p class="date"></p>
-                                        </div>
-                                        <div class="field">
-                                            <p class="uppercase">Amount</p>
-                                            <p class="date"></p>
-                                        </div>
-                                        <div class="field">
-                                            <p class="uppercase">Mode</p>
-                                            <p class="date"></p>
-                                        </div>
-                                        <div class="field">
-                                            <p class="uppercase">Date</p>
-                                            <p class="date"></p>
-                                        </div>
-
-                                    </div>
                                 </div>
                                 <!-- ---------------  -->
                             </div>
@@ -137,6 +118,10 @@
                 <!-- ----------PAGINATION--------- -->
                 <%- include('../partials/pagin.ejs') %>
             </div>
+             <!-- -----DROPDOWN----- -->
+             <div class="main-dropdown hide">
+                        
+             </div>
         </main>
         </section>
 

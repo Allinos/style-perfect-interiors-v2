@@ -21,7 +21,6 @@ document.querySelectorAll(`.assign-to`).forEach((item, index) => {
                 })
             }
         }
-
         item.classList.toggle("open");
         let description = item.querySelector(".emp-acc-data");
         let description2 = item.getElementsByClassName("emp-acc-data")[1];
@@ -92,7 +91,6 @@ async function addTaskStatus(target, type, route) {
         target.classList.remove('blue', 'green')
         target.classList.add('red')
     } 
-
     if (type === 'normal') {
         body = { status: target.value, dealId: Number(dataSet.ndealid), catId: Number(dataSet.taskid) }
     } else {
