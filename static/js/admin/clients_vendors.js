@@ -79,7 +79,19 @@ function UpdateClientsVendors(e) {
         })
 }
 
-function DeleteClientsVendors(e) {
-    
+function DeleteClientsVendors(e,id) {
+    let type =e.parentElement.parentElement.parentElement.dataset.type;
+    console.log(type, window.location.origin + `/admin/user-manager/${type}s/delete/`+id);
+    ReqHandler.DEL(window.location.origin + `/admin/user-manager/${type}s/delete/`+id)
+        .then((res) => { 
+            if (res) {
+            AlertNotify('Success', res.msg, 'success') ;
+            (e.parentElement.parentElement.parentElement).remove();
+            }
+         })
+        .catch(err => {
+            AlertNotify('Success', 'Error While adding ', 'error') 
+            console.log('Error(fn-AddClientsVendors):' + err);
+        })
 
 }

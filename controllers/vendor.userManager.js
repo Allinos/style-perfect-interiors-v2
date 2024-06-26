@@ -46,7 +46,7 @@ exports.updateVendor = (req, res) => {
             res.status(200).send({ status: true, msg: 'Successfully Data Updated', data: results })
         } else {
             console.log("Error inside file Vendor.usermanager:ln:43-" + err);
-            new errorHandler(501, "Error inside file Vendor.usermanager : 10" + err)
+            new errorHandler(501, "Error inside file Vendor.usermanager : 49" + err)
             res.status(500).send({ status: false, msg: "Internal error occurs!" });
         }
     })
@@ -57,7 +57,7 @@ exports.deleteVendor = (req, res) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully Data Deleted', data: results })
         } else {
-            new errorHandler(501, "Error inside file Vendor.usermanager : 10" + err)
+            new errorHandler(501, "Error inside file Vendor.usermanager : 60" + err)
             res.status(500).send({ status: false, msg: "Internal error occurs!" });
         }
     })
