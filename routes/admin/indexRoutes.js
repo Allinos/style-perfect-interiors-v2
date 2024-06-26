@@ -16,6 +16,7 @@ router.get('/inventory/vendor_supplies', mainController.vendor_supplies)
 router.get('/inventory/supply_payments', mainController.supply_payments)
 router.get('/stock', mainController.stock)
 router.post('/projects-create', mainController.insertNewNormalDeal );
+router.get('/get-client-data-for-form', mainController.getClientDataForForm );
 
 
 

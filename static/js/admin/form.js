@@ -31,3 +31,12 @@ async function SubmitNormalFormData(e) {
   }
 }
 
+async function getClientData(target) {
+  const clientData = await method.GET_POST(`admin/get-client-data-for-form?refid=${target.value}`, 'GET')
+  console.log(clientData);
+} 
+
+function showContactForm() {
+   document.getElementById('project-form').classList.remove('hidden')
+}
+

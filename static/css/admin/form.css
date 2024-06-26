@@ -9,7 +9,11 @@
     width: 100%;
 }
 .contactDetails{
-    display: none;
+    display: block;
+}
+
+.hidden {
+  display: none;
 }
 .form-header button{
     padding: 8px;

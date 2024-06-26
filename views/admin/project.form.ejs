@@ -31,26 +31,27 @@
                 </div> -->
                 <div class="formContainer">
                     <div class="normalForm" id="normalForm">
+                        <div class="field fname flex">
+                            <label for="">Select an existing client</label>
+                            <select name="" id="" onchange="getClientData(this)">
+                                <option value="">Select client reference</option>
+                                <% data?.length > 0 && data.forEach((ref)=> { %>
+                                <option value="<%= ref.id %>"><%= ref.id %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <button class="uppercase" id="newCli" onclick="showContactForm()">
+                                <span>Add New Client</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle" class="svg">
+                                    <path fill="##000000"
+                                        d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
                         <form id="np-form-data">
-                            <div class="field fname flex">
-                                <label for="">Select an existing client</label>
-                                <select name="" id="">
-                                    <option value="">Panchanan Deka</option>
-                                    <option value="">Panchanan Deka</option>
-                                    <option value="">Panchanan Deka</option>
-                                </select>
-                            </div>
-                            <div class="field">
-                                <button class="uppercase" id="newCli">
-                                    <span>Add New Client</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle" class="svg">
-                                        <path fill="##000000"
-                                            d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
-                                        </path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="contactDetails">
+                            <div id="project-form" class="contactDetails hidden">
                                 <h4 class="uppercase">contact details</h4>
                             <div class="fgrid">
                                 <div class="field">

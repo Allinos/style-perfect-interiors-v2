@@ -164,12 +164,33 @@ exports.renderNormalProjectFinance = async (req, res) => {
 
 exports.renderNormalProjectForm = async (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        res.status(200).render('../views/admin/project.form.ejs')
+        const query = `SELECT id FROM clients;`
+        await db.query(query, (err, result) => {
+            if (!err) {
+                return res.status(200).render('../views/admin/project.form.ejs', { data: result })
+            } 
+            return res.status(500).send({ msg: "something error occured" })
+        });
+        
     }
 }
 
 
 //---Normal project form works-------
+
+exports.getClientDataForForm = async (req, res) => {
+    // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+        const query = `SELECT * FROM clients where id = ?`
+        await db.query(query, [req.query.refid], (err, result) => {
+            if (!err) {
+                return res.status(200).send({clientData : result})
+            } 
+            return res.status(500).send({ msg: "something error occured" })
+        });
+        
+    // }
+},
+
 exports.insertNewNormalDeal = async (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
         db.getConnection((err0, conn) => {
