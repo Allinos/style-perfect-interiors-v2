@@ -26,9 +26,9 @@ api.get('/nIsProjectPaid', pmNormalAPI.getCheckCompletedUnpaid)
 
 
 // -----Update task route for bith normal and misc task-----
-
 api.get('/get-data-update', pmNormalAPI.getDataToUpdate)
 api.put('/np-data-update', pmNormalAPI.UpdateNormalProjectData)
 
+api.get('/getProjectList',pmNormalAPI.getProjectList)
 
 module.exports = api

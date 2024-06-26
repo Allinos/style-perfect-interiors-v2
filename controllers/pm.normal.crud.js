@@ -245,3 +245,18 @@ exports.UpdateNormalProjectData = async (req, res) => {
   })
 
 }
+
+exports.getProjectList=async(req,res)=>{
+let query='SELECT id,deal_name,reference_no FROM deals;';
+databaseCon.query(query, (err, result) => {
+  if (!err) {
+    res.status(200).send({ status: true, msg: 'Successfully data retrieve', data: result })
+
+  } else {
+    res.status(500).send({ status: false, msg: "Internal error occurs!" });
+  }
+})
+
+
+
+}
