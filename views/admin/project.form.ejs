@@ -32,24 +32,54 @@
                 <div class="formContainer">
                     <div class="normalForm" id="normalForm">
                         <form id="np-form-data">
-                            <h4 class="uppercase">contact details</h4>
+                            <div class="field fname flex">
+                                <label for="">Select an existing client</label>
+                                <select name="" id="">
+                                    <option value="">Panchanan Deka</option>
+                                    <option value="">Panchanan Deka</option>
+                                    <option value="">Panchanan Deka</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <button class="uppercase" id="newCli">
+                                    <span>Add New Client</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle" class="svg">
+                                        <path fill="##000000"
+                                            d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="contactDetails">
+                                <h4 class="uppercase">contact details</h4>
                             <div class="fgrid">
                                 <div class="field">
                                     <label for="name">Name</label>
                                     <input type="text" name="name" id="name" placeholder="e.g.: Pragyan Tamuli">
                                 </div>
                                 <div class="field">
-                                    <label for="cnumber">Phone Number</label>
+                                    <label for="cnumber">Contact Number</label>
                                     <input type="text" name="contactNo" id="cnumber" placeholder="e.g.: 9874561230">
+                                </div>
+                                <div class="field">
+                                    <label for="altContact">Alternate Contact Number</label>
+                                    <input type="text" name="altContact" id="altContact" placeholder="e.g.: 9874561230">
                                 </div>
                                 <div class="field">
                                     <label for="email">Email</label>
                                     <input type="text" name="email" id="email" placeholder="e.g.: styleperfect@gmail.com">
                                 </div>
+                                <div class="field">
+                                    <label for="address">Address</label>
+                                    <input type="text" name="city" id="address" placeholder="Address">
+                                    <!-- <textarea name="city" id="address"></textarea> -->
+                                </div>
+                                <div class="field">
+                                    <label for="address">Remarks</label>
+                                    <input type="text" name="remarks" id="remarks">
+                                    <!-- <textarea name="remarks" id="remarks"></textarea> -->
+                                </div>
                             </div>
-                            <div class="field">
-                                <label for="address">Address</label>
-                                <textarea name="city" id="address"></textarea>
                             </div>
                             <!-- ----------------------------------------------------------- -->
                             <h4 class="uppercase">project details</h4>
@@ -93,7 +123,6 @@
                                 </div>
                             </div>
                             <!-- ---------- grid ends--------- -->
-                            <br><br>
                             <div class="field">
                                 <button type="submit" onclick="SubmitNormalFormData(event)" class="uppercase">submit</button>
                                 <!-- <input type="submit" name="submit" id="" value="submit"> -->

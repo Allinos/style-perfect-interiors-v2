@@ -30,3 +30,4 @@ async function SubmitNormalFormData(e) {
     await method.addNewItemToNp(undefined, e, 'np-form-data', null, 'admin/projects-create')
   }
 }
+
