@@ -3,7 +3,7 @@ let ReqURI = { addExps: BASE_URL + `/add-Exps`, updExps: BASE_URL + `/expsUpdate
 function Opn_ExpenseCtn(e, elm) {
     (document.getElementsByClassName('main')[0]).classList.add('flow');
     (document.querySelector(`${e}`)).classList.remove(`hide`);
-    e == '.editexpense' ? setExpenseToModel(elm) : null
+    e == '.editexpense' ? setExpenseToModel(elm) : null;
 }
 function Cls_ExpenseCtn(e) {
     document.getElementsByClassName('main')[0].classList.remove('flow');
@@ -27,7 +27,8 @@ function setExpenseToModel(e) {
     editCtn.querySelector('#category').options[0].value = ExpsCtn.querySelector('.exp-category-data').innerText
     editCtn.querySelector('#category').options[0].innerText = ExpsCtn.querySelector('.exp-category-data').innerText
     editCtn.querySelector('#project').options[0].value = (ExpsCtn.querySelector('.exp-project-data').innerText)
-    editCtn.querySelector('#project').options[0].innerText = (ExpsCtn.querySelector('.exp-project-data').innerText)
+    editCtn.querySelector('#project').options[0].innerText = (ExpsCtn.querySelector('.exp-project-data').innerText);
+
 }
 function addExpense() {
     let expAddCtn = document.getElementsByClassName('addexpense')[0]
@@ -44,7 +45,6 @@ function addExpense() {
         if (res.status == true) {
             AlertNotifier(res.status, res.msg, 'success');
             Cls_UserCtn('.uprofile-settings')
-            // Cls_ExpenseCtn('.addexpense')
             Disable_BtnHandler('.profile-grid', false)
             Cls_UserCtn('.usform')
             setTimeout(() => {
@@ -113,7 +113,7 @@ function ChangeExpsByMonths(e) {
                <!-- ---------------------------------  -->
                <div class="expense-edit"><a class="eicon" onclick="Opn_ExpenseCtn('.editexpense',this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pen"><path fill="##000000"   d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z">
                </path> </svg></a> <span class="edit">Edit</span></div> </div>`
-                    dataCtn.innerHTML += html
+                    dataCtn.innerHTML += html;
                 });
             } else { AlertNotifier(res.status, res.msg, 'error'); }
         }).catch(err => { console.log('Error(fn-ExpsUpdate):', err); })
