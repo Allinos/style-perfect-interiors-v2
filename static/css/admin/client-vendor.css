@@ -105,7 +105,11 @@
 .fdata.open {
     margin-top: 0;
 }
-
+.userContainer .head-btn button:first-child{
+    background: var(--primary-bg);
+    color: var(--primary-color);
+    outline: 1px solid var(--primary-outline);
+}
 .main-dropdown .finance-dropdown {
     background: var(--white);
     padding: 10px;
