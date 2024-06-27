@@ -90,6 +90,155 @@
 .data-info .content{
     height: 65vh;
 }
+
+
+
+.supplierContainer{
+    background: var(--white);
+    border-radius: var(--border-radius-2);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.supplierContainer button{
+    padding: 8px;
+    border-radius: var(--border-radius-1);
+    color: var(--secondary-color);
+    background: var(--sec-light-color);
+    outline: 2px dashed var(--sec-outline);
+    font-weight: 600;
+    transition: var(--transition-2);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+:is(.supplierContainer, .supplies-add-item) button svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--secondary-color);
+}
+.suppliers-form{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--black-light);
+    z-index: 100;
+}
+.suppliers-form .suppliers{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    width: 90%;
+    background: var(--white);
+    box-shadow: var(--box-shadow-1);
+    padding: 8px;
+    border-radius: var(--border-radius-1);
+}
+.sup-particular{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) 2rem;
+    gap: 10px;
+    align-items: center;
+}
+.sup-particular.active{
+    grid-template-columns: repeat(8, 1fr) 2rem;
+}
+.sup-particular .gst{
+    display: none !important;
+}
+.suppliers .field{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.suppliers .fiend{
+    width: 100%;
+    margin-top: 10px;
+}
+.suppliers .fend{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 16px;
+    margin-top: 15px;
+    font-weight: 500;
+    font-size: 18px;
+    justify-content: space-between;
+}
+.suppliers .fiend .select{
+    flex-grow: 1 !important;
+    width: 100%;
+}
+.suppliers .field label{
+    font-size: 12px;
+    color: var(--grey);
+    font-weight: 500;
+}
+.suppliers :is(.field,.fiend) :is(input, select):not(input[type="radio"]){
+    width: 100%;
+    height: 2.5rem;
+    border-radius: var(--border-radius-1);
+    background: var(--bg-2);
+    outline: 1px solid var(--black-light);
+    animation: var(--animation-1);
+    padding: 0 1rem;
+    margin-top: 5px;
+    font-size: 1rem;
+    word-wrap: break-word;
+    font-weight: 500;
+}
+.supplies-add-item button{
+    padding: 8px;
+    border-radius: var(--border-radius-1);
+    color: var(--secondary-color);
+    background: var(--sec-light-color);
+    outline: 1px solid var(--sec-outline);
+    font-weight: 600;
+    transition: var(--transition-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 1rem;
+    flex-grow: 1;
+}
+:is(.supplies-btn) button {
+    padding: 10px;
+    border-radius: var(--border-radius-1);
+    font-size: 16px;
+    font-weight: 700;
+    transition: var(--transition-2);
+    margin-top: 1rem;
+    flex-grow: 1;
+}
+
+:is(.supplies-btn) button:first-child {
+    background: var(--primary-bgr);
+    color: var(--primary-color);
+}
+
+:is(.supplies-btn) button:first-child:is(:hover, :focus) {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+:is(.supplies-btn) button:last-child {
+    background: var(--ter-light-color);
+    color: var(--ter-dark-color);
+}
+
+:is(.supplies-btn) button:last-child:is(:hover, :focus) {
+    background: var(--ter-dark-color);
+    color: var(--white);
+}
 /* --------FINANCE TABLE------------ */
 .data-info .finegrid {
     display: grid;
