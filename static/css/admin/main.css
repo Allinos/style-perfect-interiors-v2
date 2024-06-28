@@ -261,7 +261,28 @@
 .accordion-content .e-mail {
     width: 80%;
 }
-
+.accordion-content .flexy{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.accordion-content .butt{
+    width: 25px;
+    height: 25px;
+    color: var(--ter-dark-color);
+    background: var(--ter-light-color);
+    outline: 1px solid var(--ter-outline);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-1);
+}
+.accordion-content .icon{
+    width: 20px;
+    height: 20px;
+    fill: var(--ter-dark-color);
+}
 .info-content .accordion-content .stat {
     width: 80%;
     font-size: 12px;
