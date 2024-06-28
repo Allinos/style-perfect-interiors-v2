@@ -1,5 +1,6 @@
 const db = require('../config/db.config')
 const dataUnity = require('../utils/arrange')
+const { transactHandler } = require('../utils/transactionHandler')
 
 // SELECT deals.*, normal_project_cat.category_id,normal_project_cat.npcid, task.task_name, normal_project_cat.cat_status, normal_project_subtask.stask_id, subtask.sub_task_name, normal_project_subtask.stask_status, normal_project_cat.project_status, normal_project_cat.dateofdeadline FROM deals INNER JOIN normal_project_cat ON normal_project_cat.ndeal_id = deals.id INNER JOIN task ON normal_project_cat.category_id = task.task_id LEFT JOIN normal_project_subtask ON normal_project_subtask.ndeal_id = deals.id AND normal_project_subtask.category_id = normal_project_cat.category_id LEFT JOIN subtask ON subtask.sub_task_id = normal_project_subtask.stask_id WHERE deals.id BETWEEN (SELECT MAX(id)-${Number(req.query.from) * 20} FROM deals) AND (SELECT MAX(id)-${Number(req.query.from) * 20} FROM deals) ORDER BY deals.id DESC;
 
@@ -179,16 +180,16 @@ exports.renderNormalProjectForm = async (req, res) => {
 //---Normal project form works-------
 
 exports.getClientDataForForm = async (req, res) => {
-    // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
         const query = `SELECT * FROM clients where id = ?`
         await db.query(query, [req.query.refid], (err, result) => {
             if (!err) {
-                return res.status(200).send({clientData : result})
+                return res.status(200).send({result})
             } 
             return res.status(500).send({ msg: "something error occured" })
         });
         
-    // }
+    } 
 },
 
 exports.insertNewNormalDeal = async (req, res) => {
@@ -200,9 +201,11 @@ exports.insertNewNormalDeal = async (req, res) => {
                     res.status(500).send({ msg: "something error occured" })
                     return;
                 }
-                const dealsTableData = [req.body.name, req.body.rfNo, req.body.contactNo, req.body.agreementAm, req.body.workName, req.body.email, req.body.city, req.body.TotalAm, req.body.npdeadline]
 
-                const qTodeal = `insert into deals (deal_name, reference_no, contact, agreement_amount, work_name, email, city, total_price, np_deadline) values (?,?,?,?,?,?,?,?,?)`
+                 // -------- insert into deals tables -----------
+                const dealsTableData = [req.body.name, req.body.rfNo, req.body.contactNo, req.body.altContact, req.body.agreementAm, req.body.workName, req.body.email, req.body.city, req.body.remarks, req.body.TotalAm, req.body.npdeadline]
+
+                const qTodeal = `insert into deals (deal_name, reference_no, contact, contact2, agreement_amount, work_name, email, city, oth_details, total_price, np_deadline) values (?,?,?,?,?,?,?,?,?,?,?)`
 
                 conn.query(qTodeal, dealsTableData, (err1, response) => {
                     if (err1) {
@@ -211,6 +214,14 @@ exports.insertNewNormalDeal = async (req, res) => {
                             throw err1;
                         })
                     }
+                    // -------- insert into client tables -----------
+                    if (req.body.dataType == 'new') {
+                        const clientTableData = [req.body.name, req.body.contactNo, req.body.altContact, req.body.email, req.body.city, req.body.remarks]
+                        const qToclient = `INSERT INTO clients (name, contact, contact2, email, location, oth_details) VALUES (?, ?, ?, ?, ?, ?)` 
+                        transactHandler(qToclient, clientTableData, conn, res, null)
+                    }
+
+                    // -------- insert into normal_project_cat tables -----------   
                     const dealId = response.insertId
                     const catTableData = []
                     if (req.body.task && typeof req.body.task === 'object') {
@@ -228,8 +239,11 @@ exports.insertNewNormalDeal = async (req, res) => {
                                 throw err2;
                             })
                         }
+
+                          // -------- insert into normal_projects_finance tables -----------
                         const finTableData = [dealId, req.body.TotalAm, req.body.agreementAm]
                         const qTonpf = `insert into normal_projects_finance (ndeal_id, totalamount, amount_got) values (?, ?, ?)`
+
                         conn.query(qTonpf, finTableData, (err3, response3) => {
                             if (err3) {
                                 res.status(500).send({ msg: "something error occured" })

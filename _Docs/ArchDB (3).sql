@@ -7,6 +7,9 @@
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
+-- ALTER TABLE `deals` ADD `contact2` VARCHAR(15) NULL DEFAULT NULL AFTER `contact`;
+-- ALTER TABLE `deals` ADD `oth_details` VARCHAR(155) NULL DEFAULT NULL AFTER `city`;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
