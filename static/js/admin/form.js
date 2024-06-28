@@ -21,6 +21,7 @@ function checkFormValid(id) {
   return arrR;
 }
 
+
 async function SubmitNormalFormData(e) {
   e.preventDefault();
   const actionCreator = checkFormValid('np-form-data')
