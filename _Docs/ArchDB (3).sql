@@ -9,6 +9,8 @@
 
 -- ALTER TABLE `deals` ADD `contact2` VARCHAR(15) NULL DEFAULT NULL AFTER `contact`;
 -- ALTER TABLE `deals` ADD `oth_details` VARCHAR(155) NULL DEFAULT NULL AFTER `city`;
+-- ALTER TABLE `vendor_supplies` DROP `quantity`, DROP `rate`, DROP `uom`;
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;

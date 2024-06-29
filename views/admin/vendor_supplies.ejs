@@ -41,7 +41,7 @@
                     <p class="uppercase phead none">Item</p>
                     <p class="uppercase phead none">Total Amount</p>
                     <p class="uppercase phead none">Paid</p>
-                    <p class="uppercase phead none">Quantity</p>
+                    <p class="uppercase phead none">Mode Of Pay</p>
                     <p class="uppercase phead none">Date </p>
                     <p class="uppercase phead none">Action</p>
                     <!-- ------resposnive class------- -->
@@ -85,8 +85,7 @@
                                 <p class="emp_date">
                                     <span class="uppercase hide block phead"></span>
                                     <span>
-                                        <%= e?.quantity %>
-                                            <%= e?.uom %>
+                                        <%= e?.modeofpay %>
                                     </span>
                                 </p>
                                 <p class="emp_date">
@@ -121,12 +120,7 @@
                                 <!-- --INSTALLMENT-- -->
                                 <div class="finegrid">
                                     <p></p>
-                                    <p>
-                                        <span class="uppercase phead">Mode</span>
-                                        <span>
-                                            <%= e?.modeofpay %>
-                                        </span>
-                                    </p>
+
                                     <p>
                                         <span class="uppercase phead">Details</span>
                                         <span>
@@ -143,12 +137,6 @@
                                         <span class="uppercase phead">Vendor Contact</span>
                                         <span>
                                             <%= e?.contact %>
-                                        </span>
-                                    </p>
-                                    <p>
-                                        <span class="uppercase phead">Rate</span>
-                                        <span>
-                                            <%= e?.rate %>
                                         </span>
                                     </p>
                                     <p>
