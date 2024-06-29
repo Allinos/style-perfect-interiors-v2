@@ -11,6 +11,7 @@
 -- ALTER TABLE `deals` ADD `oth_details` VARCHAR(155) NULL DEFAULT NULL AFTER `city`;
 -- ALTER TABLE `vendor_supplies` DROP `quantity`, DROP `rate`, DROP `uom`;
 -- ALTER TABLE `vendor_supplies` ADD `gst_status` VARCHAR(10) NOT NULL DEFAULT 'yes' AFTER `date`;
+-- ALTER TABLE `vendor_supplies` ADD `vendor_supply_id` INT(20) NOT NULL AFTER `vendor_id`;
 -- ALTER TABLE vendor_supplies  DROP project_ref; // delete if exist !
 
 

@@ -1,3 +1,4 @@
+const { query } = require('express');
 const db = require('../config/db.config')
 const { errorHandler } = require('../utils/errorHandler')
 
@@ -17,11 +18,12 @@ exports.getOneSupply = (req, res) => {
 }
 exports.addSupply = (req, res) => {
     let e = req.body;
+    let query ='INSERT INTO vendor_supplies(vendor_id, item_name, details,total_amount, modeofpay, date,gst_status) VALUES (?,?,?,?,?,?,?);'
     db.query(query, [e.vendor_id, e.item_name, e.details, e.total_amount, e.modeofpay, e.date, e.gst_status], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully e Crated', data: results.insertedId })
         } else {
-            console.log("Error inside file Supply.usermanager:ln:35-" + err);
+            console.log("Error inside file Supply.usermanager:ln:21-" + err);
             new errorHandler(501, "Error inside file Supply.usermanager : 10" + err)
             res.status(500).send({ status: false, msg: "Internal error occurs!" });
         }

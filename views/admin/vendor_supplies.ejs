@@ -48,8 +48,8 @@
                 </div>
                 <!-- ----------project information----------- -->
                 <div class="info-content content">
-                    <!-- --------1st project---------  -->
                     <% data?.forEach((e)=>{ %>
+                    <!-- --------1st project---------  -->
                         <div class="accordion-content" data-dealId="<%= data.id %>">
                             <div class="ahead finegrid">
                                 <p class="ref">
@@ -151,8 +151,8 @@
                             </div>
                             <!-- ---------------  -->
                         </div>
+                        <% }) %>
                 </div>
-                <% }) %>
                     <!-- ------------------------------ -->
             </div>
 
@@ -168,11 +168,8 @@
                                 <label for="" onchange="" class="select">Select a Vendor</label>
                                 <select name="vendor_id" id="" class="select">
                                     <option value="">select vendor</option>
-                                    <% vendorData?.forEach((ven)=>{ %>
-                                        <option value="<%= ven.id %>">
-                                            <%= ven.name %>
+                                        <option value="">
                                         </option>
-                                        <% }) %>
                                 </select>
                             </div>
 
