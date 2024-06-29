@@ -48,8 +48,8 @@
                 </div>
                 <!-- ----------project information----------- -->
                 <div class="info-content content">
-                    <!-- --------1st project---------  -->
                     <% data?.forEach((e)=>{ %>
+                    <!-- --------1st project---------  -->
                         <div class="accordion-content" data-dealId="<%= data.id %>">
                             <div class="ahead finegrid">
                                 <p class="ref">
@@ -152,12 +152,10 @@
                             <!-- ---------------  -->
                         </div>
                         <% }) %>
-
                     </div>
                     <%- include('../partials/pagin.ejs') %>
                 <!-- ------------------------------ -->
             </div>
-
 
             <!-- ----------------------------  -->
             <div class="suppliers-form hidden" id="vendor-supply-from-div">

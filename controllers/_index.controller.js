@@ -11,7 +11,7 @@ exports.indexDeshboard = async (req, res) => {
         await db.query(q, (err, results) => {
             const grouped = {};
             const sentData = []
-            if (!err) { 
+            if (!err) {
                 results.forEach(element => {
                     const key = element.id.toString();
                     if (!grouped[key]) { grouped[key] = [] }
@@ -71,19 +71,13 @@ exports.clients_vendors = (req, res) => {
 
 exports.vendor_supplies = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT vendor_supplies.id,vendor_supplies.vendor_id, vendor_supplies.item_name, vendor_supplies.details, vendor_supplies.sgst, vendor_supplies.cgst,vendor_supplies.total_amount, vendor_supplies.modeofpay, vendor_supplies.date, vendors.name,vendors.contact,vendors.location, COALESCE(sum(vendor_payments.amount),0) as paid FROM vendor_supplies JOIN vendors on vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_supplies.vendor_id;`
-        db.query(query, (err, result, field) => { 
+        const query = `SELECT vendor_supplies.id,vendor_supplies.vendor_id, vendor_supplies.item_name, vendor_supplies.details, vendor_supplies.sgst, vendor_supplies.cgst,vendor_supplies.total_amount, vendor_supplies.modeofpay, vendor_supplies.date, vendors.name,vendors.contact,vendors.location, COALESCE(sum(vendor_payments.amount),0) as paid FROM vendor_supplies JOIN vendors on vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_payments.vendor_supply_id;`
+        db.query(query, (err, result, field) => {
             if (!err) {
-                const vendorQuery = `SELECT id, name FROM vendors;`
-                db.query(vendorQuery, (errVendor, vendorResult, field) => {
-                    if (!errVendor) {
-                        console.log(result);
-                       return res.status(200).render('../views/admin/vendor_supplies.ejs', { data: result, vendorData: vendorResult }) 
-                    }
-                    
-                })
+                console.log(result);
+                res.status(200).render('../views/admin/vendor_supplies.ejs', { data: result })
             } else {
-                return res.status(500).send({msg: "Internal error occurs!"});
+                res.status(500).send({ status: false, msg: "Internal error occurs!" });
             }
         })
     }
@@ -177,10 +171,10 @@ exports.renderNormalProjectForm = async (req, res) => {
         await db.query(query, (err, result) => {
             if (!err) {
                 return res.status(200).render('../views/admin/project.form.ejs', { data: result })
-            } 
+            }
             return res.status(500).send({ msg: "something error occured" })
         });
-        
+
     }
 }
 
@@ -192,88 +186,88 @@ exports.getClientDataForForm = async (req, res) => {
         const query = `SELECT * FROM clients where id = ?`
         await db.query(query, [req.query.refid], (err, result) => {
             if (!err) {
-                return res.status(200).send({result})
-            } 
+                return res.status(200).send({ result })
+            }
             return res.status(500).send({ msg: "something error occured" })
         });
-        
-    } 
+
+    }
 },
 
-exports.insertNewNormalDeal = async (req, res) => {
-    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        db.getConnection((err0, conn) => {
-            if (err0) throw err0;
-            conn.beginTransaction(function (err) {
-                if (err) {
-                    res.status(500).send({ msg: "something error occured" })
-                    return;
-                }
-
-                 // -------- insert into deals tables -----------
-                const dealsTableData = [req.body.name, req.body.rfNo, req.body.contactNo, req.body.altContact, req.body.agreementAm, req.body.workName, req.body.email, req.body.city, req.body.remarks, req.body.TotalAm, req.body.npdeadline]
-
-                const qTodeal = `insert into deals (deal_name, reference_no, contact, contact2, agreement_amount, work_name, email, city, oth_details, total_price, np_deadline) values (?,?,?,?,?,?,?,?,?,?,?)`
-
-                conn.query(qTodeal, dealsTableData, (err1, response) => {
-                    if (err1) {
+    exports.insertNewNormalDeal = async (req, res) => {
+        if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+            db.getConnection((err0, conn) => {
+                if (err0) throw err0;
+                conn.beginTransaction(function (err) {
+                    if (err) {
                         res.status(500).send({ msg: "something error occured" })
-                        return conn.rollback(function () {
-                            throw err1;
-                        })
-                    }
-                    // -------- insert into client tables -----------
-                    if (req.body.dataType == 'new') {
-                        const clientTableData = [req.body.name, req.body.contactNo, req.body.altContact, req.body.email, req.body.city, req.body.remarks]
-                        const qToclient = `INSERT INTO clients (name, contact, contact2, email, location, oth_details) VALUES (?, ?, ?, ?, ?, ?)` 
-                        transactHandler(qToclient, clientTableData, conn, res, null)
+                        return;
                     }
 
-                    // -------- insert into normal_project_cat tables -----------   
-                    const dealId = response.insertId
-                    const catTableData = []
-                    if (req.body.task && typeof req.body.task === 'object') {
-                        req.body.task.forEach((ask) => {
-                            const taskNum = Number(ask)
-                            catTableData.push([dealId, taskNum, 'not set yet'])
-                        })
-                    } else { catTableData.push([dealId, req.body.task, 'not set yet']) }
+                    // -------- insert into deals tables -----------
+                    const dealsTableData = [req.body.name, req.body.rfNo, req.body.contactNo, req.body.altContact, req.body.agreementAm, req.body.workName, req.body.email, req.body.city, req.body.remarks, req.body.TotalAm, req.body.npdeadline]
 
-                    const qTonpc = `insert into normal_project_cat (ndeal_id, category_id, dateofdeadline) values ?`
-                    conn.query(qTonpc, [catTableData], (err2, response2) => {
-                        if (err2) {
+                    const qTodeal = `insert into deals (deal_name, reference_no, contact, contact2, agreement_amount, work_name, email, city, oth_details, total_price, np_deadline) values (?,?,?,?,?,?,?,?,?,?,?)`
+
+                    conn.query(qTodeal, dealsTableData, (err1, response) => {
+                        if (err1) {
                             res.status(500).send({ msg: "something error occured" })
                             return conn.rollback(function () {
-                                throw err2;
+                                throw err1;
                             })
                         }
+                        // -------- insert into client tables -----------
+                        if (req.body.dataType == 'new') {
+                            const clientTableData = [req.body.name, req.body.contactNo, req.body.altContact, req.body.email, req.body.city, req.body.remarks]
+                            const qToclient = `INSERT INTO clients (name, contact, contact2, email, location, oth_details) VALUES (?, ?, ?, ?, ?, ?)`
+                            transactHandler(qToclient, clientTableData, conn, res, null)
+                        }
 
-                          // -------- insert into normal_projects_finance tables -----------
-                        const finTableData = [dealId, req.body.TotalAm, req.body.agreementAm]
-                        const qTonpf = `insert into normal_projects_finance (ndeal_id, totalamount, amount_got) values (?, ?, ?)`
+                        // -------- insert into normal_project_cat tables -----------   
+                        const dealId = response.insertId
+                        const catTableData = []
+                        if (req.body.task && typeof req.body.task === 'object') {
+                            req.body.task.forEach((ask) => {
+                                const taskNum = Number(ask)
+                                catTableData.push([dealId, taskNum, 'not set yet'])
+                            })
+                        } else { catTableData.push([dealId, req.body.task, 'not set yet']) }
 
-                        conn.query(qTonpf, finTableData, (err3, response3) => {
-                            if (err3) {
+                        const qTonpc = `insert into normal_project_cat (ndeal_id, category_id, dateofdeadline) values ?`
+                        conn.query(qTonpc, [catTableData], (err2, response2) => {
+                            if (err2) {
                                 res.status(500).send({ msg: "something error occured" })
                                 return conn.rollback(function () {
-                                    throw err3;
+                                    throw err2;
                                 })
                             }
-                            conn.commit(function (errC) {
-                                if (errC) {
+
+                            // -------- insert into normal_projects_finance tables -----------
+                            const finTableData = [dealId, req.body.TotalAm, req.body.agreementAm]
+                            const qTonpf = `insert into normal_projects_finance (ndeal_id, totalamount, amount_got) values (?, ?, ?)`
+
+                            conn.query(qTonpf, finTableData, (err3, response3) => {
+                                if (err3) {
                                     res.status(500).send({ msg: "something error occured" })
                                     return conn.rollback(function () {
-                                        throw errC;
-                                    });
+                                        throw err3;
+                                    })
                                 }
-                                res.status(200).send({ msg: "new deal entered successfully..😍" })
+                                conn.commit(function (errC) {
+                                    if (errC) {
+                                        res.status(500).send({ msg: "something error occured" })
+                                        return conn.rollback(function () {
+                                            throw errC;
+                                        });
+                                    }
+                                    res.status(200).send({ msg: "new deal entered successfully..😍" })
+                                })
                             })
                         })
-                    })
 
+                    })
+                    conn.release();
                 })
-                conn.release();
             })
-        })
+        }
     }
-}
