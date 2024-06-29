@@ -13,7 +13,7 @@ let con = mysql.createPool({
 })
 con.getConnection((error) => {
     if (!!error) {
-        console.log('there is an error bro!' + error)
+        console.log('There is an error' + error)
     } else {
         console.log('connected to datbase!')
     }
