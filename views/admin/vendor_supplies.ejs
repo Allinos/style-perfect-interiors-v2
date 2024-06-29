@@ -152,128 +152,128 @@
                             <!-- ---------------  -->
                         </div>
                         <% }) %>
-                </div>
-                    <!-- ------------------------------ -->
+                    </div>
+                    <%- include('../partials/pagin.ejs') %>
+                <!-- ------------------------------ -->
             </div>
 
-            <!-- ----------PAGINATION--------- -->
-            <%- include('../partials/pagin.ejs') %>
-                </div>
+            <!-- ----------------------------  -->
+            <div class="suppliers-form hidden" id="vendor-supply-from-div">
+                <div class="suppliers">
+                    <form id="vendor-supply-form">
+                        <div class="fiend flex">
+                            <label for="" onchange="" class="select">Select a Vendor</label>
+                            <select name="vendor_id" id="" class="select">
+                                <option value="">select vendor</option>
+                                <% vendorData?.forEach((ven)=>{ %>
+                                    <option value="<%= ven.id %>">
+                                        <%= ven.name %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                        </div>
 
-                <!-- ----------------------------  -->
-                <div class="suppliers-form hidden" id="vendor-supply-from-div">
-                    <div class="suppliers">
-                        <form id="vendor-supply-form">
-                            <div class="fiend flex">
-                                <label for="" onchange="" class="select">Select a Vendor</label>
-                                <select name="vendor_id" id="" class="select">
-                                    <option value="">select vendor</option>
-                                        <option value="">
-                                        </option>
-                                </select>
-                            </div>
+                        <div class="sgrid">
+                            <!-- -- PROJECT DETAILS--  -->
+                            <div class="supplies-inv">
+                                <!-- --PARTICULARS-- -->
 
-                            <div class="sgrid">
-                                <!-- -- PROJECT DETAILS--  -->
-                                <div class="supplies-inv">
-                                    <!-- --PARTICULARS-- -->
-
-                                    <div class="sup-particular flex"><!-- Append custom ITEM -->
-                                        <div class="field">
-                                            <label for="" class="uppercase">Date</label>
-                                            <input name="date" type="text">
-                                        </div>
-                                        <div class="field">
-                                            <label for="" class="uppercase">Particulars</label>
-                                            <input type="text" name="item_name" id="">
-                                        </div>
-                                        <div class="field">
-                                            <label for="" class="uppercase">details</label>
-                                            <input type="text" name="details" id="">
-                                        </div>
-                                        <div class="field">
-                                            <label for="" class="uppercase">Mode of pay</label>
-                                            <select name="modeofpay" id="">
-                                                <option value="cash">Cash</option>
-                                                <option value="credit">Credit</option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <label for="" class="uppercase">GSt</label>
-                                            <select name="gst_status" id="">
-                                                <option value="yes">GST</option>
-                                                <option value="no">WITHOUT GST</option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <label for="" class="uppercase">total Amount(&#8377;)</label>
-                                            <input type="text" name="total_amount" id="">
-                                        </div>
-
-                                        <!-- --------------  -->
+                                <div class="sup-particular flex"><!-- Append custom ITEM -->
+                                    <div class="field">
+                                        <label for="" class="uppercase">Date</label>
+                                        <input name="date" type="text">
                                     </div>
-                                </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">Particulars</label>
+                                        <input type="text" name="item_name" id="">
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">details</label>
+                                        <input type="text" name="details" id="">
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">Mode of pay</label>
+                                        <select name="modeofpay" id="">
+                                            <option value="cash">Cash</option>
+                                            <option value="credit">Credit</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">GSt</label>
+                                        <select name="gst_status" id="">
+                                            <option value="yes">GST</option>
+                                            <option value="no">WITHOUT GST</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">total Amount(&#8377;)</label>
+                                        <input type="text" name="total_amount" id="">
+                                    </div>
 
-                                <div class="supplies-btn flex">
-                                    <button class="uppercase" type="submit"
-                                        onclick="addVendorSupplyFormSubmit(event)">update</button>
-                                    <button class="uppercase" onclick="closeVendorSupplyForm()">cancel</button>
+                                    <!-- --------------  -->
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
 
-                <div class="edit-suppliers-form hide">
-                    <div class="edit-form">
+                            <div class="supplies-btn flex">
+                                <button class="uppercase" type="submit"
+                                    onclick="addVendorSupplyFormSubmit(event)">update</button>
+                                <button class="uppercase" onclick="closeVendorSupplyForm()">cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="edit-suppliers-form hide">
+                <div class="edit-form">
+                    <div class="field">
+                        <label for="">Vendor Name</label>
+                        <p class="uppercase ref">KAnkan</p>
+                    </div>
+
+                    <div class="editGrid">
                         <div class="field">
-                            <label for="">Vendor Name</label>
-                            <p class="uppercase ref">KAnkan</p>
+                            <label for="particular" class="uppercase">Particulars</label>
+                            <input type="text" name="particular" id="particular">
                         </div>
-
-                        <div class="editGrid">
-                            <div class="field">
-                                <label for="particular" class="uppercase">Particulars</label>
-                                <input type="text" name="particular" id="particular">
-                            </div>
-                            <div class="field">
-                                <label for="quantity" class="uppercase">Quantity</label>
-                                <input type="text" name="quantity" id="quantity">
-                            </div>
-                            <div class="field">
-                                <label for="quantity" class="uppercase">Rate</label>
-                                <input type="text" name="quantity" id="quantity">
-                            </div>
-                            <div class="field">
-                                <label for="amount" class="uppercase">Amount</label>
-                                <input type="text" name="amount" id="amount">
-                            </div>
+                        <div class="field">
+                            <label for="quantity" class="uppercase">Quantity</label>
+                            <input type="text" name="quantity" id="quantity">
                         </div>
-                        <div class="editGrid">
-                            <div class="field">
-                                <label for="particular" class="uppercase">gst rate(%)</label>
-                                <input type="text" name="particular" id="particular">
-                            </div>
-                            <div class="field">
-                                <label for="quantity" class="uppercase">cgst(&#8377;) </label>
-                                <input type="text" name="quantity" id="quantity">
-                            </div>
-                            <div class="field">
-                                <label for="quantity" class="uppercase">sgst(&#8377;)</label>
-                                <input type="text" name="quantity" id="quantity">
-                            </div>
-                            <div class="field">
-                                <label for="amount" class="uppercase">total(&#8377;)</label>
-                                <input type="text" name="amount" id="amount">
-                            </div>
+                        <div class="field">
+                            <label for="quantity" class="uppercase">Rate</label>
+                            <input type="text" name="quantity" id="quantity">
                         </div>
-                        <div class="drop-btn flex">
-                            <button type="button" class="uppercase" onclick="">update</button>
-                            <button type="reset" class="uppercase" onclick="">Cancel</button>
+                        <div class="field">
+                            <label for="amount" class="uppercase">Amount</label>
+                            <input type="text" name="amount" id="amount">
                         </div>
-
                     </div>
+                    <div class="editGrid">
+                        <div class="field">
+                            <label for="particular" class="uppercase">gst rate(%)</label>
+                            <input type="text" name="particular" id="particular">
+                        </div>
+                        <div class="field">
+                            <label for="quantity" class="uppercase">cgst(&#8377;) </label>
+                            <input type="text" name="quantity" id="quantity">
+                        </div>
+                        <div class="field">
+                            <label for="quantity" class="uppercase">sgst(&#8377;)</label>
+                            <input type="text" name="quantity" id="quantity">
+                        </div>
+                        <div class="field">
+                            <label for="amount" class="uppercase">total(&#8377;)</label>
+                            <input type="text" name="amount" id="amount">
+                        </div>
+                    </div>
+                    <div class="drop-btn flex">
+                        <button type="button" class="uppercase" onclick="">update</button>
+                        <button type="reset" class="uppercase" onclick="">Cancel</button>
+                    </div>
+
                 </div>
+            </div>
 
         </main>
         </section>
