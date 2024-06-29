@@ -43,7 +43,7 @@
                     <p class="uppercase phead none">Paid</p>
                     <p class="uppercase phead none">Quantity</p>
                     <p class="uppercase phead none">Date </p>
-                    <p class="uppercase phead none">Mode</p>
+                    <p class="uppercase phead none">Action</p>
                     <!-- ------resposnive class------- -->
                 </div>
                 <!-- ----------project information----------- -->
@@ -95,11 +95,14 @@
                                         <%= e?.date %>
                                     </span>
                                 </p>
-                                <p class="emp_date">
-                                    <span class="uppercase hide block phead"></span>
-                                    <span>
-                                        <%= e?.modeofpay %>
-                                    </span>
+                                <p class="flexy">
+                                    <span class="edit-btn" onclick="editSupplies()">Edit</span>
+                                    <span class="butt"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                            id="trash-alt" class="icon">
+                                            <path fill=""
+                                                d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z">
+                                            </path>
+                                        </svg></span>
                                 </p>
 
                                 <p class="arrow-down action-icons">
@@ -116,196 +119,257 @@
                             <!-- ----------open data for accordion---------- -->
                             <div class="adata data">
                                 <!-- --INSTALLMENT-- -->
-                                <div class="finance_expand">
-                                    <div class="installment flex">
-                                        <div class="field">
-                                            <p class="uppercase">Details</p>
-                                            <p class="date">
-                                                <%= e?.details %>
-                                            </p>
-                                        </div>
-                                        <div class="field">
-                                            <p class="uppercase">Vendor Location</p>
-                                            <p class="date">
-                                                <%= e?.location %>
-                                            </p>
-                                        </div>
+                                <div class="finegrid">
+                                    <p></p>
+                                    <p>
+                                        <span class="uppercase phead">Mode</span>
+                                        <span>
+                                            <%= e?.modeofpay %>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="uppercase phead">Details</span>
+                                        <span>
+                                            <%= e?.details %>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="uppercase phead">Vendor Location</span>
+                                        <span>
+                                            <%= e?.location %>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="uppercase phead">Vendor Contact</span>
+                                        <span>
+                                            <%= e?.contact %>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="uppercase phead">Rate</span>
+                                        <span>
+                                            <%= e?.rate %>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="uppercase phead">GST</span>
+                                        <span>
+                                            <%= e?.cgst+e?.sgst %>(<%= e?.cgst %>|<%= e?.sgst %>)%
+                                        </span>
+                                    </p>
 
-                                    </div>
-                                    <div class="installment flex">
-                                        <div class="field">
-                                            <p class="uppercase">Vendor Contact</p>
-                                            <p class="date">
-                                                <%= e?.contact %>
-                                            </p>
-                                        </div>
-                                        <div class="field">
-                                            <p class="uppercase">Rate</p>
-                                            <p class="amount">
-                                                <%= e?.rate %>
-                                            </p>
-                                        </div>
-                                        <div class="field">
-                                            <p class="uppercase">GST</p>
-                                            <p class="mode">
-                                                <%= e?.cgst+e?.sgst %>(<%= e?.cgst %>|<%= e?.sgst %>)%
-                                            </p>
-                                        </div>
-
-                                    </div>
                                 </div>
-                                <!-- ---------------  -->
                             </div>
+                            <!-- ---------------  -->
                         </div>
-                        <% }) %>
-                            <!-- ------------------------------ -->
                 </div>
-
-                <!-- ----------PAGINATION--------- -->
-                <%- include('../partials/pagin.ejs') %>
+                <% }) %>
+                    <!-- ------------------------------ -->
             </div>
 
+            <!-- ----------PAGINATION--------- -->
+            <%- include('../partials/pagin.ejs') %>
+                </div>
 
-            <div class="suppliers-form">
-                <div class="suppliers">
-                    <div class="fiend flex">
-                        <label for="" onchange="" class="select">Select a Vendor</label>
-                        <select name="" id="" class="select">
-                            <option value="">Kankan</option>
-                            <option value="">Kankan</option>
-                        </select>
-                    </div>
 
-                    <div class="sgrid">
-                        <!-- -- PROJECT DETAILS--  -->
-                        <div class="supplies-inv">
-                            <!-- --PARTICULARS-- -->
-                            <div class="sup-particular flex"><!-- Append ANOTHER ITEM -->
-                                <div class="field">
-                                    <label for="" class="uppercase">Particulars</label>
-                                    <select name="particulars" id="particulars">
-                                        <option value="_" disabled="disabled" selected="selected">Select
-                                        </option>
-                                    </select>
-                                </div>
+                <div class="suppliers-form hide">
+                    <div class="suppliers">
+                        <div class="fiend flex">
+                            <label for="" onchange="" class="select">Select a Vendor</label>
+                            <select name="" id="" class="select">
+                                <option value="">Kankan</option>
+                                <option value="">Kankan</option>
+                            </select>
+                        </div>
 
-                                <div class="field gst">
-                                    <label for="" class="uppercase">GST Rate(%)</label>
-                                    <input type="text" name="rate" id="rate">
-                                </div>
-                                <div class="field">
-                                    <label for="" class="uppercase">Quantity</label>
-                                    <input type="text" name="quantity" id="quantity">
-                                </div>
-                                <div class="field">
-                                    <label for="" class="uppercase">Rate(&#8377;)</label>
-                                    <input type="text" name="rate" id="rate">
-                                </div>
-                                <div class="field">
-                                    <label for="" class="uppercase">Amount(&#8377;)</label>
-                                    <input type="text" name="amount" id="amount">
-                                </div>
-                                <div class="field gst">
-                                    <label for="" class="uppercase">sGST(&#8377;)</label>
-                                    <input type="text" name="amount" id="amount">
-                                </div>
-                                <div class="field gst">
-                                    <label for="" class="uppercase">cgst(&#8377;)</label>
-                                    <input type="text" name="amount" id="amount">
-                                </div>
-                                <div class="field">
-                                    <label for="" class="uppercase">Total(&#8377;)</label>
-                                    <input type="text" name="amount" id="amount">
-                                </div>
+                        <div class="sgrid">
+                            <!-- -- PROJECT DETAILS--  -->
+                            <div class="supplies-inv">
+                                <!-- --PARTICULARS-- -->
+                                <div class="sup-particular flex"><!-- Append ANOTHER ITEM -->
+                                    <div class="field">
+                                        <label for="" class="uppercase">Particulars</label>
+                                        <select name="particulars" id="particulars">
+                                            <option value="_" disabled="disabled" selected="selected">Select
+                                            </option>
+                                        </select>
+                                    </div>
 
-                                <!-- --------------  -->
+                                    <div class="field gst">
+                                        <label for="" class="uppercase">GST Rate(%)</label>
+                                        <input type="text" name="rate" id="rate">
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">Quantity</label>
+                                        <input type="text" name="quantity" id="quantity">
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">Rate(&#8377;)</label>
+                                        <input type="text" name="rate" id="rate">
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">Amount(&#8377;)</label>
+                                        <input type="text" name="amount" id="amount">
+                                    </div>
+                                    <div class="field gst">
+                                        <label for="" class="uppercase">sGST(&#8377;)</label>
+                                        <input type="text" name="amount" id="amount">
+                                    </div>
+                                    <div class="field gst">
+                                        <label for="" class="uppercase">cgst(&#8377;)</label>
+                                        <input type="text" name="amount" id="amount">
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">Total(&#8377;)</label>
+                                        <input type="text" name="amount" id="amount">
+                                    </div>
+
+                                    <!-- --------------  -->
+                                </div>
+                                <!-- ----------------------------  -->
+                                <div class="sup-particular flex"><!-- Append custom ITEM -->
+                                    <div class="field">
+                                        <label for="" class="uppercase">Particulars</label>
+                                        <input type="text" name="particulars" id="">
+                                    </div>
+                                    <div class="field gst">
+                                        <label for="" class="uppercase">GST Rate(%)</label>
+                                        <input type="text" name="rate" id="rate">
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">Quantity</label>
+                                        <input type="text" name="quantity" id="">
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">Rate(&#8377;)</label>
+                                        <input type="text" name="rate" id="">
+                                    </div>
+                                    <div class="field">
+                                        <label for="" class="uppercase">Amount(&#8377;)</label>
+                                        <input type="text" name="amount" id="">
+                                    </div>
+                                    <div class="field gst">
+                                        <label for="" class="uppercase">sGST(&#8377;)</label>
+                                        <input type="text" name="amount" id="amount">
+                                    </div>
+                                    <div class="field gst">
+                                        <label for="" class="uppercase">cgst(&#8377;)</label>
+                                        <input type="text" name="amount" id="amount">
+                                    </div>
+                                    <div class="field gst">
+                                        <label for="" class="uppercase">Total(&#8377;)</label>
+                                        <input type="text" name="amount" id="amount">
+                                    </div>
+                                    <div class="field">
+                                        <span class="btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                id="trash-alt" class="svg">
+                                                <path fill=""
+                                                    d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z">
+                                                </path>
+                                            </svg></span>
+                                    </div>
+
+                                    <!-- --------------  -->
+                                </div>
                             </div>
-                            <!-- ----------------------------  -->
-                            <div class="sup-particular flex"><!-- Append custom ITEM -->
-                                <div class="field">
-                                    <label for="" class="uppercase">Particulars</label>
-                                    <input type="text" name="particulars" id="">
-                                </div>
-                                <div class="field gst">
-                                    <label for="" class="uppercase">GST Rate(%)</label>
-                                    <input type="text" name="rate" id="rate">
-                                </div>
-                                <div class="field">
-                                    <label for="" class="uppercase">Quantity</label>
-                                    <input type="text" name="quantity" id="">
-                                </div>
-                                <div class="field">
-                                    <label for="" class="uppercase">Rate(&#8377;)</label>
-                                    <input type="text" name="rate" id="">
-                                </div>
-                                <div class="field">
-                                    <label for="" class="uppercase">Amount(&#8377;)</label>
-                                    <input type="text" name="amount" id="">
-                                </div>
-                                <div class="field gst">
-                                    <label for="" class="uppercase">sGST(&#8377;)</label>
-                                    <input type="text" name="amount" id="amount">
-                                </div>
-                                <div class="field gst">
-                                    <label for="" class="uppercase">cgst(&#8377;)</label>
-                                    <input type="text" name="amount" id="amount">
-                                </div>
-                                <div class="field gst">
-                                    <label for="" class="uppercase">Total(&#8377;)</label>
-                                    <input type="text" name="amount" id="amount">
-                                </div>
-                                <div class="field">
-                                    <span class="btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                            id="trash-alt" class="svg">
-                                            <path fill=""
-                                                d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z">
-                                            </path>
-                                        </svg></span>
-                                </div>
-                                
-                                <!-- --------------  -->
-                            </div>
-                        </div>
 
-                        <div class="fend flex">
-                            <label for="" onchange="">Total</label>
-                            <p class="uppercase">&#8377; <span>50,000</span></p>
-                        </div>
-                        <!-- -----------  -->
-                        <!-- --ADD GST BUTTON-- -->
-                         <div class="supplies-add-item flex">
-                            <button type="button" class="uppercase">
-                                <span>Add GST</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="percentage"><path d="M7.75781,10.75781a3,3,0,1,0-3-3A3.00328,3.00328,0,0,0,7.75781,10.75781Zm0-4a1,1,0,1,1-1,1A1.00067,1.00067,0,0,1,7.75781,6.75781Zm8.48438,6.48438a3,3,0,1,0,3,3A3.00328,3.00328,0,0,0,16.24219,13.24219Zm0,4a1,1,0,1,1,1-1A1.00067,1.00067,0,0,1,16.24219,17.24219ZM19.707,4.293a.99962.99962,0,0,0-1.41406,0l-14,14A.99989.99989,0,1,0,5.707,19.707l14-14A.99962.99962,0,0,0,19.707,4.293Z"></path></svg>
-                            </button>
-                         </div>
-                        <!-- ---ADD ANOTHER FIELD BUTTON--  -->
-                        <div class="supplies-add-item flex">
-                            <button class="uppercase" type="button" onclick="addField()" id="">
-                                <span>Add another field</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
-                                    <path fill="##000000"
-                                        d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
-                                    </path>
-                                </svg>
-                            </button>
-                            <button class="uppercase" type="button" onclick="addCustomField()" id="">
-                                <span>Add custom field</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
-                                    <path fill="##000000"
-                                        d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                        
-                        <div class="supplies-btn flex">
-                            <button class="uppercase" type="submit" onclick="addInventoryItem(event)">update</button>
-                            <button class="uppercase" type="reset" onclick="closeInventoryExpense()">cancel</button>
+                            <div class="fend flex">
+                                <label for="" onchange="">Total</label>
+                                <p class="uppercase">&#8377; <span>50,000</span></p>
+                            </div>
+                            <!-- -----------  -->
+                            <!-- --ADD GST BUTTON-- -->
+                            <div class="supplies-add-item flex">
+                                <button type="button" class="uppercase">
+                                    <span>Add GST</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24"
+                                        id="percentage">
+                                        <path
+                                            d="M7.75781,10.75781a3,3,0,1,0-3-3A3.00328,3.00328,0,0,0,7.75781,10.75781Zm0-4a1,1,0,1,1-1,1A1.00067,1.00067,0,0,1,7.75781,6.75781Zm8.48438,6.48438a3,3,0,1,0,3,3A3.00328,3.00328,0,0,0,16.24219,13.24219Zm0,4a1,1,0,1,1,1-1A1.00067,1.00067,0,0,1,16.24219,17.24219ZM19.707,4.293a.99962.99962,0,0,0-1.41406,0l-14,14A.99989.99989,0,1,0,5.707,19.707l14-14A.99962.99962,0,0,0,19.707,4.293Z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- ---ADD ANOTHER FIELD BUTTON--  -->
+                            <div class="supplies-add-item flex">
+                                <button class="uppercase" type="button" onclick="addField()" id="">
+                                    <span>Add another field</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
+                                        <path fill="##000000"
+                                            d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <button class="uppercase" type="button" onclick="addCustomField()" id="">
+                                    <span>Add custom field</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
+                                        <path fill="##000000"
+                                            d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="supplies-btn flex">
+                                <button class="uppercase" type="submit"
+                                    onclick="addInventoryItem(event)">update</button>
+                                <button class="uppercase" type="reset" onclick="closeInventoryExpense()">cancel</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="edit-suppliers-form hide">
+                    <div class="edit-form">
+                        <div class="field">
+                            <label for="">Vendor Name</label>
+                            <p class="uppercase ref">KAnkan</p>
+                        </div>
+
+                        <div class="editGrid">
+                            <div class="field">
+                                <label for="particular" class="uppercase">Particulars</label>
+                                <input type="text" name="particular" id="particular">
+                            </div>
+                            <div class="field">
+                                <label for="quantity" class="uppercase">Quantity</label>
+                                <input type="text" name="quantity" id="quantity">
+                            </div>
+                            <div class="field">
+                                <label for="quantity" class="uppercase">Rate</label>
+                                <input type="text" name="quantity" id="quantity">
+                            </div>
+                            <div class="field">
+                                <label for="amount" class="uppercase">Amount</label>
+                                <input type="text" name="amount" id="amount">
+                            </div>
+                        </div>
+                        <div class="editGrid">
+                            <div class="field">
+                                <label for="particular" class="uppercase">gst rate(%)</label>
+                                <input type="text" name="particular" id="particular">
+                            </div>
+                            <div class="field">
+                                <label for="quantity" class="uppercase">cgst(&#8377;) </label>
+                                <input type="text" name="quantity" id="quantity">
+                            </div>
+                            <div class="field">
+                                <label for="quantity" class="uppercase">sgst(&#8377;)</label>
+                                <input type="text" name="quantity" id="quantity">
+                            </div>
+                            <div class="field">
+                                <label for="amount" class="uppercase">total(&#8377;)</label>
+                                <input type="text" name="amount" id="amount">
+                            </div>
+                        </div>
+                        <div class="drop-btn flex">
+                            <button type="button" class="uppercase" onclick="">update</button>
+                            <button type="reset" class="uppercase" onclick="">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+
         </main>
         </section>
 
