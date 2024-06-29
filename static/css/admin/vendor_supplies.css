@@ -2,6 +2,10 @@
     background: var(--green);
 }
 
+.hidden {
+    display: none;
+}
+
 .main .total-amount::before {
     content: '';
     position: absolute;
@@ -165,7 +169,7 @@
 }
 .sup-particular{
     display: grid;
-    grid-template-columns: repeat(5, 1fr) 2rem;
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     align-items: center;
 }
