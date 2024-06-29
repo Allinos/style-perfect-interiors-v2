@@ -17,7 +17,6 @@ exports.getOneSupply = (req, res) => {
 }
 exports.addSupply = (req, res) => {
     let e = req.body;
-    let query = 'INSERT INTO vendor_supplies(vendor_id, item_name, details, total_amount, modeofpay, date, gst_status) VALUES(?,?,?,?,?,?,?);';
     db.query(query, [e.vendor_id, e.item_name, e.details, e.total_amount, e.modeofpay, e.date, e.gst_status], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully e Crated', data: results.insertedId })

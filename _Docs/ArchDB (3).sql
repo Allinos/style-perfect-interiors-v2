@@ -11,6 +11,8 @@
 -- ALTER TABLE `deals` ADD `oth_details` VARCHAR(155) NULL DEFAULT NULL AFTER `city`;
 -- ALTER TABLE `vendor_supplies` DROP `quantity`, DROP `rate`, DROP `uom`;
 -- ALTER TABLE `vendor_supplies` ADD `gst_status` VARCHAR(10) NOT NULL DEFAULT 'yes' AFTER `date`;
+-- ALTER TABLE vendor_supplies  DROP project_ref; // delete if exist !
+
 
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,16 +20,11 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `ArchDB`
---
-
 -- --------------------------------------------------------
+
+
 
 --
 -- Table structure for table `adminauth`
