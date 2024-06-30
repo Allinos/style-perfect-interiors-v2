@@ -31,8 +31,8 @@ exports.addSupply = (req, res) => {
 }
 exports.updateSupply = (req, res) => {
     let e = req.body;
-    let query = 'UPDATE vendor_supplies SET item_name=?,details=?,sgst=?,cgst=?,total_amount=?,date=? WHERE id=?;';
-    db.query(query, [e.name, e.details, e.sgst, e.cgst,e.total_amount,e.date, req.params.id], (err, results) => {
+    let query = 'UPDATE vendor_supplies SET item_name=?, details=?, total_amount=?, modeofpay=?, date=?, gst_status=? WHERE id=?;';
+    db.query(query, [e.item_name, e.details, e.total_amount, e.modeofpay, e.dayofadd, e.gst_status, req.params.id], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully e Updated', data: results })
         } else {

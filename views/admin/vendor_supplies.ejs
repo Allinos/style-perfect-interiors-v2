@@ -67,15 +67,16 @@
                                 </p>
                                 <p class="emp_date">
                                     <span class="uppercase hide block phead"></span>
-                                    <span>
+                                    <span id="item-name">
                                         <%= e?.item_name %>
                                     </span>
                                 </p>
                                 <p class="emp_date">
                                     <span class="uppercase hide block phead"></span>
-                                    <span>
-                                        <%= e?.total_amount %>/-
+                                    <span id="total-amount">
+                                        <%= e?.total_amount %>
                                     </span>
+                                    <span>/-</span>
                                 </p>
                                 <p class="emp_date">
                                     <span class="uppercase hide block phead"></span>
@@ -85,19 +86,19 @@
                                 </p>
                                 <p class="emp_date">
                                     <span class="uppercase hide block phead"></span>
-                                    <span>
+                                    <span id="modeofpay" data-status="<%= e?.modeofpay %>">
                                         <%= e?.modeofpay %>
                                     </span>
                                 </p>
                                 <p class="emp_date">
                                     <span class="uppercase hide block phead"></span>
-                                    <span>
+                                    <span id="dayofadd">
                                         <%= e?.date %>
                                     </span>
                                 </p>
                                 <p class="flexy">
-                                    <span class="edit-btn" onclick="editSupplies()">Edit</span>
-                                    <span class="butt"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    <span class="edit-btn" data-refid="<%= e?.id %>" onclick="openVendorSupplyForm('edit', event, this)">Edit</span>
+                                    <span data-refid="<%= e?.id %>" class="butt" onclick="deleteSupply(event, this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                             id="trash-alt" class="icon">
                                             <path fill=""
                                                 d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z">
@@ -125,7 +126,7 @@
 
                                     <p>
                                         <span class="uppercase phead">Details</span>
-                                        <span>
+                                        <span id="details">
                                             <%= e?.details %>
                                         </span>
                                     </p>
@@ -145,6 +146,12 @@
                                         <span class="uppercase phead">GST</span>
                                         <span>
                                             <%= e?.cgst+e?.sgst %>(<%= e?.cgst %> | <%= e?.sgst %>)%
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="uppercase phead">GST STATUS</span>
+                                        <span id="gst-status" data-status="<%= e?.gst_status %>">
+                                             <%= e?.gst_status == 'yes' ? 'with GST' : 'without GST' %>
                                         </span>
                                     </p>
 
@@ -218,59 +225,66 @@
                             <div class="supplies-btn flex">
                                 <button class="uppercase" type="submit"
                                     onclick="addVendorSupplyFormSubmit(event)">update</button>
-                                <button class="uppercase" onclick="closeVendorSupplyForm(event)">cancel</button>
+                                <button class="uppercase" onclick="closeVendorSupplyForm('vendor-supply-from-div',event)">cancel</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <div class="edit-suppliers-form hide" id="vendor-supply-edit-form">
+            <div class="edit-suppliers-form hidden" id="vendor-supply-edit-form">
                 <div class="edit-form">
                     <div class="field">
                         <label for="">Vendor Name</label>
                         <p class="uppercase ref">KAnkan</p>
                     </div>
 
-                    <div class="editGrid">
-                        <div class="field">
-                            <label for="particular" class="uppercase">Particulars</label>
-                            <input type="text" name="particular" id="particular">
+                    <div class="sgrid">
+                        <!-- -- PROJECT DETAILS--  -->
+                        <div class="supplies-inv">
+                            <!-- --PARTICULARS-- -->
+                        <form id="update-supply-form">
+                            <div class="sup-particular flex"><!-- Append custom ITEM -->
+                                <div class="field">
+                                    <label for="" class="uppercase">Date</label>
+                                    <input name="dayofadd" type="text" id="dayofadd">
+                                </div>
+                                <div class="field">
+                                    <label for="" class="uppercase">Particulars</label>
+                                    <input type="text" name="item_name" id="item_name">
+                                </div>
+                                <div class="field">
+                                    <label for="" class="uppercase">details</label>
+                                    <input type="text" name="details" id="details">
+                                </div>
+                                <div class="field">
+                                    <label for="" class="uppercase">Mode of pay</label>
+                                    <select name="modeofpay" id="modeofpay">
+                                        <option value="cash">Cash</option>
+                                        <option value="credit">Credit</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="" class="uppercase">GSt</label>
+                                    <select name="gst_status" id="gst_status">
+                                        <option value="yes">GST</option>
+                                        <option value="no">WITHOUT GST</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="" class="uppercase">total Amount(&#8377;)</label>
+                                    <input type="text" name="total_amount" id="total_amount">
+                                </div>
+                                <!-- --------------  -->
+                            </div>
+                        </form>
                         </div>
-                        <div class="field">
-                            <label for="quantity" class="uppercase">Quantity</label>
-                            <input type="text" name="quantity" id="quantity">
+
+                        <div class="supplies-btn flex">
+                            <button id="update-supply-btn" class="uppercase" type="submit" data-supplyid=""
+                                onclick="updateVendorSupplyFormSubmit(event, this)">update</button>
+                            <button class="uppercase" onclick="closeVendorSupplyForm('vendor-supply-edit-form', event)">cancel</button>
                         </div>
-                        <div class="field">
-                            <label for="quantity" class="uppercase">Rate</label>
-                            <input type="text" name="quantity" id="quantity">
-                        </div>
-                        <div class="field">
-                            <label for="amount" class="uppercase">Amount</label>
-                            <input type="text" name="amount" id="amount">
-                        </div>
-                    </div>
-                    <div class="editGrid">
-                        <div class="field">
-                            <label for="particular" class="uppercase">gst rate(%)</label>
-                            <input type="text" name="particular" id="particular">
-                        </div>
-                        <div class="field">
-                            <label for="quantity" class="uppercase">cgst(&#8377;) </label>
-                            <input type="text" name="quantity" id="quantity">
-                        </div>
-                        <div class="field">
-                            <label for="quantity" class="uppercase">sgst(&#8377;)</label>
-                            <input type="text" name="quantity" id="quantity">
-                        </div>
-                        <div class="field">
-                            <label for="amount" class="uppercase">total(&#8377;)</label>
-                            <input type="text" name="amount" id="amount">
-                        </div>
-                    </div>
-                    <div class="drop-btn flex">
-                        <button type="button" class="uppercase" onclick="">update</button>
-                        <button type="reset" class="uppercase" onclick="">Cancel</button>
                     </div>
 
                 </div>

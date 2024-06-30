@@ -2,17 +2,20 @@
 
 
 
- function openVendorSupplyForm(type) {
+ function openVendorSupplyForm(type, e, target) {
     if (type == 'add') {
         document.getElementById('vendor-supply-from-div').classList.remove('hidden');
     } else {
-        document.getElementById('vendor-supply-from-div').classList.remove('hidden');
+        e.stopPropagation()
+        document.getElementById('vendor-supply-edit-form').classList.remove('hidden');
+        renderEditValue(target)
+        document.getElementById('update-supply-btn').dataset.supplyid = target.dataset.refid;
     }
 }
 
- function closeVendorSupplyForm(e) {
+ function closeVendorSupplyForm(id, e) {
     e.preventDefault()
-    document.getElementById('vendor-supply-from-div').classList.add('hidden');
+    document.getElementById(id).classList.add('hidden');
 }
 
 function checkFormValid(id) {
@@ -24,6 +27,11 @@ function checkFormValid(id) {
     return arrR;
   }
 
+async function deleteSupply(e, target) {
+    e.stopPropagation();
+    await method.DEL_UPD(`admin/inventory/vendor/delete-supply/${target.dataset.refid}`, 'DELETE')
+}
+
 async function addVendorSupplyFormSubmit(e) {
     e.preventDefault()
     let data = new FormData(document.getElementById('vendor-supply-form'));
@@ -32,5 +40,42 @@ async function addVendorSupplyFormSubmit(e) {
         alert('Please fill in all the details')
     } else {
         await method.GET_POST('admin/inventory/vendor/add-supply', 'POST', data, 'form')
+    }
+}
+
+
+function renderEditValue(target) {
+    const mainParent = target.parentNode.parentNode.parentNode
+    const requiredData = {
+        total_amount : mainParent.querySelector('#total-amount'),
+        item_name : mainParent.querySelector('#item-name'),
+        modeofpay : mainParent.querySelector('#modeofpay'),
+        details : mainParent.querySelector('#details'),
+        gst_status : mainParent.querySelector('#gst-status'),
+        dayofadd : mainParent.querySelector('#dayofadd')
+    }
+
+    for (const key in requiredData) {
+        const main = document.getElementById('vendor-supply-edit-form')
+        main.querySelector(`#${key}`).value = requiredData[key].textContent.trim()
+        console.log(requiredData[key].textContent);
+
+        if (main.querySelector(`#${key}`).nodeName == 'SELECT') {
+            const selectOpt = main.querySelector(`#${key}`).children;
+            for (const opt of selectOpt) {
+                if (opt.value == requiredData[key].dataset.status) { opt.selected = true } 
+            }
+        }
+    }
+}
+
+async function updateVendorSupplyFormSubmit(e, target) {
+    e.preventDefault()
+    let data = new FormData(document.getElementById('update-supply-form'));
+    const isValid = checkFormValid('update-supply-form')
+    if (isValid.includes(false)) {
+        alert('Please fill in all the details')
+    } else {
+        await method.GET_POST(`admin/inventory/vendor/update-supply/${target.dataset.supplyid}`, 'PUT', data, 'form')
     }
 }
