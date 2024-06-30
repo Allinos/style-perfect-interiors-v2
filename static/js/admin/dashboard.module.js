@@ -42,9 +42,10 @@ class DataCall {
           body: payload
         })
         const res = await fet.json()
-        if (fet.ok) { 
+        if (fet.ok) {
           document.getElementById('loading-container').classList.add('hide')
-          this.GET_Notify('Successfully Done', 'Successfull', 'success') } else {
+          this.GET_Notify('Successfully Done', 'Successfull', 'success')
+        } else {
           document.getElementById('loading-container').classList.add('hide')
           this.GET_Notify('Error Recognized', 'Something Error', 'error')
         }
@@ -70,9 +71,10 @@ class DataCall {
           const fet = await fetch(this.urlHead + url, { method: method })
           const res = await fet.json()
           console.log(fet)
-          if (fet.ok) { 
+          if (fet.ok) {
             document.getElementById('loading-container').classList.add('hide')
-            this.GET_Notify('Removed Successfully', 'Successfull', 'success') } else {
+            this.GET_Notify('Removed Successfully', 'Successfull', 'success')
+          } else {
             document.getElementById('loading-container').classList.add('hide')
             this.GET_Notify('Error Recognized', 'Something Error', 'error')
           }
@@ -94,10 +96,11 @@ class DataCall {
         })
         const res = await fet.json()
         console.log(fet)
-        if (fet.ok) { 
+        if (fet.ok) {
           document.getElementById('loading-container').classList.add('hide')
-          this.GET_Notify('Updated Successfully', 'Successfull', 'success') } else {
-            document.getElementById('loading-container').classList.add('hide')
+          this.GET_Notify('Updated Successfully', 'Successfull', 'success')
+        } else {
+          document.getElementById('loading-container').classList.add('hide')
           this.GET_Notify('Error Recognized', 'Something Error', 'error')
         }
         return res;
@@ -115,9 +118,10 @@ class DataCall {
           body: payload
         })
         const res = await fet.json()
-        if (fet.ok) { 
+        if (fet.ok) {
           document.getElementById('loading-container').classList.add('hide')
-          this.GET_Notify('Successfully Done', 'Successfull', 'success') } else {
+          this.GET_Notify('Successfully Done', 'Successfull', 'success')
+        } else {
           document.getElementById('loading-container').classList.add('hide')
           this.GET_Notify('Error Recognized', 'Something Error', 'error')
         }
@@ -128,6 +132,20 @@ class DataCall {
         throw new Error('request not proceed !' + err.message)
       }
     }
+  }
+
+  HTML_FORM_VALIDATE(formId, optionalFields) {
+    const dataTobeInsert = new FormData(document.getElementById(formId))
+    let isValid = []
+    for (const i of dataTobeInsert) {
+      if (i[1]) {
+        isValid.push(true)
+      } else { isValid.push(false) }
+    }
+    if (isValid.includes(false)) {
+      return false;
+    } else { return true; }
+
   }
 
 
@@ -170,7 +188,7 @@ class DataCall {
         newItem.append(key, Number(target[key]))
       }
     })
-    if (Exdata) { for (const x in Exdata) { newItem.append(x, Exdata[x])}}
+    if (Exdata) { for (const x in Exdata) { newItem.append(x, Exdata[x]) } }
     await this.GET_POST(url, 'POST', newItem, 'form')
     if (fun) { fun(); }
   }

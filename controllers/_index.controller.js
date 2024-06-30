@@ -71,13 +71,19 @@ exports.clients_vendors = (req, res) => {
 
 exports.vendor_supplies = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT vendor_supplies.id,vendor_supplies.vendor_id, vendor_supplies.item_name, vendor_supplies.details, vendor_supplies.sgst, vendor_supplies.cgst,vendor_supplies.total_amount, vendor_supplies.modeofpay, vendor_supplies.date, vendors.name,vendors.contact,vendors.location, COALESCE(sum(vendor_payments.amount),0) as paid FROM vendor_supplies JOIN vendors on vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_payments.vendor_supply_id;`
+        const query = `SELECT vendor_supplies.id,vendor_supplies.vendor_id, vendor_supplies.item_name, vendor_supplies.details, vendor_supplies.sgst, vendor_supplies.cgst,vendor_supplies.total_amount, vendor_supplies.modeofpay, vendor_supplies.date, vendors.name,vendors.contact,vendors.location, COALESCE(sum(vendor_payments.amount),0) as paid FROM vendor_supplies JOIN vendors on vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_supplies.vendor_id;`
         db.query(query, (err, result, field) => {
             if (!err) {
-                console.log(result);
-                res.status(200).render('../views/admin/vendor_supplies.ejs', { data: result })
+                const vendorQuery = `SELECT id, name FROM vendors;`
+                db.query(vendorQuery, (errVendor, vendorResult, field) => {
+                    if (!errVendor) {
+                        console.log(result);
+                        return res.status(200).render('../views/admin/vendor_supplies.ejs', { data: result, vendorData: vendorResult })
+                    }
+
+                })
             } else {
-                res.status(500).send({ status: false, msg: "Internal error occurs!" });
+                return res.status(500).send({ msg: "Internal error occurs!" });
             }
         })
     }
