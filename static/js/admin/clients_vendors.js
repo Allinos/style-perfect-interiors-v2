@@ -7,6 +7,9 @@ function displayCtn(e) {
     document.querySelector('.ClientCtn').style.backgrpund = "";
     document.querySelector(e).classList.add('block');
     document.querySelector(e).style.backgrpund = "";
+    document.querySelector('.info-head').children[1].innerText=(e=='.VendorCtn'?'Vendors':'Clients')
+
+    
 }
 function openAddClientsVendors(params) {
     document.getElementsByClassName('main')[0].classList.add('flow');

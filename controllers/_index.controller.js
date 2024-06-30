@@ -62,7 +62,7 @@ exports.expense = (req, res) => {
 
 exports.clients_vendors = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT * FROM vendors;SELECT * FROM clients;`
+        const query = `SELECT vendors.id,vendors.name, vendors.contact, vendors.contact2, vendors.email, vendors.location, vendors.oth_details, sum(vendor_supplies.total_amount)as amount, sum(vendor_payments.amount)as paid FROM vendors LEFT JOIN vendor_supplies ON vendor_supplies.vendor_id=vendors.id LEFT JOIN vendor_payments ON vendor_payments.vendor_supply_id=vendor_supplies.id GROUP BY vendors.id;SELECT * FROM clients;`
         db.query(query, (err, result, field) => {
             res.status(200).render('../views/admin/clients_vendors.ejs', { data: result })
         })

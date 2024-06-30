@@ -40,7 +40,7 @@
                 <!-- headings -->
                 <div class="info-head finegrid">
                     <p class="uppercase phead none">Ref. No.</p>
-                    <p class="uppercase phead none">Name</p>
+                    <p class="uppercase phead none">Clients</p>
                     <p class="uppercase phead none">Contact </p>
                     <p class="uppercase phead none">Location</p>
                     <p class="uppercase phead none">Other Details</p>
@@ -119,6 +119,7 @@
                                                 <%= e?.contact2 %>
                                             </p>
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <!-- ---------------  -->
@@ -197,6 +198,21 @@
                                             <p class="uppercase">Alt. Contact</p>
                                             <p class="alt_contact">
                                                 <%= e?.contact2 %>
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <p class="uppercase">Amount</p>
+                                            <p class="alt_contact">
+                                                ₹ <%= e.amount %> /-
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="installment flex">
+                                       
+                                        <div class="field">
+                                            <p class="uppercase">Paid</p>
+                                            <p class="alt_contact">
+                                                ₹ <%= e?.paid %> /-
                                             </p>
                                         </div>
                                     </div>

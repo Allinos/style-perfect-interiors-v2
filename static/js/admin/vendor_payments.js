@@ -69,6 +69,7 @@ async function OpenAddPayment(data) {
             <select name="mode" id="">
                 <option value="cash">Cash</option>
                 <option value="online">Online</option>
+                <option value="cheque">Cheque</option>
             </select>
         </div>
         <div class="flex">
@@ -111,6 +112,7 @@ async function OpenUpdatePayment(e, o) {
             <select name="mode" id="mode" value="${mode.innerText}" >
                 <option value="cash">Cash</option>
                 <option value="online">Online</option>
+                <option value="cheque">Cheque</option>
             </select>
         </div>
         <div class="flex">
