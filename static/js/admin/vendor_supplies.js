@@ -2,11 +2,16 @@
 
 
 
- function openVendorSupplyForm() {
-    document.getElementById('vendor-supply-from-div').classList.remove('hidden');
+ function openVendorSupplyForm(type) {
+    if (type == 'add') {
+        document.getElementById('vendor-supply-from-div').classList.remove('hidden');
+    } else {
+        document.getElementById('vendor-supply-from-div').classList.remove('hidden');
+    }
 }
 
- function closeVendorSupplyForm() {
+ function closeVendorSupplyForm(e) {
+    e.preventDefault()
     document.getElementById('vendor-supply-from-div').classList.add('hidden');
 }
 

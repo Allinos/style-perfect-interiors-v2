@@ -75,6 +75,7 @@ exports.vendor_supplies = (req, res) => {
         ;SELECT id, name FROM vendors;`
         db.query(query, (err, result, field) => {
             if (!err) {
+                console.log(result[1]);
                 res.status(200).render('../views/admin/vendor_supplies.ejs', { data: result})
             } else {
                 return res.status(500).send({ msg: "Internal error occurs!" });
