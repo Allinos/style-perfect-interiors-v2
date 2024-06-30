@@ -27,8 +27,13 @@
                 <h4 class="uppercase">Stock</h4>
                 <div class="side-btn flex">
                     <div class="filter">
-                        <span class="btn" onclick="(location.reload())"><svg height="25px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="25px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28,16c-1.219,0-1.797,0.859-2,1.766C25.269,21.03,22.167,26,16,26c-5.523,0-10-4.478-10-10S10.477,6,16,6  c2.24,0,4.295,0.753,5.96,2H20c-1.104,0-2,0.896-2,2s0.896,2,2,2h6c1.104,0,2-0.896,2-2V4c0-1.104-0.896-2-2-2s-2,0.896-2,2v0.518  C21.733,2.932,18.977,2,16,2C8.268,2,2,8.268,2,16s6.268,14,14,14c9.979,0,14-9.5,14-11.875C30,16.672,28.938,16,28,16z" /></svg> 
+                        <span class="btn" onclick="(location.reload())"><svg height="25px" id="Layer_1"
+                                style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="25px"
+                                xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <path
+                                    d="M28,16c-1.219,0-1.797,0.859-2,1.766C25.269,21.03,22.167,26,16,26c-5.523,0-10-4.478-10-10S10.477,6,16,6  c2.24,0,4.295,0.753,5.96,2H20c-1.104,0-2,0.896-2,2s0.896,2,2,2h6c1.104,0,2-0.896,2-2V4c0-1.104-0.896-2-2-2s-2,0.896-2,2v0.518  C21.733,2.932,18.977,2,16,2C8.268,2,2,8.268,2,16s6.268,14,14,14c9.979,0,14-9.5,14-11.875C30,16.672,28.938,16,28,16z" />
+                            </svg>
                         </span>
                     </div>
 
@@ -91,11 +96,17 @@
                         <div class="inventory-details">
                             <p class="inName uppercase">Deadline</p>
                             <p class="inData">
-                                    <%= e.np_deadline?e.np_deadline:'N/A' %>
-                                </p>
+                                <%= e.np_deadline?e.np_deadline:'N/A' %>
+                            </p>
                         </div>
-                        <div class="inventory-details" onclick="showInventory(<%= e.id %>,'userInventoryStockCtn',this)">
-                            <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="info" class="svg"><path fill="" d="M12,10a1,1,0,0,0-1,1v6a1,1,0,0,0,2,0V11A1,1,0,0,0,12,10Zm0-4a1.25,1.25,0,1,0,1.25,1.25A1.25,1.25,0,0,0,12,6Z"></path></svg></p>
+                        <div class="inventory-details"
+                            onclick="showInventory(<%= e.id %>,'userInventoryStockCtn',this)">
+                            <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
+                                    viewBox="0 0 24 24" id="info" class="svg">
+                                    <path fill=""
+                                        d="M12,10a1,1,0,0,0-1,1v6a1,1,0,0,0,2,0V11A1,1,0,0,0,12,10Zm0-4a1.25,1.25,0,1,0,1.25,1.25A1.25,1.25,0,0,0,12,6Z">
+                                    </path>
+                                </svg></p>
                         </div>
                     </div>
                     <% }) %>
@@ -192,8 +203,8 @@
 
 
             </div>
-             <!-- --EDIT INVENTORY--  -->
-             <div class="editInventory one">
+            <!-- --EDIT INVENTORY--  -->
+            <div class="editInventory one">
                 <div class="edit-inventory-popup two">
                     <div class="field">
                         <p class="uppercase">Ref No</p>
@@ -202,19 +213,20 @@
                     <div class="flex">
                         <div class="field">
                             <label for="" class="uppercase">Particulars</label>
-                            <input type="text" name="particulars" id="particular" >
+                            <input type="text" name="particulars" id="particular">
                         </div>
                         <div class="field">
                             <label for="" class="uppercase">Quantity</label>
-                            <input type="text" name="quantity" id="quantity" >
+                            <input type="text" name="quantity" id="quantity">
                         </div>
                         <div class="field">
                             <label for="" class="uppercase">Amount</label>
-                            <input type="text" name="amount" id="amount" >
+                            <input type="text" name="amount" id="amount">
                         </div>
                     </div>
                     <div class="drop-btn flex">
-                        <button type="button" class="uppercase" onclick="UpdateParticular(this.parentElement)">update</button>
+                        <button type="button" class="uppercase"
+                            onclick="UpdateParticular(this.parentElement)">update</button>
                         <button type="reset" class="uppercase" onclick="Close_editParticulars()">Cancel</button>
                     </div>
                 </div>

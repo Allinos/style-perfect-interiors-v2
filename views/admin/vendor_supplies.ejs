@@ -23,7 +23,7 @@
             <!------------- Supply-OVERALL-------------  -->
             <div class="supplierContainer">
                 <h4 class="uppercase">Supplies</h4>
-                <button class="uppercase" onclick="openVendorSupplyForm()" id="">
+                <button class="uppercase" onclick="openVendorSupplyForm('add')" id="">
                     <span>Add supplies</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
                         <path fill="##000000"
@@ -46,11 +46,12 @@
                     <p class="uppercase phead none">Action</p>
                     <!-- ------resposnive class------- -->
                 </div>
+
                 <!-- ----------project information----------- -->
                 <div class="info-content content">
-                    <% data?.forEach((e)=>{ %>
+                    <% data[0]?.forEach((e)=>{ %>
                     <!-- --------1st project---------  -->
-                        <div class="accordion-content" data-dealId="<%= data.id %>">
+                        <div class="accordion-content" data-dealId="<%= e?.id %>">
                             <div class="ahead finegrid">
                                 <p class="ref">
                                     <span class="uppercase hide block phead">Ref. No.</span>
@@ -143,7 +144,7 @@
                                     <p>
                                         <span class="uppercase phead">GST</span>
                                         <span>
-                                            <%= e?.cgst+e?.sgst %>(<%= e?.cgst %>|<%= e?.sgst %>)%
+                                            <%= e?.cgst+e?.sgst %>(<%= e?.cgst %> | <%= e?.sgst %>)%
                                         </span>
                                     </p>
 
@@ -151,7 +152,7 @@
                             </div>
                             <!-- ---------------  -->
                         </div>
-                        <% }) %>
+                     <% }) %>
                     </div>
                     <%- include('../partials/pagin.ejs') %>
                 <!-- ------------------------------ -->
@@ -165,7 +166,7 @@
                             <label for="" onchange="" class="select">Select a Vendor</label>
                             <select name="vendor_id" id="" class="select">
                                 <option value="">select vendor</option>
-                                <% vendorData?.forEach((ven)=>{ %>
+                                <% data[1]?.forEach((ven)=>{ %>
                                     <option value="<%= ven.id %>">
                                         <%= ven.name %>
                                     </option>
@@ -217,14 +218,14 @@
                             <div class="supplies-btn flex">
                                 <button class="uppercase" type="submit"
                                     onclick="addVendorSupplyFormSubmit(event)">update</button>
-                                <button class="uppercase" onclick="closeVendorSupplyForm()">cancel</button>
+                                <button class="uppercase" onclick="closeVendorSupplyForm(event)">cancel</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <div class="edit-suppliers-form hide">
+            <div class="edit-suppliers-form hide" id="vendor-supply-edit-form">
                 <div class="edit-form">
                     <div class="field">
                         <label for="">Vendor Name</label>

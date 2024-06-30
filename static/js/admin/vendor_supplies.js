@@ -2,11 +2,16 @@
 
 
 
- function openVendorSupplyForm() {
-    document.getElementById('vendor-supply-from-div').classList.remove('hidden');
+ function openVendorSupplyForm(type) {
+    if (type == 'add') {
+        document.getElementById('vendor-supply-from-div').classList.remove('hidden');
+    } else {
+        document.getElementById('vendor-supply-from-div').classList.remove('hidden');
+    }
 }
 
- function closeVendorSupplyForm() {
+ function closeVendorSupplyForm(e) {
+    e.preventDefault()
     document.getElementById('vendor-supply-from-div').classList.add('hidden');
 }
 
@@ -23,9 +28,9 @@ async function addVendorSupplyFormSubmit(e) {
     e.preventDefault()
     let data = new FormData(document.getElementById('vendor-supply-form'));
     const isValid = checkFormValid('vendor-supply-form')
-    if (isValid.includes(true)) {
-        await method.GET_POST('admin/inventory/vendor/add-supply', 'POST', data, 'form')
-    } else {
+    if (isValid.includes(false)) {
         alert('Please fill in all the details')
+    } else {
+        await method.GET_POST('admin/inventory/vendor/add-supply', 'POST', data, 'form')
     }
 }

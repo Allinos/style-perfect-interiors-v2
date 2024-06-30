@@ -62,7 +62,7 @@ exports.expense = (req, res) => {
 
 exports.clients_vendors = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT * FROM vendors;SELECT * FROM clients;`
+        const query = `SELECT vendors.id,vendors.name, vendors.contact, vendors.contact2, vendors.email, vendors.location, vendors.oth_details, sum(vendor_supplies.total_amount)as amount, sum(vendor_payments.amount)as paid FROM vendors LEFT JOIN vendor_supplies ON vendor_supplies.vendor_id=vendors.id LEFT JOIN vendor_payments ON vendor_payments.vendor_supply_id=vendor_supplies.id GROUP BY vendors.id;SELECT * FROM clients;`
         db.query(query, (err, result, field) => {
             res.status(200).render('../views/admin/clients_vendors.ejs', { data: result })
         })
@@ -71,13 +71,12 @@ exports.clients_vendors = (req, res) => {
 
 exports.vendor_supplies = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT vendor_supplies.id,vendor_supplies.vendor_id, vendor_supplies.item_name, vendor_supplies.details, vendor_supplies.sgst, vendor_supplies.cgst,vendor_supplies.total_amount, vendor_supplies.modeofpay, vendor_supplies.date, vendors.name,vendors.contact,vendors.location, COALESCE(sum(vendor_payments.amount),0) as paid FROM vendor_supplies JOIN vendors on vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_payments.vendor_supply_id;`
+        const query = `SELECT vendor_supplies.id, vendor_supplies.vendor_id, vendor_supplies.item_name, vendor_supplies.details, vendor_supplies.sgst, vendor_supplies.cgst, vendor_supplies.total_amount, vendor_supplies.modeofpay, vendor_supplies.date, vendors.name, vendors.contact, vendors.location, COALESCE(SUM(vendor_payments.amount), 0) AS paid FROM vendor_supplies JOIN vendors ON vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_supplies.id, vendor_supplies.vendor_id, vendor_supplies.item_name, vendor_supplies.details, vendor_supplies.sgst, vendor_supplies.cgst, vendor_supplies.total_amount, vendor_supplies.modeofpay, vendor_supplies.date, vendors.name, vendors.contact, vendors.location;SELECT id, name FROM vendors;`
         db.query(query, (err, result, field) => {
             if (!err) {
-                console.log(result);
-                res.status(200).render('../views/admin/vendor_supplies.ejs', { data: result })
+                res.status(200).render('../views/admin/vendor_supplies.ejs', { data: result})
             } else {
-                res.status(500).send({ status: false, msg: "Internal error occurs!" });
+                return res.status(500).send({ msg: "Internal error occurs!" });
             }
         })
     }
@@ -85,7 +84,7 @@ exports.vendor_supplies = (req, res) => {
 
 exports.supply_payments = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT COALESCE(SUM(vendor_payments.amount), 0) AS total_payments, vendor_supplies.id, vendor_supplies.item_name, vendor_supplies.sgst, vendor_supplies.cgst,vendor_supplies.total_amount, vendor_supplies.date, vendors.name, vendors.contact, vendors.location FROM vendor_supplies JOIN vendors ON vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_supplies.vendor_id;`
+        const query = `SELECT COALESCE(SUM(vendor_payments.amount), 0) AS total_payments, vendor_supplies.id, vendor_supplies.item_name, vendor_supplies.sgst, vendor_supplies.cgst, vendor_supplies.total_amount, vendor_supplies.date, vendors.name, vendors.contact, vendors.location FROM vendor_supplies JOIN vendors ON vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_supplies.id, vendor_supplies.item_name, vendor_supplies.sgst, vendor_supplies.cgst, vendor_supplies.total_amount, vendor_supplies.date, vendors.name, vendors.contact, vendors.location;`
         db.query(query, (err, result, field) => {
             res.status(200).render('../views/admin/vendor_payments.ejs', { data: result })
         })
