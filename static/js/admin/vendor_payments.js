@@ -17,27 +17,28 @@ async function AddPayment_toSupply(data, e) {
             let res = await getFun.GET_POST('admin/inventory/vendor/getAllpayment/' + mainCtn.dataset.supplyid, 'GET')
             res.data.forEach(e => {
                 mainCtn.querySelector('.adata').children[0].innerHTML += `
-                <p>
-        <span class="uppercase phead">Title</span>
-        <span class="title">${e.title}</span>
-    </p>
-    <p>
-        <span class="uppercase phead">Amount</span>
-        <span class="amount">${e.amount}</span>
-    </p>
-    <p>
-        <span class="uppercase phead">Mode</span>
-        <span class="mode">${e.modeofpay}</span>
-    </p>
-    <p>
-        <span class="uppercase phead">Date</span>
-        <span class="date">${e.dateofpay}</span>
-    </p>
+                <div class="paymentV flex">
+    <div class="field">
+        <p class="uppercase">title</p>
+        <p class="title"> ${e.title}</p>
+    </div>
+    <div class="field">
+        <p class="uppercase">amount</p>
+        <p class="amount"> ${e.amount_got}</p>
+    </div>
+    <div class="field">
+        <p class="uppercase">Date</p>
+        <p class="date"> ${e.dateofpay}</p>
+    </div>
+    <div class="field">
+        <p class="uppercase">Mode</p>
+        <p class="mode"> ${e.modeofpay}</p>
+    </div>
     <div class="field">
         <button onclick="OpenUpdatePayment(this,${e.id})">Edit</button>
         <button onclick="deletePayments(this,${e.id})">Delete</button>
-    </div>`});
-
+    </div>
+</div> `});
         } catch (error) {
             console.error('Error fetching payment data:', error);
         }
@@ -93,7 +94,6 @@ async function OpenUpdatePayment(e, o) {
     let amount = mainCtn.querySelector('.amount');
     let date = mainCtn.querySelector('.date');
     let mode = mainCtn.querySelector('.mode');
-    console.log(date);
     const maindropDown = document.querySelector(`.main-dropdown`);
     maindropDown.style.display = `block`;
     maindropDown.innerHTML = ""
