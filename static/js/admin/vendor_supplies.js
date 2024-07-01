@@ -29,7 +29,13 @@ function checkFormValid(id) {
 
 async function deleteSupply(e, target) {
     e.stopPropagation();
-    await method.DEL_UPD(`admin/inventory/vendor/delete-supply/${target.dataset.refid}`, 'DELETE')
+    const actionValid = await Swal.fire({ template: "#my-template" });
+    console.log(actionValid);
+    if (actionValid.isConfirmed) {
+        await method.DEL_UPD(`admin/inventory/vendor/delete-supply/${target.dataset.refid}`, 'DELETE')
+        target.parentNode.parentNode.parentNode.remove()
+    }
+    
 }
 
 async function addVendorSupplyFormSubmit(e) {
@@ -46,6 +52,8 @@ async function addVendorSupplyFormSubmit(e) {
 
 function renderEditValue(target) {
     const mainParent = target.parentNode.parentNode.parentNode
+    const supplierName = mainParent.querySelector('#vendor-name')
+
     const requiredData = {
         total_amount : mainParent.querySelector('#total-amount'),
         item_name : mainParent.querySelector('#item-name'),
@@ -54,6 +62,8 @@ function renderEditValue(target) {
         gst_status : mainParent.querySelector('#gst-status'),
         dayofadd : mainParent.querySelector('#dayofadd')
     }
+
+    document.getElementById('supplier-name').innerHTML = supplierName.textContent.trim();
 
     for (const key in requiredData) {
         const main = document.getElementById('vendor-supply-edit-form')

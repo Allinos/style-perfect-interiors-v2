@@ -46,6 +46,20 @@
                     <p class="uppercase phead none">Action</p>
                     <!-- ------resposnive class------- -->
                 </div>
+                <!-- delete popup  -->
+                <template id="my-template">
+                    <swal-title>
+                      Are you Sure to Delete?
+                    </swal-title>
+                    <swal-icon type="warning" color="red"></swal-icon>
+                    <swal-button type="confirm">
+                      Delete it
+                    </swal-button>
+                    <swal-button type="cancel">
+                      cancel
+                    </swal-button>
+                </template>
+                  <!-- delete popup ends  -->
 
                 <!-- ----------project information----------- -->
                 <div class="info-content content">
@@ -61,7 +75,7 @@
                                 </p>
                                 <p class="pro">
                                     <span class="uppercase hide block phead">name of work</span>
-                                    <span>
+                                    <span id="vendor-name">
                                         <%= e?.name %>
                                     </span>
                                 </p>
@@ -236,7 +250,7 @@
                 <div class="edit-form">
                     <div class="field">
                         <label for="">Vendor Name</label>
-                        <p class="uppercase ref">KAnkan</p>
+                        <p class="uppercase ref" id="supplier-name">KAnkan</p>
                     </div>
 
                     <div class="sgrid">
