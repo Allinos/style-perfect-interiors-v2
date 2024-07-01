@@ -24,7 +24,7 @@ async function AddPayment_toSupply(data, e) {
     </div>
     <div class="field">
         <p class="uppercase">amount</p>
-        <p class="amount"> ${e.amount_got}</p>
+        <p class="amount"> ${e.amount}</p>
     </div>
     <div class="field">
         <p class="uppercase">Date</p>
@@ -59,15 +59,15 @@ async function OpenAddPayment(data) {
     <form id="advanced-form">
         <div class="flex">
             <p class="uppercase phead">Title</p>
-            <input type="text" name="title" id="">
+            <input type="text" name="title" id="title">
         </div>
         <div class="flex">
         <p class="uppercase phead">Amount</p>
-        <input type="text" name="amount" id="">
+        <input type="text" name="amount" id="amount">
     </div>
         <div class="flex">
             <p class="uppercase phead">Payment mode</p>
-            <select name="mode" id="">
+            <select name="mode" id="mode">
                 <option value="cash">Cash</option>
                 <option value="online">Online</option>
                 <option value="cheque">Cheque</option>
@@ -75,7 +75,7 @@ async function OpenAddPayment(data) {
         </div>
         <div class="flex">
             <p class="uppercase phead">Date of payment</p>
-            <input type="text" name="date" id="" placeholder="dd/mm/yyyy">
+            <input type="text" name="date" id="date" placeholder="dd/mm/yyyy">
         </div>
         <div class = "drop-btn flex">
         <button type="button" class="uppercase" data-supplyid=${supplyId} onclick="AddPayment_toSupply(this, event)">Add</button>
@@ -138,6 +138,7 @@ async function UpdatePayments(e, o) {
     let date = mainCtn.querySelector('#date').value;
     let mode = mainCtn.querySelector('#mode').value;
     let dataBody = { title: title, amount: amount, date: date, mode: mode }
+    console.log(dataBody);
     let res = await getFun.GET_POST('admin/inventory/vendor/update-payment/' + id, 'PUT', dataBody, 'form');
     if (res.status) { setTimeout(() => { location.reload() }, 1500); }
 }
