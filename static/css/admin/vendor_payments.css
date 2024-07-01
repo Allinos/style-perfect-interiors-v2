@@ -188,13 +188,13 @@
     width: 13px;
 }
 
-.adata .finance_expand {
+.adata .finegr {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
 }
 
-.finance_expand .installment {
+.paymentV {
     justify-content: space-between;
     outline: 1px solid var(--primary-outline);
     background: var(--primary-bg);
@@ -204,17 +204,17 @@
 
 .installment .field {}
 
-.installment .field :is(p:first-child) {
+.paymentV .field :is(p:first-child) {
     font-size: 12px;
     font-weight: 600;
     color: var(--primary-color);
 }
 
-.installment .field p:last-child {
+.paymentV .field p:last-child {
     font-size: 14px;
 }
 
-.installment .field button {
+.paymentV .field button {
     padding: 3px 5px;
     color: var(--secondary-color);
     font-weight: 500;
@@ -222,7 +222,7 @@
     outline: 1px solid var(--sec-outline);
     background: var(--sec-light-color);
 }
-.installment .field button:last-child{
+.paymentV .field button:last-child{
     outline: 1px solid var(--ter-outline);
     background: var(--ter-light-color);
     color: var(--ter-dark-color);
