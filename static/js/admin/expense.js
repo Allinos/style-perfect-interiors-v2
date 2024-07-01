@@ -26,6 +26,9 @@ function setExpenseToModel(e) {
     editCtn.querySelector('#remark').value = ExpsCtn.querySelector('.exp-rem-content').innerText
     editCtn.querySelector('#category').options[0].value = ExpsCtn.querySelector('.exp-category-data').innerText
     editCtn.querySelector('#category').options[0].innerText = ExpsCtn.querySelector('.exp-category-data').innerText
+    ReqHandler.GET(ReqURI.getProjectList).then((res) => {(res.data).forEach(e => {
+                editCtn.querySelector('#project').innerHTML += `<option value="${e.reference_no}">${e.reference_no} | ${e.deal_name}</option>`;});
+        }).catch(err => { console.log('error getting IsProjectPaid() data expanse.js |ln:110 ' + err) })
     editCtn.querySelector('#project').options[0].value = (ExpsCtn.querySelector('.exp-project-data').innerText)
     editCtn.querySelector('#project').options[0].innerText = (ExpsCtn.querySelector('.exp-project-data').innerText);
 

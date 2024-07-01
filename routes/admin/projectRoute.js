@@ -2,6 +2,11 @@ const express = require('express');
 const api = express.Router();
 const pmNormalAPI = require('../../controllers/pm.normal.crud')
 
+
+//-------normal project crud --------
+api.get('/delete-project/:id', pmNormalAPI.DeleteNormalProjectData)
+
+
 //-------normal project employee --------
 api.get('/employee/:dealId/:catId', pmNormalAPI.getEmployListPerProject)
 api.get('/get-employee', pmNormalAPI.getEmployListToaddOrRemove)

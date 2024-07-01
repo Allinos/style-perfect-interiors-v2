@@ -20,14 +20,14 @@ exports.getEmployListPerProject = async (req, res) => {
   })
 }
 
-exports.getContractEmployeePerProject = async function(req, res) {
-   const { dealId, catId } = req.query
-   const q = `SELECT * FROM contractual_emp WHERE ndeal_id = ${dealId} AND category_id = ${catId}`
-   await databaseCon.query(q, (err, results) => {
-     if (!err) {
-       res.status(200).send(results);
-     } else { console.log(err); res.status(500).send({ msg: "Something went wrong!" }) }
-   })
+exports.getContractEmployeePerProject = async function (req, res) {
+  const { dealId, catId } = req.query
+  const q = `SELECT * FROM contractual_emp WHERE ndeal_id = ${dealId} AND category_id = ${catId}`
+  await databaseCon.query(q, (err, results) => {
+    if (!err) {
+      res.status(200).send(results);
+    } else { console.log(err); res.status(500).send({ msg: "Something went wrong!" }) }
+  })
 
 }
 
@@ -47,7 +47,7 @@ exports.addEmployeeToProject = async (req, res) => {
     await databaseCon.query(q, [ndeal_id, category_id, emid, assignDate], async (err1, data) => {
       if (!err1) {
         res.status(200).send({ msg: "employee added successfully" })
-      } else { res.status(500).send({ msg: "some internal error occured!" })  }
+      } else { res.status(500).send({ msg: "some internal error occured!" }) }
     })
     return;
   } else if (req.body.emid) {
@@ -246,17 +246,24 @@ exports.UpdateNormalProjectData = async (req, res) => {
 
 }
 
-exports.getProjectList=async(req,res)=>{
-let query='SELECT id,deal_name,reference_no FROM deals;';
-databaseCon.query(query, (err, result) => {
-  if (!err) {
-    res.status(200).send({ status: true, msg: 'Successfully data retrieve', data: result })
+exports.getProjectList = async (req, res) => {
+  let query = 'SELECT id,deal_name,reference_no FROM deals;';
+  databaseCon.query(query, (err, result) => {
+    if (!err) {
+      res.status(200).send({ status: true, msg: 'Successfully data retrieve', data: result })
 
-  } else {
-    res.status(500).send({ status: false, msg: "Internal error occurs!" });
-  }
-})
-
-
-
+    } else {
+      res.status(500).send({ status: false, msg: "Internal error occurs!" });
+    }
+  })
+}
+exports.DeleteNormalProjectData = async (req, res) => {
+  const q = `DELETE FROM deals WHERE id =? `;
+  await databaseCon.query(q, [ req.params.id], async (err, result) => {
+    if (!err) {
+      res.status(200).send({ status: true, msg: 'Successfully data Deletd' })
+    } else {
+      res.status(500).send({ status: false, msg: 'Successfully data Deletd'+err })
+    }
+  })
 }

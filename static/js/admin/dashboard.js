@@ -157,5 +157,22 @@ function search() {
     });
 }
 CheckDeadline()
+async function DeleteProject(e,o) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then(async (pers) => {
+        if (pers.isConfirmed) {
+            await ReqHandler.GET(location.origin + '/apiv1/delete-project/'+o).then(res => {
+               if (res.status) {e.parentElement.parentElement.parentElement.remove();}
+            })
+        }
+    });
+}
 
 
