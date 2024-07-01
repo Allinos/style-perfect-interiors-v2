@@ -40,7 +40,6 @@ exports.settings = (req, res) => {
         const query = `select * from subtask;select * from task;select * from material_names`
         db.query(query, (err, result, field) => {
             if (!err) {
-                // res.send( result)
                 res.status(200).render('../views/admin/settings.ejs', { data: result })
             } else {
                 res.status(500).send({ status: false, msg: "Internal error occurs!" });
@@ -55,7 +54,6 @@ exports.expense = (req, res) => {
         SELECT  SUM(total_price) AS total_sum FROM deals;SELECT SUM(CASE WHEN md_type ='cash' THEN amount ELSE 0 END) AS cash_expenses, sum(case when md_type ='online' THEN amount ELSE 0 END) as online_expenses FROM expenses;`
         db.query(query, (err, result, field) => {
             res.status(200).render('../views/admin/expense.finance.ejs', { data: result })
-            // res.send(result)
         })
     }
 }
@@ -100,7 +98,6 @@ exports.inventory = (req, res) => {
         const query = `SELECT deals.id,deals.reference_no,deals.city,deals.deal_name,deals.work_name,deals.np_deadline FROM material_used JOIN deals on deals.id =material_used.ndeal_id GROUP BY deals.id;`
         db.query(query, (err, result, field) => {
             if (!err) {
-                // res.send(result)
                 res.status(200).render('../views/admin/inventory.ejs', { data: result })
             } else {
                 res.status(500).send({ status: false, msg: "Internal error occurs!" });
@@ -115,7 +112,6 @@ exports.stock = (req, res) => {
         const query = `SELECT deals.id,deals.reference_no,deals.city,deals.deal_name,deals.work_name ,deals.np_deadline FROM material_left JOIN deals on deals.id =material_left.ndeal_id GROUP BY deals.id ;`;
         db.query(query, (err, result, field) => {
             if (!err) {
-                // res.send(result)
                 res.status(200).render('../views/admin/stock.ejs', { data: result })
             } else {
                 res.status(500).send({ status: false, msg: "Internal error occurs!" });
