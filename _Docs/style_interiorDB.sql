@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 13, 2024 at 12:59 PM
+-- Generation Time: Jul 01, 2024 at 04:51 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -35,6 +35,29 @@ CREATE TABLE `adminauth` (
   `role` varchar(10) DEFAULT 'admin'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `adminauth`
+--
+
+INSERT INTO `adminauth` (`adm_id`, `name`, `email`, `password`, `role`) VALUES
+(1, 'msi', 'msi@gmail.com', '77ee3625f508f3051360327fb67668b2ba769f13f56599bb45a4a923bb850c49', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clients`
+--
+
+CREATE TABLE `clients` (
+  `id` int(11) NOT NULL,
+  `name` varchar(155) NOT NULL,
+  `contact` varchar(15) DEFAULT NULL,
+  `contact2` varchar(15) DEFAULT NULL,
+  `email` varchar(155) DEFAULT NULL,
+  `location` varchar(155) DEFAULT NULL,
+  `oth_details` varchar(155) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- --------------------------------------------------------
 
 --
@@ -60,10 +83,12 @@ CREATE TABLE `deals` (
   `deal_name` varchar(200) DEFAULT NULL,
   `reference_no` varchar(20) DEFAULT NULL,
   `contact` bigint(15) DEFAULT NULL,
+  `contact2` varchar(15) DEFAULT NULL,
   `agreement_amount` int(11) DEFAULT NULL,
   `work_name` varchar(300) DEFAULT NULL,
   `email` varchar(80) DEFAULT NULL,
   `city` varchar(50) DEFAULT NULL,
+  `oth_details` varchar(155) DEFAULT NULL,
   `total_price` int(11) DEFAULT NULL,
   `np_deadline` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -137,7 +162,9 @@ CREATE TABLE `expenses` (
   `remark` varchar(355) DEFAULT NULL,
   `amount` int(50) NOT NULL,
   `date` varchar(20) NOT NULL,
-  `md_type` varchar(10) NOT NULL
+  `md_type` varchar(10) NOT NULL,
+  `categories` varchar(155) DEFAULT NULL,
+  `project_id` varchar(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -267,6 +294,64 @@ CREATE TABLE `task` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `task`
+--
+
+INSERT INTO `task` (`task_id`, `task_name`) VALUES
+(1, 'interior'),
+(2, 'execution');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendors`
+--
+
+CREATE TABLE `vendors` (
+  `id` int(11) NOT NULL,
+  `name` varchar(155) NOT NULL,
+  `contact` varchar(15) DEFAULT NULL,
+  `contact2` varchar(15) DEFAULT NULL,
+  `email` varchar(155) DEFAULT NULL,
+  `location` varchar(155) DEFAULT NULL,
+  `oth_details` varchar(155) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_payments`
+--
+
+CREATE TABLE `vendor_payments` (
+  `id` int(11) NOT NULL,
+  `vendor_supply_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT 'n/a',
+  `amount` int(50) NOT NULL,
+  `dateofpay` varchar(50) NOT NULL,
+  `modeofpay` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_supplies`
+--
+
+CREATE TABLE `vendor_supplies` (
+  `id` int(11) NOT NULL,
+  `vendor_id` int(11) NOT NULL,
+  `item_name` varchar(255) NOT NULL,
+  `details` varchar(255) DEFAULT NULL,
+  `sgst` int(5) DEFAULT 0,
+  `cgst` int(5) DEFAULT 0,
+  `total_amount` int(50) NOT NULL,
+  `modeofpay` varchar(20) NOT NULL,
+  `date` varchar(15) NOT NULL,
+  `gst_status` varchar(10) NOT NULL DEFAULT 'yes'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
 -- Indexes for dumped tables
 --
 
@@ -275,6 +360,12 @@ CREATE TABLE `task` (
 --
 ALTER TABLE `adminauth`
   ADD PRIMARY KEY (`adm_id`);
+
+--
+-- Indexes for table `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `contractual_emp`
@@ -384,6 +475,26 @@ ALTER TABLE `task`
   ADD PRIMARY KEY (`task_id`);
 
 --
+-- Indexes for table `vendors`
+--
+ALTER TABLE `vendors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `vendor_payments`
+--
+ALTER TABLE `vendor_payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `vendor_payments_ibfk_1` (`vendor_supply_id`);
+
+--
+-- Indexes for table `vendor_supplies`
+--
+ALTER TABLE `vendor_supplies`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `vendor_supplies_ibfk_1` (`vendor_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -391,7 +502,13 @@ ALTER TABLE `task`
 -- AUTO_INCREMENT for table `adminauth`
 --
 ALTER TABLE `adminauth`
-  MODIFY `adm_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `adm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `contractual_emp`
@@ -481,7 +598,25 @@ ALTER TABLE `subtask`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `vendors`
+--
+ALTER TABLE `vendors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `vendor_payments`
+--
+ALTER TABLE `vendor_payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `vendor_supplies`
+--
+ALTER TABLE `vendor_supplies`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -510,36 +645,47 @@ ALTER TABLE `material_used`
 -- Constraints for table `normal_projects_finance`
 --
 ALTER TABLE `normal_projects_finance`
-  ADD CONSTRAINT `normal_projects_finance_ibfk_1` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`),
-  ADD CONSTRAINT `normal_projects_finance_ibfk_2` FOREIGN KEY (`task`) REFERENCES `task` (`task_id`);
+  ADD CONSTRAINT `normal_projects_finance_ibfk_1` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `normal_projects_finance_ibfk_2` FOREIGN KEY (`task`) REFERENCES `task` (`task_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `normal_project_cat`
 --
 ALTER TABLE `normal_project_cat`
-  ADD CONSTRAINT `normal_project_cat_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `task` (`task_id`),
-  ADD CONSTRAINT `normal_project_cat_ibfk_2` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`);
+  ADD CONSTRAINT `normal_project_cat_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `task` (`task_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `normal_project_cat_ibfk_2` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `normal_project_employee`
 --
 ALTER TABLE `normal_project_employee`
-  ADD CONSTRAINT `normal_project_employee_ibfk_1` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`),
-  ADD CONSTRAINT `normal_project_employee_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `task` (`task_id`),
-  ADD CONSTRAINT `normal_project_employee_ibfk_3` FOREIGN KEY (`emid`) REFERENCES `employee` (`em_id`);
+  ADD CONSTRAINT `normal_project_employee_ibfk_1` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `normal_project_employee_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `task` (`task_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `normal_project_employee_ibfk_3` FOREIGN KEY (`emid`) REFERENCES `employee` (`em_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `normal_project_subtask`
 --
 ALTER TABLE `normal_project_subtask`
-  ADD CONSTRAINT `normal_project_subtask_ibfk_1` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`),
-  ADD CONSTRAINT `normal_project_subtask_ibfk_2` FOREIGN KEY (`stask_id`) REFERENCES `subtask` (`sub_task_id`);
+  ADD CONSTRAINT `normal_project_subtask_ibfk_1` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `subtask`
 --
 ALTER TABLE `subtask`
   ADD CONSTRAINT `subtask_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `task` (`task_id`);
+
+--
+-- Constraints for table `vendor_payments`
+--
+ALTER TABLE `vendor_payments`
+  ADD CONSTRAINT `vendor_payments_ibfk_1` FOREIGN KEY (`vendor_supply_id`) REFERENCES `vendor_supplies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `vendor_supplies`
+--
+ALTER TABLE `vendor_supplies`
+  ADD CONSTRAINT `vendor_supplies_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

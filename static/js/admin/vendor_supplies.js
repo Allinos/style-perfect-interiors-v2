@@ -30,7 +30,6 @@ function checkFormValid(id) {
 async function deleteSupply(e, target) {
     e.stopPropagation();
     const actionValid = await Swal.fire({ template: "#my-template" });
-    console.log(actionValid);
     if (actionValid.isConfirmed) {
         await method.DEL_UPD(`admin/inventory/vendor/delete-supply/${target.dataset.refid}`, 'DELETE')
         target.parentNode.parentNode.parentNode.remove()
@@ -68,7 +67,6 @@ function renderEditValue(target) {
     for (const key in requiredData) {
         const main = document.getElementById('vendor-supply-edit-form')
         main.querySelector(`#${key}`).value = requiredData[key].textContent.trim()
-        console.log(requiredData[key].textContent);
 
         if (main.querySelector(`#${key}`).nodeName == 'SELECT') {
             const selectOpt = main.querySelector(`#${key}`).children;
