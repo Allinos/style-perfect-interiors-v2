@@ -23,35 +23,37 @@
         <main class="main" data-app-page="clients_vendors">
             <!-- ----------- Clients TABLE----------- -->
             <div class="userContainer uform">
+                <h4 class="uppercase" id="cv-head">Clients</h4>
                 <div class="head-btn flex">
                     <button onclick="displayCtn('.ClientCtn')">Clients</buttton>
-                        <button onclick="displayCtn('.VendorCtn')">Vendors</buttton>
+                    <button onclick="displayCtn('.VendorCtn')">Vendors</buttton>
+                    <button class="uppercase" onclick="openAddClientsVendors('.adduserCtn')">
+                        <span>Add Client/Vendor</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
+                            <path fill="##000000"
+                                d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                            </path>
+                        </svg>
+                    </button>
                 </div>
-                <button class="uppercase" onclick="openAddClientsVendors('.adduserCtn')">
-                    <span>Add Client/Vendor</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
-                        <path fill="##000000"
-                            d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
-                        </path>
-                    </svg>
-                </button>
             </div>
             <div class="data-info box">
                 <!-- headings -->
-                <div class="info-head finegrid">
+                <div class="info-head clientgrid">
                     <p class="uppercase phead none">Ref. No.</p>
-                    <p class="uppercase phead none">Clients</p>
-                    <p class="uppercase phead none">Contact </p>
-                    <p class="uppercase phead none">Location</p>
+                    <p class="uppercase phead none"> <span id="cumon">Client</span> Name</p>
+                    <p class="uppercase phead none">Contact/Alternate Number</p>
+                    <p class="uppercase phead none">Email</p>
+                    <p class="uppercase phead none">Address</p>
                     <p class="uppercase phead none">Other Details</p>
                     <!-- ------resposnive class------- -->
-                    <p class="responsive uppercase phead hide block">action buttons</p>
+                    <p class="responsive uppercase phead hide block">action</p>
                 </div>
                 <!-- ----------Clients information----------- -->
                 <div class="info-content ClientCtn">
                     <% data[1]?.forEach((e)=>{ %>
                         <div class="accordion-content" data-id="<%= data.id %>" data-type="client">
-                            <div class="ahead finegrid">
+                            <div class="ahead clientgrid">
                                 <p class="ref">
                                     <span>
                                         <%= e?.id %>
@@ -64,7 +66,12 @@
                                 </p>
                                 <p class="contact">
                                     <span>
-                                        <%= e?.contact %>
+                                        <%= e?.contact %> /<%= e?.contact2 %>
+                                    </span>
+                                </p>
+                                <p class="email">
+                                    <span>
+                                        <%= e?.email %>
                                     </span>
                                 </p>
                                 <p class="location">
@@ -78,61 +85,29 @@
                                         <%= e?.oth_details %>
                                     </span>
                                 </p>
-                                <p class="flex user-action-icons ">
-                                    <!-- edit -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="svg"
-                                        onclick="openUpdateClientsVendors(this)">
-                                        <path
-                                            d="M6 34.5V42h7.5l22.13-22.13-7.5-7.5L6 34.5zm35.41-20.41c.78-.78.78-2.05 0-2.83l-4.67-4.67c-.78-.78-2.05-.78-2.83 0l-3.66 3.66 7.5 7.5 3.66-3.66z" />
-                                    </svg>
-                                    <!-- delete -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="svg" onclick="DeleteClientsVendors(this,<%= e?.id %>)">
-                                        <path
-                                            d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z" />
-                                    </svg>
-
+                                <p class="flexy">
+                                    <span class="edit-btn" onclick="openUpdateClientsVendors(this)">Edit</span>
+                                    <span class="butt" onclick="DeleteClientsVendors(this,<%= e?.id %>)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt"
+                                            class="icon">
+                                            <path fill=""
+                                                d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z">
+                                            </path>
+                                        </svg></span>
                                 </p>
-                                <p class="arrow-down action-icons">
-                                    <!-- arrow-down -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down"
-                                        class="svg">
-                                        <path fill="##000000"
-                                            d="M11.29,11.46a1,1,0,0,0,1.42,0l3-3A1,1,0,1,0,14.29,7L12,9.34,9.71,7A1,1,0,1,0,8.29,8.46Zm3,1.08L12,14.84l-2.29-2.3A1,1,0,0,0,8.29,14l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z">
-                                        </path>
-                                    </svg>
+                                <p class="flexy">
+                                    <span class="edit-btn" onclick="openCpopup(this)">See More</span>
                                 </p>
-                            </div>
-                            <!-- ----------open data for accordion---------- -->
-                            <div class="adata data">
-                                <!-- --Dropdown Details-- -->
-                                <div class="finance_expand">
-                                    <div class="installment flex">
-                                        <div class="field">
-                                            <p class="uppercase">Email</p>
-                                            <p class="email">
-                                                <%= e?.email %>
-                                            </p>
-                                        </div>
-                                        <div class="field">
-                                            <p class="uppercase">Alt. Contact</p>
-                                            <p class="alt_contact">
-                                                <%= e?.contact2 %>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <!-- ---------------  -->
+                               
                             </div>
                         </div>
                         <% }) %>
                             <!-- ------------------------------ -->
                 </div>
-                <!-- -----///// Vendor information----------- -->
+                <!-- Vendors----------- -->
                 <div class="info-content VendorCtn hide">
                     <% data[0]?.forEach((e)=>{ %>
                         <div class="accordion-content" data-id="<%= data.id %>" data-type="vendor">
-                            <div class="ahead finegrid">
+                            <div class="ahead clientgrid">
                                 <p class="ref">
                                     <span>
                                         <%= e?.id %>
@@ -159,28 +134,17 @@
                                         <%= e?.oth_details %>
                                     </span>
                                 </p>
-                                <p class="flex user-action-icons ">
-                                    <!-- edit -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="svg"
-                                        onclick="openUpdateClientsVendors(this)">
-                                        <path
-                                            d="M6 34.5V42h7.5l22.13-22.13-7.5-7.5L6 34.5zm35.41-20.41c.78-.78.78-2.05 0-2.83l-4.67-4.67c-.78-.78-2.05-.78-2.83 0l-3.66 3.66 7.5 7.5 3.66-3.66z" />
-                                    </svg>
-                                    <!-- delete -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="svg" onclick="DeleteClientsVendors(this,<%= e?.id %>)">
-                                        <path
-                                            d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V14H12v24zM38 8h-7l-2-2H19l-2 2h-7v4h28V8z" />
-                                    </svg>
-
+                                <p class="flexy">
+                                    <span class="edit-btn" onclick="openUpdateClientsVendors(this)">Edit</span>
+                                    <span class="butt" onclick="DeleteClientsVendors(this,<%= e?.id %>)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt"
+                                            class="icon">
+                                            <path fill=""
+                                                d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z">
+                                            </path>
+                                        </svg></span>
                                 </p>
-                                <p class="arrow-down action-icons">
-                                    <!-- arrow-down -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down"
-                                        class="svg">
-                                        <path fill="##000000"
-                                            d="M11.29,11.46a1,1,0,0,0,1.42,0l3-3A1,1,0,1,0,14.29,7L12,9.34,9.71,7A1,1,0,1,0,8.29,8.46Zm3,1.08L12,14.84l-2.29-2.3A1,1,0,0,0,8.29,14l3,3a1,1,0,0,0,1.42,0l3-3a1,1,0,0,0-1.42-1.42Z">
-                                        </path>
-                                    </svg>
+                                <p class="flexy">
+                                    <span class="edit-btn" onclick="(this)">See More</span>
                                 </p>
                             </div>
                             <!-- ----------open data for accordion---------- -->
@@ -223,9 +187,11 @@
                         <% }) %>
                             <!-- ------------------------------ -->
                 </div>
-                <div class="addcilent-vendor hide">
+
+                <!-- CLIENT ADD POPUP  -->
+                <div class="addclient hide">
                     <div class="cilent-vendor-grid" data-id="">
-                        <h3 class="uppercase">Add cilent/vendor</h3>
+                        <h3 class="uppercase">Add Client</h3>
                         <hr>
                         <div class="field">
                             <label for="date">Category</label>
@@ -249,27 +215,29 @@
                                 <input type="text" name="alt_contact" id="alt_contact" placeholder="Alternate Contact">
                             </div>
                             <div class="field">
-                                <label for="date">Location</label>
-                                <input type="text" name="location" id="location" placeholder="Location">
+                                <label for="date">Email</label>
+                                <input type="text" name="email" id="email" placeholder="Email">
+                            </div>
+                            <div class="field">
+                                <label for="date">Address</label>
+                                <input type="text" name="location" id="location" placeholder="Address">
                             </div>
                             <div class="field">
                                 <label for="date">Other Details</label>
                                 <input type="text" name="details" id="details" placeholder="Other Details">
                             </div>
-                            <div class="field">
-                                <label for="date">Email</label>
-                                <input type="text" name="email" id="email" placeholder="Email">
-                            </div>
                         </div>
                         <div class="flex user-btns">
                             <button class="uppercase" onclick="AddClientsVendors(this)">add</button>
-                            <button class="uppercase" onclick="closeDropdown('.addcilent-vendor')">Close</button>
+                            <button class="uppercase" onclick="closeDropdown('.addclient')">Close</button>
                         </div>
                     </div>
                 </div>
-                <div class="updatecilent-vendor hide">
+
+                <!-- UPDATE CLIENT DATA  -->
+                <div class="updateclient hide">
                     <div class="cilent-vendor-grid" data-id="">
-                        <h3 class="uppercase">Update cilent/vendor</h3>
+                        <h3 class="uppercase">Update Client</h3>
                         <hr>
                         <div class="field">
                             <label for="date">Category</label>
@@ -307,7 +275,79 @@
                         </div>
                         <div class="flex user-btns">
                             <button class="uppercase" onclick="UpdateClientsVendors(this)">Update</button>
-                            <button class="uppercase" onclick="closeDropdown('.updatecilent-vendor')">Close</button>
+                            <button class="uppercase" onclick="closeDropdown('.updateclient')">Close</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="c-popup hide">
+                    <div class="collect-popup">
+                        <div class="collect-btns flex">
+                            <button type="button" class="" onclick="displayTable('.client-collection-table')">Collections</button>
+                            <button type="button" class="" onclick="displayTable('.client-expenses-table')">Expenses</button>
+                        </div>
+                        <button type="button" class="close-c-popup" onclick="closeCpopup(this)">Close</button>
+                        <div class="main-tables">
+                            <table class="client-collection-table">
+                                <caption>Collections</caption>
+                                <thead>
+                                    <tr>
+                                        <th class="">No.</th>
+                                        <th class="">Date</th>
+                                        <th class="">Amount</th>
+                                        <th class="">Mode</th>
+                                        <th class="">Remarks</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td class="text">19-Mar-2024</td>
+                                        <td class="text">&#8377; <span>50,000</span></td>
+                                        <td class="text">Cash</td>
+                                        <td class="text">Bought for false ceiling </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="4">Total</th>
+                                        <th colspan="1">&#8377; <span>50,000</span></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <!-- expenses  -->
+                            <table class="client-expenses-table hide">
+                                <caption>Expenses</caption>
+                                <thead>
+                                    <tr>
+                                        <th class="">No.</th>
+                                        <th class="">Date</th>
+                                        <th class="">Amount</th>
+                                        <th class="">Mode</th>
+                                        <th class="">Remarks</th>
+                                        <th class="">Project Reference</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td class="text">19-Mar-2024</td>
+                                        <td class="text">&#8377; <span>50,000</span></td>
+                                        <td class="text">Cash</td>
+                                        <td class="text">Bought for false ceiling </td>
+                                        <td class="text">Project 1A</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="5">Total</th>
+                                        <th colspan="1">&#8377; <span>50,000</span></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>

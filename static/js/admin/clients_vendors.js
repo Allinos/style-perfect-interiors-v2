@@ -1,37 +1,35 @@
 function displayCtn(e) {
-    document.querySelector('.VendorCtn').classList.add('hide');
-    document.querySelector('.VendorCtn').classList.remove('block');
-    document.querySelector('.VendorCtn').style.backgrpund = ""
     document.querySelector('.ClientCtn').classList.add('hide');
     document.querySelector('.ClientCtn').classList.remove('block');
-    document.querySelector('.ClientCtn').style.backgrpund = "";
+    document.querySelector('.VendorCtn').classList.add('hide');
+    document.querySelector('.VendorCtn').classList.remove('block');
     document.querySelector(e).classList.add('block');
-    document.querySelector(e).style.backgrpund = "";
-    document.querySelector('.info-head').children[1].innerText=(e=='.VendorCtn'?'Vendors':'Clients')
-
-    
+    document.querySelector('#cumon').innerText=(e=='.VendorCtn'?'Vendors':'Clients')
+    document.querySelector('#cv-head').innerText=(e=='.VendorCtn'?'Vendors':'Clients')
+ 
 }
 function openAddClientsVendors(params) {
     document.getElementsByClassName('main')[0].classList.add('flow');
-    document.querySelector('.addcilent-vendor').classList.add('block');
+    document.querySelector('.addclient').classList.add('block');
 }
 function closeDropdown(e) {
+    console.log(e)
     document.querySelector(e).classList.remove(`block`);
     document.getElementsByClassName('main')[0].classList.remove('flow');
 }
 function openUpdateClientsVendors(e) {
     let mainCtn = e.parentElement.parentElement.parentElement;
-    let inputCtn = document.querySelector('.updatecilent-vendor')
+    let inputCtn = document.querySelector('.updateclient')
     inputCtn.children[0].dataset.id = mainCtn.querySelector('.ref').children[0].innerText
     inputCtn.querySelector('#category').value = mainCtn.dataset.type;
     inputCtn.querySelector('#name').value = (mainCtn.querySelector('.name').children[0].innerText).trim();
     inputCtn.querySelector('#contact').value = (mainCtn.querySelector('.contact').children[0].innerText).trim();
-    inputCtn.querySelector('#alt_contact').value = (mainCtn.querySelector('.alt_contact').innerText).trim();
+    // inputCtn.querySelector('#alt_contact').value = (mainCtn.querySelector('.alt_contact').innerText).trim();
     inputCtn.querySelector('#location').value = (mainCtn.querySelector('.location').children[0].innerText).trim();
     inputCtn.querySelector('#details').value = (mainCtn.querySelector('.details').children[0].innerText).trim();
     inputCtn.querySelector('#email').value = (mainCtn.querySelector('.email').innerText).trim();
     document.getElementsByClassName('main')[0].classList.add('flow');
-    document.querySelector('.updatecilent-vendor').classList.add('block');
+    document.querySelector('.updateclient').classList.add('block');
 }
 
 
@@ -97,4 +95,20 @@ function DeleteClientsVendors(e,id) {
             console.log('Error(fn-AddClientsVendors):' + err);
         })
 
+}
+
+
+function displayTable(event) {
+    document.querySelector('.client-collection-table').classList.add('hide');
+    document.querySelector('.client-collection-table').classList.remove('table');
+    document.querySelector('.client-expenses-table').classList.add('hide');
+    document.querySelector('.client-expenses-table').classList.remove('table');
+    document.querySelector(event).classList.add('table');
+}
+
+function openCpopup(event){
+    document.querySelector(`.c-popup`).classList.remove(`hide`)
+}
+function closeCpopup(event){
+    document.querySelector(`.c-popup`).classList.add(`hide`)
 }
