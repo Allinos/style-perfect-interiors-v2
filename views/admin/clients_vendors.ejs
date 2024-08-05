@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../../css/admin/user.css">
     <link rel="stylesheet" href="../../css/admin/client-vendor.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/admin/dashboard.module.js"></script>
 </head>
 
 <body>
@@ -26,15 +27,15 @@
                 <h4 class="uppercase" id="cv-head">Clients</h4>
                 <div class="head-btn flex">
                     <button onclick="displayCtn('.ClientCtn')">Clients</buttton>
-                    <button onclick="displayCtn('.VendorCtn')">Vendors</buttton>
-                    <button class="uppercase" onclick="openAddClientsVendors('.adduserCtn')">
-                        <span>Add Client/Vendor</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
-                            <path fill="##000000"
-                                d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
-                            </path>
-                        </svg>
-                    </button>
+                        <button onclick="displayCtn('.VendorCtn')">Vendors</buttton>
+                            <button class="uppercase" onclick="openAddClientsVendors('.adduserCtn')">
+                                <span>Add Client/Vendor</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
+                                    <path fill="##000000"
+                                        d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                                    </path>
+                                </svg>
+                            </button>
                 </div>
             </div>
             <div class="data-info box">
@@ -42,10 +43,10 @@
                 <div class="info-head clientgrid">
                     <p class="uppercase phead none">Ref. No.</p>
                     <p class="uppercase phead none"> <span id="cumon">Client</span> Name</p>
-                    <p class="uppercase phead none">Contact/Alternate Number</p>
+                    <!-- <p class="uppercase phead none">Contact/Alternate Number</p> -->
                     <p class="uppercase phead none">Email</p>
                     <p class="uppercase phead none">Address</p>
-                    <p class="uppercase phead none">Other Details</p>
+                    <!-- <p class="uppercase phead none">Other Details</p> -->
                     <!-- ------resposnive class------- -->
                     <p class="responsive uppercase phead hide block">action</p>
                 </div>
@@ -56,19 +57,19 @@
                             <div class="ahead clientgrid">
                                 <p class="ref">
                                     <span>
-                                        <%= e?.id %>
+                                        <%= e?.reference_no %>
                                     </span>
                                 </p>
                                 <p class="name">
                                     <span>
-                                        <%= e?.name %>
+                                        <%= e?.deal_name %>
                                     </span>
                                 </p>
-                                <p class="contact">
+                                <!-- <p class="contact">
                                     <span>
                                         <%= e?.contact %> /<%= e?.contact2 %>
                                     </span>
-                                </p>
+                                </p> -->
                                 <p class="email">
                                     <span>
                                         <%= e?.email %>
@@ -76,18 +77,19 @@
                                 </p>
                                 <p class="location">
                                     <span>
-                                        <%= e?.location %>
+                                        <%= e?.city %>
                                     </span>
                                 </p>
 
-                                <p class="details none ">
+                                <!-- <p class="details none ">
                                     <span>
                                         <%= e?.oth_details %>
                                     </span>
-                                </p>
+                                </p> -->
                                 <p class="flexy">
                                     <span class="edit-btn" onclick="openUpdateClientsVendors(this)">Edit</span>
-                                    <span class="butt" onclick="DeleteClientsVendors(this,<%= e?.id %>)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt"
+                                    <span class="butt" onclick="DeleteClientsVendors(this,<%= e?.id %>)"><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt"
                                             class="icon">
                                             <path fill=""
                                                 d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z">
@@ -95,9 +97,10 @@
                                         </svg></span>
                                 </p>
                                 <p class="flexy">
-                                    <span class="edit-btn" onclick="openCpopup(this)">See More</span>
+                                    <span class="edit-btn" data-clientid="<%= e?.id %>" onclick="openCpopup(this)">See
+                                        More</span>
                                 </p>
-                               
+
                             </div>
                         </div>
                         <% }) %>
@@ -136,7 +139,8 @@
                                 </p>
                                 <p class="flexy">
                                     <span class="edit-btn" onclick="openUpdateClientsVendors(this)">Edit</span>
-                                    <span class="butt" onclick="DeleteClientsVendors(this,<%= e?.id %>)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt"
+                                    <span class="butt" onclick="DeleteClientsVendors(this,<%= e?.id %>)"><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt"
                                             class="icon">
                                             <path fill=""
                                                 d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z">
@@ -172,7 +176,7 @@
                                         </div>
                                     </div>
                                     <div class="installment flex">
-                                       
+
                                         <div class="field">
                                             <p class="uppercase">Paid</p>
                                             <p class="alt_contact">
@@ -281,73 +285,110 @@
                 </div>
 
                 <div class="c-popup hide">
-                    <div class="collect-popup">
-                        <div class="collect-btns flex">
-                            <button type="button" class="" onclick="displayTable('.client-collection-table')">Collections</button>
-                            <button type="button" class="" onclick="displayTable('.client-expenses-table')">Expenses</button>
+                    <div class="main-popup-container">
+                        <div class="collect-popup" style="background-color: #FFF; box-shadow: none;">
+                            <button type="button" class="close-c-popup" onclick="closeCpopup(this)">Close</button>
+                            <!-- client deatails -->
+                            <div class="main-tables" id="per-client-details" style="display: flex; flex-direction: column; gap: .6rem; padding: 1rem;">
+                                <h5 style="font-size: 1.2rem; font-weight: 600;" id="client-name">Panchana Deka</h5>
+                                <div class="client-data-x" style="display: flex; gap: 1.5rem">
+                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                            style="font-weight: 600; color: var(--primary-color);">Reff</span>: <span id="reference_no">11223</span>
+                                    </h5>
+                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                            style="font-weight: 600; color: var(--primary-color);">Contact</span>:
+                                        <span id="contact">6000192289 | 9988776678</span></h5>
+                                </div>
+                                <div class="client-data-x" style="display: flex; gap: 1.8rem">
+                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                            style="font-weight: 600; color: var(--primary-color);">Email</span>:
+                                        <span id="email">Panchanandeka12345678@gmail.com</span></h5>
+                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                            style="font-weight: 600; color: var(--primary-color);">Total Price</span>:
+                                        <span id="total_price">300000</span></h5>
+                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                            style="font-weight: 600; color: var(--primary-color);">Adv. Amount</span>:
+                                        <span id="agreement_amount">50000</span></h5>
+                                </div>
+                                <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                        style="font-weight: 600; color: var(--primary-color);">City</span>: <span id="city">Guwahati,
+                                            Assam, India, 782001</span></h5>
+                                <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                        style="font-weight: 600; color: var(--primary-color);">Other-details</span>:
+                                    <span id="oth_details">need urgent due to shift</span></h5>
+                            </div>
                         </div>
-                        <button type="button" class="close-c-popup" onclick="closeCpopup(this)">Close</button>
-                        <div class="main-tables">
-                            <table class="client-collection-table">
-                                <caption>Collections</caption>
-                                <thead>
-                                    <tr>
-                                        <th class="">No.</th>
-                                        <th class="">Date</th>
-                                        <th class="">Amount</th>
-                                        <th class="">Mode</th>
-                                        <th class="">Remarks</th>
-                                    </tr>
-                                </thead>
+                            <!-- client finance and expenses -->
+                        <div class="collect-popup second-pop" style="box-shadow: none;">
+                            <div class="collect-btns flex">
+                                <button type="button" class=""
+                                    onclick="displayTable('.client-collection-table')">Collections</button>
+                                <button type="button" class=""
+                                    onclick="displayTable('.client-expenses-table')">Expenses</button>
+                            </div>
+                            <button type="button" class="close-c-popup hide" onclick="closeCpopup(this)">Close</button>
+                            <div class="main-tables">
+                                <table class="client-collection-table">
+                                    <caption>Collections</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="">No.</th>
+                                            <th class="">Date</th>
+                                            <th class="">Amount</th>
+                                            <th class="">Mode</th>
+                                            <th class="">Remarks</th>
+                                        </tr>
+                                    </thead>
 
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td class="text">19-Mar-2024</td>
-                                        <td class="text">&#8377; <span>50,000</span></td>
-                                        <td class="text">Cash</td>
-                                        <td class="text">Bought for false ceiling </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th colspan="4">Total</th>
-                                        <th colspan="1">&#8377; <span>50,000</span></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                    <tbody id="client-finance">                            
+                                            <tr>
+                                                <td>1</td>
+                                                <td class="text">19-Mar-2024</td>
+                                                <td class="text">&#8377; <span>50,000</span></td>
+                                                <td class="text">Cash</td>
+                                                <td class="text">Bought for false ceiling </td>
+                                            </tr>                                          
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="4">Total</th>
+                                            <th colspan="1">&#8377; <span>50,000</span></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
 
-                            <!-- expenses  -->
-                            <table class="client-expenses-table hide">
-                                <caption>Expenses</caption>
-                                <thead>
-                                    <tr>
-                                        <th class="">No.</th>
-                                        <th class="">Date</th>
-                                        <th class="">Amount</th>
-                                        <th class="">Mode</th>
-                                        <th class="">Remarks</th>
-                                        <th class="">Project Reference</th>
-                                    </tr>
-                                </thead>
+                                <!-- expenses  -->
+                                <table class="client-expenses-table hide">
+                                    <caption>Expenses</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="">No.</th>
+                                            <th class="">Date</th>
+                                            <th class="">Amount</th>
+                                            <th class="">Mode</th>
+                                            <th class="">Remarks</th>
+                                            <th class="">Project Reference</th>
+                                        </tr>
+                                    </thead>
 
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td class="text">19-Mar-2024</td>
-                                        <td class="text">&#8377; <span>50,000</span></td>
-                                        <td class="text">Cash</td>
-                                        <td class="text">Bought for false ceiling </td>
-                                        <td class="text">Project 1A</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th colspan="5">Total</th>
-                                        <th colspan="1">&#8377; <span>50,000</span></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td class="text">19-Mar-2024</td>
+                                            <td class="text">&#8377; <span>50,000</span></td>
+                                            <td class="text">Cash</td>
+                                            <td class="text">Bought for false ceiling </td>
+                                            <td class="text">Project 1A</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="5">Total</th>
+                                            <th colspan="1">&#8377; <span>50,000</span></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

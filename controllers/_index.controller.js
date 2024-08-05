@@ -60,7 +60,7 @@ exports.expense = (req, res) => {
 
 exports.clients_vendors = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT vendors.id,vendors.name, vendors.contact, vendors.contact2, vendors.email, vendors.location, vendors.oth_details, sum(vendor_supplies.total_amount)as amount, sum(vendor_payments.amount)as paid FROM vendors LEFT JOIN vendor_supplies ON vendor_supplies.vendor_id=vendors.id LEFT JOIN vendor_payments ON vendor_payments.vendor_supply_id=vendor_supplies.id GROUP BY vendors.id;SELECT * FROM clients;`
+        const query = `SELECT vendors.id,vendors.name, vendors.contact, vendors.contact2, vendors.email, vendors.location, vendors.oth_details, sum(vendor_supplies.total_amount)as amount, sum(vendor_payments.amount)as paid FROM vendors LEFT JOIN vendor_supplies ON vendor_supplies.vendor_id=vendors.id LEFT JOIN vendor_payments ON vendor_payments.vendor_supply_id=vendor_supplies.id GROUP BY vendors.id; SELECT id, deal_name, reference_no, contact, contact2, agreement_amount, work_name, email, city, oth_details FROM deals ORDER BY id DESC LIMIT 5`
         db.query(query, (err, result, field) => {
             res.status(200).render('../views/admin/clients_vendors.ejs', { data: result })
         })
@@ -121,10 +121,12 @@ exports.stock = (req, res) => {
 }
 
 
+
+
 //---Finance 
 exports.renderNormalProjectFinance = async (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        let s = `SELECT deals.id, normal_projects_finance.fid, deals.reference_no,deals.deal_name,deals.city,normal_projects_finance.ndeal_id,normal_projects_finance.totalamount,normal_projects_finance.amount_got,normal_projects_finance.modeofpay,normal_projects_finance.dateofpay FROM normal_projects_finance JOIN deals on normal_projects_finance.ndeal_id= deals.id `;
+        let s = `SELECT deals.id, normal_projects_finance.fid, deals.reference_no,deals.deal_name,deals.city,normal_projects_finance.ndeal_id,normal_projects_finance.totalamount,normal_projects_finance.amount_got,normal_projects_finance.modeofpay,normal_projects_finance.dateofpay FROM normal_projects_finance JOIN deals on normal_projects_finance.ndeal_id= deals.id`;
         await db.query(s, (err, results) => {
             if (!err) {
                 let newObj = {};

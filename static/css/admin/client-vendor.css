@@ -302,11 +302,12 @@
     width: 80%;
     z-index: 10;
     height: 100vh;
-    background: var(--black-light);
+    /* background: var(--black-light); */
+    background: rgb(255, 255, 255, 0.96);
 }
 .collect-popup{
     position: absolute;
-    top: 10%;
+    top: 0%;
     left: 50%;
     transform: translateX(-50%);
     max-width: 100%;
@@ -316,6 +317,11 @@
     padding: 8px;
     border-radius: var(--border-radius-1);
 }
+
+.second-pop {
+    top: 25%;
+}
+
 .collect-btns button{
     padding: 10px;
     border-radius: var(--border-radius-1);

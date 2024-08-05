@@ -1,3 +1,5 @@
+const method = new DataCall()
+
 function displayCtn(e) {
     document.querySelector('.ClientCtn').classList.add('hide');
     document.querySelector('.ClientCtn').classList.remove('block');
@@ -97,6 +99,14 @@ function DeleteClientsVendors(e,id) {
 
 }
 
+function renderPerClient_vendorData(targetBox, idArr, dataObj) {
+    const targetContainer = document.getElementById(targetBox)
+    idArr.forEach((id) => {
+        Object.keys(dataObj).forEach((elem) => {
+           if (elem == id) { targetContainer.querySelector(`#${id}`).innerHTML = dataObj[id]; } 
+        })        
+    })
+}
 
 function displayTable(event) {
     document.querySelector('.client-collection-table').classList.add('hide');
@@ -106,8 +116,27 @@ function displayTable(event) {
     document.querySelector(event).classList.add('table');
 }
 
+async function displayClientRecords(dealid) {
+    const data = await method.GET_POST(`admin/user-manager/clients/getOne/${dealid}`, 'GET')
+    document.getElementById('client-name').innerHTML = data.data[0][0].deal_name
+    renderPerClient_vendorData('per-client-details', ['reference_no', 'contact', 'email', 'total_price', 'agreement_amount', 'city', 'oth_details'], data.data[0][0])
+    const financeTable = document.getElementById('client-finance')
+    financeTable.innerHTML = ""
+    data.data[1].forEach((fin)=> {
+        const fin_tr = `<tr>
+        <td>1</td>
+        <td class="text">${fin.dateofpay ? fin.dateofpay : 'N/A'}</td>
+        <td class="text">&#8377; <span>${fin.amount_got ? fin.amount_got : 'N/A'}</span></td>
+        <td class="text">${fin.modeofpay ? fin.modeofpay : 'N/A'}</td>
+        <td class="text">${fin.remark ? fin.remark : 'N/A'}</td>
+        </tr>`
+        financeTable.innerHTML += fin_tr
+    })
+}
+
 function openCpopup(event){
     document.querySelector(`.c-popup`).classList.remove(`hide`)
+    displayClientRecords(event.dataset.clientid);
 }
 function closeCpopup(event){
     document.querySelector(`.c-popup`).classList.add(`hide`)

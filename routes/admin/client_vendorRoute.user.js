@@ -5,10 +5,13 @@ const clientController = require('../../controllers/client.userManager')
 
 // User  routes for Clients [ /clients/* ]
 userRouter.get('/clients/getAll', clientController.getAllClients);
-userRouter.get('/clients/getOne/:id', clientController.getOneClient);
+userRouter.get('/clients/getOne/:dealid', clientController.getOneClient);
 userRouter.post('/clients/create', clientController.createClient);
 userRouter.put('/clients/update/:id', clientController.updateClient);
 userRouter.delete('/clients/delete/:id', clientController.deleteClient);
+// clent section new
+userRouter.get('/clients/getMyFinance', clientController.getFinancePerClient);
+userRouter.get('/clients/getMyExpense', clientController.getExpensePerClient);
 
 
 // User  routes for Vendor [ /vendor/* ]
