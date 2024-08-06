@@ -141,3 +141,10 @@ function openCpopup(event){
 function closeCpopup(event){
     document.querySelector(`.c-popup`).classList.add(`hide`)
 }
+
+
+function openvendorPopup(e) {
+    e.stopPropagation();
+    document.getElementById('vendor-popup').classList.remove(`hide`)
+    console.log('Opended vendor popup');
+}

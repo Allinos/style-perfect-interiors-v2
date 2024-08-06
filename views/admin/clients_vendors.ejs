@@ -148,7 +148,7 @@
                                         </svg></span>
                                 </p>
                                 <p class="flexy">
-                                    <span class="edit-btn" onclick="(this)">See More</span>
+                                    <span class="edit-btn" onclick="openvendorPopup(event) ">See More</span>
                                 </p>
                             </div>
                             <!-- ----------open data for accordion---------- -->
@@ -360,6 +360,117 @@
                                 <!-- expenses  -->
                                 <table class="client-expenses-table hide">
                                     <caption>Expenses</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="">No.</th>
+                                            <th class="">Date</th>
+                                            <th class="">Amount</th>
+                                            <th class="">Mode</th>
+                                            <th class="">Remarks</th>
+                                            <th class="">Project Reference</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td class="text">19-Mar-2024</td>
+                                            <td class="text">&#8377; <span>50,000</span></td>
+                                            <td class="text">Cash</td>
+                                            <td class="text">Bought for false ceiling </td>
+                                            <td class="text">Project 1A</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="5">Total</th>
+                                            <th colspan="1">&#8377; <span>50,000</span></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- vendor render supply and payments data -->
+
+                <div class="c-popup hide" id="vendor-popup">
+                    <div class="main-popup-container">
+                        <div class="collect-popup" style="background-color: #FFF; box-shadow: none;">
+                            <button type="button" class="close-c-popup" onclick="closeCpopup(this)">Close</button>
+                            <!-- client deatails -->
+                            <div class="main-tables" id="per-client-details" style="display: flex; flex-direction: column; gap: .6rem; padding: 1rem;">
+                                <h5 style="font-size: 1.2rem; font-weight: 600;" id="client-name">Panchana Deka</h5>
+                                <div class="client-data-x" style="display: flex; gap: 1.5rem">
+                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                            style="font-weight: 600; color: var(--primary-color);">Reff</span>: <span id="reference_no">11223</span>
+                                    </h5>
+                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                            style="font-weight: 600; color: var(--primary-color);">Contact</span>:
+                                        <span id="contact">6000192289 | 9988776678</span></h5>
+                                </div>
+                                <div class="client-data-x" style="display: flex; gap: 1.8rem">
+                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                            style="font-weight: 600; color: var(--primary-color);">Email</span>:
+                                        <span id="email">Panchanandeka12345678@gmail.com</span></h5>
+                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                            style="font-weight: 600; color: var(--primary-color);">Total Price</span>:
+                                        <span id="total_price">300000</span></h5>
+                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                            style="font-weight: 600; color: var(--primary-color);">Adv. Amount</span>:
+                                        <span id="agreement_amount">50000</span></h5>
+                                </div>
+                                <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                        style="font-weight: 600; color: var(--primary-color);">City</span>: <span id="city">Guwahati,
+                                            Assam, India, 782001</span></h5>
+                                <h5 style="font-size: .9rem; font-weight: 500;"><span
+                                        style="font-weight: 600; color: var(--primary-color);">Other-details</span>:
+                                    <span id="oth_details">need urgent due to shift</span></h5>
+                            </div>
+                        </div>
+                            <!-- client finance and expenses -->
+                        <div class="collect-popup second-pop" style="box-shadow: none;">
+                            <div class="collect-btns flex">
+                                <button type="button" class=""
+                                    onclick="displayTable('.client-collection-table')">Payments</button>
+                                <button type="button" class=""
+                                    onclick="displayTable('.client-expenses-table')">Supplies</button>
+                            </div>
+                            <button type="button" class="close-c-popup hide" onclick="closeCpopup(this)">Close</button>
+                            <div class="main-tables">
+                                <table class="client-collection-table">
+                                    <caption>Payments</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="">No.</th>
+                                            <th class="">Date</th>
+                                            <th class="">Amount</th>
+                                            <th class="">Mode</th>
+                                            <th class="">Remarks</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="client-finance">                            
+                                            <tr>
+                                                <td>1</td>
+                                                <td class="text">19-Mar-2024</td>
+                                                <td class="text">&#8377; <span>50,000</span></td>
+                                                <td class="text">Cash</td>
+                                                <td class="text">Bought for false ceiling </td>
+                                            </tr>                                          
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="4">Total</th>
+                                            <th colspan="1">&#8377; <span>50,000</span></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                                <!-- expenses  -->
+                                <table class="client-expenses-table hide">
+                                    <caption>Supplies</caption>
                                     <thead>
                                         <tr>
                                             <th class="">No.</th>
