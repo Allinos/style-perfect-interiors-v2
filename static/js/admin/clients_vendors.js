@@ -21,6 +21,7 @@ function closeDropdown(e) {
 }
 
 function renderPerClient_vendorData(targetBox, idArr, dataObj, tagType) {
+    console.log(targetBox);
     const targetContainer = document.getElementById(targetBox)
     idArr.forEach((id) => {
         Object.keys(dataObj).forEach((elem) => {
@@ -125,14 +126,6 @@ function DeleteClientsVendors(e, id) {
 
 }
 
-function renderPerClient_vendorData(targetBox, idArr, dataObj) {
-    const targetContainer = document.getElementById(targetBox)
-    idArr.forEach((id) => {
-        Object.keys(dataObj).forEach((elem) => {
-            if (elem == id) { targetContainer.querySelector(`#${id}`).innerHTML = dataObj[id]; }
-        })
-    })
-}
 
 function displayTable(event) {
     document.querySelector('.client-collection-table').classList.add('hide');
