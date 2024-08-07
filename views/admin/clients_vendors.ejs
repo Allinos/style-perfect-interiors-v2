@@ -87,7 +87,7 @@
                                     </span>
                                 </p> -->
                                 <p class="flexy">
-                                    <span class="edit-btn" onclick="openUpdateClientsVendors(this)">Edit</span>
+                                    <span class="edit-btn" data-id="<%= e.id %>" onclick="openUpdateClientsVendors(this)">Edit</span>
                                     <span class="butt" onclick="DeleteClientsVendors(this,<%= e?.id %>)"><svg
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt"
                                             class="icon">
@@ -243,47 +243,48 @@
                     <div class="cilent-vendor-grid" data-id="">
                         <h3 class="uppercase">Update Client</h3>
                         <hr>
-                        <div class="field">
+                        <!-- <div class="field">
                             <label for="date">Category</label>
                             <select name="cat" id="category">
                                 <option value=""> Select Type</option>
                                 <option value="client">Client</option>
                                 <option value="vendor">Vendor</option>
                             </select>
-                        </div>
-                        <div class="egrid">
+                        </div> -->
+                        <div class="egrid" id="client-update-form">
                             <div class="field">
                                 <label for="name">Name</label>
-                                <input type="text" name="name" id="name" placeholder="Name">
+                                <input type="text" value="" name="name" id="deal_name" placeholder="Name">
                             </div>
                             <div class="field">
                                 <label for="cnumber">Contact</label>
-                                <input type="text" name="contact" id="contact" placeholder="Contact">
+                                <input type="text" value="" name="contact" id="contact" placeholder="Contact">
                             </div>
                             <div class="field">
                                 <label for="email">Alt. Contact</label>
-                                <input type="text" name="alt_contact" id="alt_contact" placeholder="Alternate Contact">
+                                <input type="text" value="" name="alt_contact" id="contact2" placeholder="Alternate Contact">
                             </div>
                             <div class="field">
                                 <label for="date">Location</label>
-                                <input type="text" name="location" id="location" placeholder="Location">
+                                <input type="text" value="" name="location" id="city" placeholder="Location">
                             </div>
                             <div class="field">
                                 <label for="date">Other Details</label>
-                                <input type="text" name="details" id="details" placeholder="Other Details">
+                                <input type="text" value="" name="details" id="oth_details" placeholder="Other Details">
                             </div>
                             <div class="field">
                                 <label for="date">Email</label>
-                                <input type="text" name="email" id="email" placeholder="Email">
+                                <input type="text" value="" name="email" id="email" placeholder="Email">
                             </div>
                         </div>
                         <div class="flex user-btns">
-                            <button class="uppercase" onclick="UpdateClientsVendors(this)">Update</button>
+                            <button class="uppercase" id="update-client-btn" data-clid="" onclick="UpdateClientsVendors(this)">Update</button>
                             <button class="uppercase" onclick="closeDropdown('.updateclient')">Close</button>
                         </div>
                     </div>
                 </div>
 
+                <!-- client render collection and expenses --> 
                 <div class="c-popup hide">
                     <div class="main-popup-container">
                         <div class="collect-popup" style="background-color: #FFF; box-shadow: none;">
@@ -322,9 +323,9 @@
                         <div class="collect-popup second-pop" style="box-shadow: none;">
                             <div class="collect-btns flex">
                                 <button type="button" class=""
-                                    onclick="displayTable('.client-collection-table')">Collections</button>
+                                    onclick="displayTable('.client-collection-table')" id="coll-btn" data-reffno="">Collections</button>
                                 <button type="button" class=""
-                                    onclick="displayTable('.client-expenses-table')">Expenses</button>
+                                    onclick="displayTable('.client-expenses-table')" id="ex-btn" data-reffno="">Expenses</button>
                             </div>
                             <button type="button" class="close-c-popup hide" onclick="closeCpopup(this)">Close</button>
                             <div class="main-tables">
@@ -341,13 +342,13 @@
                                     </thead>
 
                                     <tbody id="client-finance">                            
-                                            <tr>
+                                            <!-- <tr>
                                                 <td>1</td>
                                                 <td class="text">19-Mar-2024</td>
                                                 <td class="text">&#8377; <span>50,000</span></td>
                                                 <td class="text">Cash</td>
                                                 <td class="text">Bought for false ceiling </td>
-                                            </tr>                                          
+                                            </tr>                                           -->
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -371,15 +372,15 @@
                                         </tr>
                                     </thead>
 
-                                    <tbody>
-                                        <tr>
+                                    <tbody id="client-expense">
+                                        <!-- <tr>
                                             <td>1</td>
                                             <td class="text">19-Mar-2024</td>
                                             <td class="text">&#8377; <span>50,000</span></td>
                                             <td class="text">Cash</td>
                                             <td class="text">Bought for false ceiling </td>
                                             <td class="text">Project 1A</td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                     <tfoot>
                                         <tr>

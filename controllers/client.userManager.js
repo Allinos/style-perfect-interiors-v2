@@ -16,8 +16,8 @@ exports.getAllClients = (req, res) => {
 }
 
 exports.getOneClient = (req, res) => {
-    let query = `SELECT id, reference_no, deal_name, contact, contact2, agreement_amount, work_name, email, city, oth_details, total_price FROM deals WHERE deals.id = ${req.params.dealid};SELECT deals.id, normal_projects_finance.fid, normal_projects_finance.ndeal_id, normal_projects_finance.totalamount, normal_projects_finance.amount_got, normal_projects_finance.modeofpay, normal_projects_finance.dateofpay FROM normal_projects_finance JOIN deals on normal_projects_finance.ndeal_id= deals.id WHERE deals.id = ${req.params.dealid}`;
-    db.query(query, [req.params.dealid], (err, results) => {
+    let query = `SELECT id, reference_no, deal_name, contact, contact2, agreement_amount, work_name, email, city, oth_details, total_price FROM deals WHERE deals.id = ${req.params.dealid};SELECT deals.id, normal_projects_finance.fid, normal_projects_finance.ndeal_id, normal_projects_finance.totalamount, normal_projects_finance.amount_got, normal_projects_finance.modeofpay, normal_projects_finance.dateofpay FROM normal_projects_finance JOIN deals on normal_projects_finance.ndeal_id= deals.id WHERE deals.id = ${req.params.dealid};SELECT * FROM expenses WHERE categories = 'project' AND project_id = ?`;
+    db.query(query, [req.params.reffid], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully Data Retrived', data: results })
         } else {
@@ -41,7 +41,7 @@ exports.createClient = (req, res) => {
 }
 exports.updateClient = (req, res) => {
     let data = req.body;
-    let query = 'UPDATE clients SET name=?, contact=?, contact2=?, email=?, location=?, oth_details=? WHERE id=?;';
+    let query = 'UPDATE deals SET deal_name=?, contact=?, contact2=?, email=?, city=?, oth_details=? WHERE id=?;';
     db.query(query, [data.name,data.contact,data.contact2,data.email,data.location,data.details,req.params.id], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully Data Updated', data: results })
@@ -65,9 +65,9 @@ exports.deleteClient = (req, res) => {
 }
 
 
-exports.getFinancePerClient = (req, res) => {
-    let query = '';
-    db.query(query, (err, results) => {
+exports.getOneClientToEdit = (req, res) => {
+    let query = 'SELECT id, reference_no, deal_name, contact, contact2, agreement_amount, work_name, email, city, oth_details, total_price FROM deals WHERE id=?';
+    db.query(query, [req.params.dealid], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Data retreived successfully', data: results })
         } else {
@@ -78,8 +78,8 @@ exports.getFinancePerClient = (req, res) => {
 }
 
 exports.getExpensePerClient = (req, res) => {
-    let query = '';
-    db.query(query, (err, results) => {
+    let query = `SELECT * FROM expenses WHERE categories = 'project' AND project_id = ?`;
+    db.query(query, [req.params.projectreff], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Data retreived successfully', data: results })
         } else {

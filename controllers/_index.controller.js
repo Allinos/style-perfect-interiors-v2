@@ -72,7 +72,7 @@ exports.vendor_supplies = (req, res) => {
         const query = `SELECT vendor_supplies.id, vendor_supplies.vendor_id, vendor_supplies.item_name, vendor_supplies.details, vendor_supplies.sgst, vendor_supplies.cgst, vendor_supplies.total_amount, vendor_supplies.modeofpay, vendor_supplies.date, vendor_supplies.gst_status, vendors.name, vendors.contact, vendors.location, COALESCE(SUM(vendor_payments.amount), 0) AS paid FROM vendor_supplies JOIN vendors ON vendor_supplies.vendor_id = vendors.id LEFT JOIN vendor_payments ON vendor_supplies.id = vendor_payments.vendor_supply_id GROUP BY vendor_supplies.id, vendor_supplies.vendor_id, vendor_supplies.item_name, vendor_supplies.details, vendor_supplies.sgst, vendor_supplies.cgst, vendor_supplies.total_amount, vendor_supplies.modeofpay, vendor_supplies.date, vendors.name, vendors.contact, vendors.location;SELECT id, name FROM vendors;`
         db.query(query, (err, result, field) => {
             if (!err) {
-                res.status(200).render('../views/admin/vendor_supplies.ejs', { data: result})
+                res.status(200).render('../views/admin/vendor_supplies.ejs', { data: result })
             } else {
                 return res.status(500).send({ msg: "Internal error occurs!" });
             }

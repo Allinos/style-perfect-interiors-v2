@@ -1,5 +1,8 @@
 let ReqURI = { addExps: BASE_URL + `/add-Exps`, updExps: BASE_URL + `/expsUpdate/`, getExpsBymonths: BASE_URL + '/getExps', NisProjectPaid: location.origin + '/apiv1/nIsProjectPaid', getProjectList: location.origin + '/apiv1/getProjectList' }
 
+function expenseShowmore() {
+    document.getElementById('expense-summary').classList.toggle('hide')
+}
 function Opn_ExpenseCtn(e, elm) {
     (document.getElementsByClassName('main')[0]).classList.add('flow');
     (document.querySelector(`${e}`)).classList.remove(`hide`);
@@ -162,3 +165,5 @@ function search() {
         if (e.value == month) { e.removeAttribute('selected'); e.setAttribute('selected', 'true') }
     }
 })()
+
+
