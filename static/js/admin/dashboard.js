@@ -6,7 +6,7 @@ document.querySelectorAll(`.assign-to`).forEach((item, index) => {
     header.addEventListener("click", async () => {
         const renderId = item.querySelector('#emp-in-np')
         const CsrenderId = item.querySelector('#cs-emp-in-np')
-        renderId.innerHTML = '';CsrenderId.innerHTML = ''
+        renderId.innerHTML = ''; CsrenderId.innerHTML = ''
         if (item.classList.contains("open") != true) {
             if (item.dataset.taskid) {
                 const CusEmpNp = await feature.GET_POST(`apiv1/get-contract-emp-to-project?dealId=${item.dataset.ndealid}&catId=${item.dataset.taskid}`, 'GET');
@@ -37,7 +37,7 @@ document.querySelectorAll(`.assign-to`).forEach((item, index) => {
 
     })
 })
-function Opn_addProjectEmp(){
+function Opn_addProjectEmp() {
     document.querySelector('.another-emp').classList.toggle('flex')
 }
 
@@ -87,10 +87,10 @@ async function addTaskStatus(target, type, route) {
     } else if (target.value == 'On Progress') {
         target.classList.remove('green', 'red')
         target.classList.add('blue')
-    }else if (target.value == 'Not Started') {
+    } else if (target.value == 'Not Started') {
         target.classList.remove('blue', 'green')
         target.classList.add('red')
-    } 
+    }
     if (type === 'normal') {
         body = { status: target.value, dealId: Number(dataSet.ndealid), catId: Number(dataSet.taskid) }
     } else {
@@ -157,7 +157,7 @@ function search() {
     });
 }
 CheckDeadline()
-async function DeleteProject(e,o) {
+async function DeleteProject(e, o) {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -168,8 +168,8 @@ async function DeleteProject(e,o) {
         confirmButtonText: 'Yes, delete it!'
     }).then(async (pers) => {
         if (pers.isConfirmed) {
-            await ReqHandler.GET(location.origin + '/apiv1/delete-project/'+o).then(res => {
-               if (res.status) {e.parentElement.parentElement.parentElement.remove();}
+            await ReqHandler.GET(location.origin + '/apiv1/delete-project/' + o).then(res => {
+                if (res.status) { e.parentElement.parentElement.parentElement.remove(); }
             })
         }
     });
