@@ -42,7 +42,7 @@ async function openUpdateClientsVendors(e) {
     // inputCtn.querySelector('#category').value = mainCtn.dataset.type;
     // inputCtn.querySelector('#name').value = (mainCtn.querySelector('.name').children[0].innerText).trim();
     // inputCtn.querySelector('#contact').value = (mainCtn.querySelector('.contact').children[0].innerText).trim();
-    // // inputCtn.querySelector('#alt_contact').value = (mainCtn.querySelector('.alt_contact').innerText).trim();
+    // inputCtn.querySelector('#alt_contact').value = (mainCtn.querySelector('.alt_contact').innerText).trim();
     // inputCtn.querySelector('#location').value = (mainCtn.querySelector('.location').children[0].innerText).trim();
     // inputCtn.querySelector('#details').value = (mainCtn.querySelector('.details').children[0].innerText).trim();
     // inputCtn.querySelector('#email').value = (mainCtn.querySelector('.email').innerText).trim();
@@ -164,38 +164,45 @@ function renderClientTablesData(dataArr, tableId, type) {
     })
 }
 function displayVendorRecords(e) {
-    ReqHandler.GET(window.location.origin + `/admin/user-manager/vendors/getOne/` + e)
-        .then((res) => {
-            if (res) {
-                document.getElementById('vendor-name').innerHTML = res.data[0][0].name
-                renderPerClient_vendorData('per-vendor-details', ['reference_no', 'contact', 'email', 'total_price', 'city', 'oth_details'], res.data[0][0])
-                const suppliesTable = document.getElementById('vendor-supplies')
-                const paymentsTable = document.getElementById('vendor-payments')
-                suppliesTable.innerHTML = ""; paymentsTable.innerHTML = "";
-                res.data[1].forEach((e) => {
-                    const e_tr = `<tr>
-                <td>${e.id}</td>
+    ReqHandler.GET(window.location.origin + `/admin/user-manager/vendors/getOne/` + e).then((res) => {
+        if (res) {
+            console.log(res);
+            document.getElementById('vendor-name').innerHTML = res.data[0][0].name
+            renderPerClient_vendorData('per-vendor-details', ['reference_no', 'contact', 'email', 'total_price', 'city', 'oth_details'], res.data[0][0])
+            const suppliesTable = document.getElementById('vendor-supplies')
+            const paymentsTable = document.getElementById('vendor-payments')
+            let [suppliesSum, paymentsSum] = [0, 0]
+            if (res.data[2] > 0) {
+                suppliesTable.innerHTML = "";
+                res.data[1]?.forEach((e) => {
+                    suppliesSum += e.total_amount;
+                    const e_tr = `<tr><td>${e.id}</td>
                 <td class="text">${e.item_name ? e.item_name : 'N/A'}</td>
                 <td class="text">&#8377; <span>${e.total_amount ? e.total_amount : 'N/A'}</span></td>
                 <td class="text">${e.modeofpay ? e.modeofpay : 'N/A'}</td>
                 <td class="text">${e.date ? e.date : 'N/A'}</td>
-                <td class="text">${e.gst_status ? e.gst_status : 'N/A'}</td>
-                </tr>`
+                <td class="text">${e.gst_status ? e.gst_status : 'N/A'}</td></tr>`
                     suppliesTable.innerHTML += e_tr
                 })
+                document.querySelector('.suppliesSum').innerText = suppliesSum;
+            }
+            if (res.data[2] > 0) {
+                paymentsTable.innerHTML = "";
                 res.data[2].forEach((e) => {
-                    const e_tr = `<tr>
-                <td>${e.id}</td>
-                <td class="text">${e.title ? e.title : 'N/A'}</td>
-                <td class="text">&#8377; <span>${e.amount ? e.amount : 'N/A'}</span></td>
-                <td class="text">${e.modeofpay ? e.modeofpay : 'N/A'}</td>
-                <td class="text">${e.dateofpay ? e.dateofpay : 'N/A'}</td>
-                </tr>`
+                    suppliesSum += e.amount;
+                    const e_tr = `<tr><td>${e.id}</td>
+                    <td class="text">${e.title ? e.title : 'N/A'}</td>
+                    <td class="text">&#8377; <span>${e.amount ? e.amount : 'N/A'}</span></td>
+                    <td class="text">${e.modeofpay ? e.modeofpay : 'N/A'}</td>
+                    <td class="text">${e.dateofpay ? e.dateofpay : 'N/A'}</td></tr>`
                     paymentsTable.innerHTML += e_tr;
                 })
+                document.querySelector('.paymentsSum').innerText = paymentsSum;
+
             }
-        })
-    }
+        }
+    })
+}
 
 
 async function displayClientRecords(dealid, target) {
