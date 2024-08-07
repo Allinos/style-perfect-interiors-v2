@@ -29,7 +29,7 @@ exports.getOneClient = (req, res) => {
 exports.createClient = (req, res) => {
     let data = req.body;
     let query = 'INSERT INTO clients(name, contact, contact2, email, location, oth_details) VALUES(?,?,?,?,?,?);';
-    db.query(query, [data.name,data.contact,data.alt_contact,data.email,data.location,data.details], (err, results) => {
+    db.query(query, [data.name, data.contact, data.alt_contact, data.email, data.location, data.details], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully Data Crated', data: results.insertedId })
         } else {
@@ -41,8 +41,13 @@ exports.createClient = (req, res) => {
 }
 exports.updateClient = (req, res) => {
     let data = req.body;
+<<<<<<< HEAD
     let query = 'UPDATE deals SET deal_name=?, contact=?, contact2=?, email=?, city=?, oth_details=? WHERE id=?;';
     db.query(query, [data.name,data.contact,data.contact2,data.email,data.location,data.details,req.params.id], (err, results) => {
+=======
+    let query = 'UPDATE clients SET name=?, contact=?, contact2=?, email=?, location=?, oth_details=? WHERE id=?;';
+    db.query(query, [data.name, data.contact, data.contact2, data.email, data.location, data.details, req.params.id], (err, results) => {
+>>>>>>> 5947d4a3b1da3a8354fba018998ffe0903bdd52d
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully Data Updated', data: results })
         } else {

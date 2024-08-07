@@ -98,28 +98,54 @@ function UpdateClientsVendors(e) {
 }
 
 function DeleteClientsVendors(e, id) {
-    let type = e.parentElement.parentElement.parentElement.dataset.type;
-    console.log(type, window.location.origin + `/admin/user-manager/${type}s/delete/` + id);
-    ReqHandler.DEL(window.location.origin + `/admin/user-manager/${type}s/delete/` + id)
-        .then((res) => {
-            if (res) {
-                AlertNotify('Success', res.msg, 'success');
-                (e.parentElement.parentElement.parentElement).remove();
-            }
-        })
-        .catch(err => {
-            AlertNotify('Success', 'Error While adding ', 'error')
-            console.log('Error(fn-AddClientsVendors):' + err);
-        })
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then(async (pers) => {
+        if (pers.isConfirmed) {
+            let type = e.parentElement.parentElement.parentElement.dataset.type;
+            ReqHandler.DEL(window.location.origin + `/admin/user-manager/${type}s/delete/` + id)
+                .then((res) => {
+                    if (res) {
+                        AlertNotify('Success', res.msg, 'success');
+                        (e.parentElement.parentElement.parentElement).remove();
+                    }
+                })
+                .catch(err => {
+                    AlertNotify('Success', 'Error While adding ', 'error')
+                    console.log('Error(fn-AddClientsVendors):' + err);
+                })
+        }
+    })
 
 }
 
+function renderPerClient_vendorData(targetBox, idArr, dataObj) {
+    const targetContainer = document.getElementById(targetBox)
+    idArr.forEach((id) => {
+        Object.keys(dataObj).forEach((elem) => {
+            if (elem == id) { targetContainer.querySelector(`#${id}`).innerHTML = dataObj[id]; }
+        })
+    })
+}
 
 function displayTable(event) {
     document.querySelector('.client-collection-table').classList.add('hide');
     document.querySelector('.client-collection-table').classList.remove('table');
     document.querySelector('.client-expenses-table').classList.add('hide');
     document.querySelector('.client-expenses-table').classList.remove('table');
+    document.querySelector(event).classList.add('table');
+}
+function displayTableVendor(event) {
+    document.querySelector('.vendor-payment-table').classList.add('hide');
+    document.querySelector('.vendor-payment-table').classList.remove('table');
+    document.querySelector('.vendor-supply-table').classList.add('hide');
+    document.querySelector('.vendor-supply-table').classList.remove('table');
     document.querySelector(event).classList.add('table');
 }
 
@@ -144,6 +170,36 @@ function renderClientTablesData(dataArr, tableId, type) {
         tableBody.innerHTML += fin_ex_tr;
     })
 }
+function displayVendorRecords(e) {
+    ReqHandler.GET(window.location.origin + `/admin/user-manager/vendors/getOne/` + e)
+        .then((res) => {
+            if (res) {
+                document.getElementById('vendor-name').innerHTML = res.data[0][0].name
+                renderPerClient_vendorData('per-vendor-details', ['reference_no', 'contact', 'email', 'total_price', 'city', 'oth_details'], res.data[0][0])
+                const suppliesTable = document.getElementById('vendor-supplies')
+                const paymentsTable = document.getElementById('vendor-payments')
+                suppliesTable.innerHTML = ""; paymentsTable.innerHTML = "";
+                res.data[1].forEach((e) => {
+                    const e_tr = `<tr>
+                <td>${e.id}</td>
+                <td class="text">${e.item_name ? e.item_name : 'N/A'}</td>
+                <td class="text">&#8377; <span>${e.total_amount ? e.total_amount : 'N/A'}</span></td>
+                <td class="text">${e.modeofpay ? e.modeofpay : 'N/A'}</td>
+                <td class="text">${e.date ? e.date : 'N/A'}</td>
+                <td class="text">${e.gst_status ? e.gst_status : 'N/A'}</td>
+                </tr>`
+                    suppliesTable.innerHTML += e_tr
+                })
+                res.data[2].forEach((e) => {
+                    const e_tr = `<tr>
+                <td>${e.id}</td>
+                <td class="text">${e.title ? e.title : 'N/A'}</td>
+                <td class="text">&#8377; <span>${e.amount ? e.amount : 'N/A'}</span></td>
+                <td class="text">${e.modeofpay ? e.modeofpay : 'N/A'}</td>
+                <td class="text">${e.dateofpay ? e.dateofpay : 'N/A'}</td>
+                </tr>`
+                    paymentsTable.innerHTML += e_tr;
+                })
 
 async function displayClientRecords(dealid, target) {
     const reffId = target.parentNode.parentNode.querySelector('.ref').innerText
@@ -163,9 +219,12 @@ function closeCpopup(event) {
     document.querySelector(`.c-popup`).classList.add(`hide`)
 }
 
-
+//vendor popup 
 function openvendorPopup(e) {
     e.stopPropagation();
     document.getElementById('vendor-popup').classList.remove(`hide`)
-    console.log('Opended vendor popup');
+    displayVendorRecords(e.target.dataset.vendorid)
+}
+function ClosevendorPopup(e) {
+    document.getElementById('vendor-popup').classList.add(`hide`)
 }
