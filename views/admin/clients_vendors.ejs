@@ -106,6 +106,9 @@
                         <% }) %>
                             <!-- ------------------------------ -->
                 </div>
+
+
+
                 <!-- Vendors----------- -->
                 <div class="info-content VendorCtn hide">
                     <% data[0]?.forEach((e)=>{ %>
@@ -131,7 +134,6 @@
                                         <%= e?.location %>
                                     </span>
                                 </p>
-
                                 <p class="details none ">
                                     <span>
                                         <%= e?.oth_details %>
@@ -148,7 +150,8 @@
                                         </svg></span>
                                 </p>
                                 <p class="flexy">
-                                    <span class="edit-btn" onclick="openvendorPopup(event) ">See More</span>
+                                    <span class="edit-btn" data-vendorid="<%= e?.id %>"
+                                        onclick="openvendorPopup(event) ">See More</span>
                                 </p>
                             </div>
                             <!-- ----------open data for accordion---------- -->
@@ -171,7 +174,7 @@
                                         <div class="field">
                                             <p class="uppercase">Amount</p>
                                             <p class="alt_contact">
-                                                ₹ <%= e.amount %> /-
+                                                ₹ <%= e?.amount %> /-
                                             </p>
                                         </div>
                                     </div>
@@ -289,36 +292,44 @@
                         <div class="collect-popup" style="background-color: #FFF; box-shadow: none;">
                             <button type="button" class="close-c-popup" onclick="closeCpopup(this)">Close</button>
                             <!-- client deatails -->
-                            <div class="main-tables" id="per-client-details" style="display: flex; flex-direction: column; gap: .6rem; padding: 1rem;">
+                            <div class="main-tables" id="per-client-details"
+                                style="display: flex; flex-direction: column; gap: .6rem; padding: 1rem;">
                                 <h5 style="font-size: 1.2rem; font-weight: 600;" id="client-name">Panchana Deka</h5>
                                 <div class="client-data-x" style="display: flex; gap: 1.5rem">
                                     <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Reff</span>: <span id="reference_no">11223</span>
+                                            style="font-weight: 600; color: var(--primary-color);">Reff</span>: <span
+                                            id="reference_no">11223</span>
                                     </h5>
                                     <h5 style="font-size: .9rem; font-weight: 500;"><span
                                             style="font-weight: 600; color: var(--primary-color);">Contact</span>:
-                                        <span id="contact">6000192289 | 9988776678</span></h5>
+                                        <span id="contact">6000192289 | 9988776678</span>
+                                    </h5>
                                 </div>
                                 <div class="client-data-x" style="display: flex; gap: 1.8rem">
                                     <h5 style="font-size: .9rem; font-weight: 500;"><span
                                             style="font-weight: 600; color: var(--primary-color);">Email</span>:
-                                        <span id="email">Panchanandeka12345678@gmail.com</span></h5>
+                                        <span id="email">Panchanandeka12345678@gmail.com</span>
+                                    </h5>
                                     <h5 style="font-size: .9rem; font-weight: 500;"><span
                                             style="font-weight: 600; color: var(--primary-color);">Total Price</span>:
-                                        <span id="total_price">300000</span></h5>
+                                        <span id="total_price">300000</span>
+                                    </h5>
                                     <h5 style="font-size: .9rem; font-weight: 500;"><span
                                             style="font-weight: 600; color: var(--primary-color);">Adv. Amount</span>:
-                                        <span id="agreement_amount">50000</span></h5>
+                                        <span id="agreement_amount">50000</span>
+                                    </h5>
                                 </div>
                                 <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                        style="font-weight: 600; color: var(--primary-color);">City</span>: <span id="city">Guwahati,
-                                            Assam, India, 782001</span></h5>
+                                        style="font-weight: 600; color: var(--primary-color);">City</span>: <span
+                                        id="city">Guwahati,
+                                        Assam, India, 782001</span></h5>
                                 <h5 style="font-size: .9rem; font-weight: 500;"><span
                                         style="font-weight: 600; color: var(--primary-color);">Other-details</span>:
-                                    <span id="oth_details">need urgent due to shift</span></h5>
+                                    <span id="oth_details">need urgent due to shift</span>
+                                </h5>
                             </div>
                         </div>
-                            <!-- client finance and expenses -->
+                        <!-- client finance and expenses -->
                         <div class="collect-popup second-pop" style="box-shadow: none;">
                             <div class="collect-btns flex">
                                 <button type="button" class=""
@@ -340,14 +351,14 @@
                                         </tr>
                                     </thead>
 
-                                    <tbody id="client-finance">                            
-                                            <tr>
-                                                <td>1</td>
-                                                <td class="text">19-Mar-2024</td>
-                                                <td class="text">&#8377; <span>50,000</span></td>
-                                                <td class="text">Cash</td>
-                                                <td class="text">Bought for false ceiling </td>
-                                            </tr>                                          
+                                    <tbody id="client-finance">
+                                        <tr>
+                                            <td>1</td>
+                                            <td class="text">19-Mar-2024</td>
+                                            <td class="text">&#8377; <span>50,000</span></td>
+                                            <td class="text">Cash</td>
+                                            <td class="text">Bought for false ceiling </td>
+                                        </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -393,53 +404,63 @@
                     </div>
                 </div>
 
-                <!-- vendor render supply and payments data -->
 
+
+
+                <!-- vendor render supply and payments data -->
                 <div class="c-popup hide" id="vendor-popup">
                     <div class="main-popup-container">
                         <div class="collect-popup" style="background-color: #FFF; box-shadow: none;">
-                            <button type="button" class="close-c-popup" onclick="closeCpopup(this)">Close</button>
+                            <button type="button" class="close-c-popup" onclick="ClosevendorPopup(this)">Close</button>
                             <!-- client deatails -->
-                            <div class="main-tables" id="per-client-details" style="display: flex; flex-direction: column; gap: .6rem; padding: 1rem;">
-                                <h5 style="font-size: 1.2rem; font-weight: 600;" id="client-name">Panchana Deka</h5>
+                            <div class="main-tables" id="per-vendor-details"
+                                style="display: flex; flex-direction: column; gap: .6rem; padding: 1rem;">
+                                <h5 style="font-size: 1.2rem; font-weight: 600;" id="vendor-name">Panchana Deka</h5>
                                 <div class="client-data-x" style="display: flex; gap: 1.5rem">
                                     <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Reff</span>: <span id="reference_no">11223</span>
+                                            style="font-weight: 600; color: var(--primary-color);">Reff</span>: <span
+                                            id="reference_no">11223</span>
                                     </h5>
                                     <h5 style="font-size: .9rem; font-weight: 500;"><span
                                             style="font-weight: 600; color: var(--primary-color);">Contact</span>:
-                                        <span id="contact">6000192289 | 9988776678</span></h5>
+                                        <span id="contact">6000192289 | 9988776678</span>
+                                    </h5>
                                 </div>
                                 <div class="client-data-x" style="display: flex; gap: 1.8rem">
                                     <h5 style="font-size: .9rem; font-weight: 500;"><span
                                             style="font-weight: 600; color: var(--primary-color);">Email</span>:
-                                        <span id="email">Panchanandeka12345678@gmail.com</span></h5>
+                                        <span id="email">Panchanandeka12345678@gmail.com</span>
+                                    </h5>
                                     <h5 style="font-size: .9rem; font-weight: 500;"><span
                                             style="font-weight: 600; color: var(--primary-color);">Total Price</span>:
-                                        <span id="total_price">300000</span></h5>
+                                        <span id="total_price">300000</span>
+                                    </h5>
                                     <h5 style="font-size: .9rem; font-weight: 500;"><span
                                             style="font-weight: 600; color: var(--primary-color);">Adv. Amount</span>:
-                                        <span id="agreement_amount">50000</span></h5>
+                                        <span id="agreement_amount">50000</span>
+                                    </h5>
                                 </div>
                                 <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                        style="font-weight: 600; color: var(--primary-color);">City</span>: <span id="city">Guwahati,
-                                            Assam, India, 782001</span></h5>
+                                        style="font-weight: 600; color: var(--primary-color);">City</span>: <span
+                                        id="city">Guwahati,
+                                        Assam, India, 782001</span></h5>
                                 <h5 style="font-size: .9rem; font-weight: 500;"><span
                                         style="font-weight: 600; color: var(--primary-color);">Other-details</span>:
-                                    <span id="oth_details">need urgent due to shift</span></h5>
+                                    <span id="oth_details">need urgent due to shift</span>
+                                </h5>
                             </div>
                         </div>
-                            <!-- client finance and expenses -->
+                        <!-- client finance and expenses -->
                         <div class="collect-popup second-pop" style="box-shadow: none;">
                             <div class="collect-btns flex">
                                 <button type="button" class=""
-                                    onclick="displayTable('.client-collection-table')">Payments</button>
+                                    onclick="displayTableVendor('.vendor-payment-table')">Payments</button>
                                 <button type="button" class=""
-                                    onclick="displayTable('.client-expenses-table')">Supplies</button>
+                                    onclick="displayTableVendor('.vendor-supply-table')">Supplies</button>
                             </div>
                             <button type="button" class="close-c-popup hide" onclick="closeCpopup(this)">Close</button>
                             <div class="main-tables">
-                                <table class="client-collection-table">
+                                <table class="vendor-payment-table">
                                     <caption>Payments</caption>
                                     <thead>
                                         <tr>
@@ -451,14 +472,14 @@
                                         </tr>
                                     </thead>
 
-                                    <tbody id="client-finance">                            
-                                            <tr>
-                                                <td>1</td>
-                                                <td class="text">19-Mar-2024</td>
-                                                <td class="text">&#8377; <span>50,000</span></td>
-                                                <td class="text">Cash</td>
-                                                <td class="text">Bought for false ceiling </td>
-                                            </tr>                                          
+                                    <tbody id="vendor-payments">
+                                        <tr>
+                                            <td>1</td>
+                                            <td class="text">19-Mar-2024</td>
+                                            <td class="text">&#8377; <span>50,000</span></td>
+                                            <td class="text">Cash</td>
+                                            <td class="text">Bought for false ceiling </td>
+                                        </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -469,20 +490,20 @@
                                 </table>
 
                                 <!-- expenses  -->
-                                <table class="client-expenses-table hide">
+                                <table class="vendor-supply-table hide">
                                     <caption>Supplies</caption>
                                     <thead>
                                         <tr>
                                             <th class="">No.</th>
-                                            <th class="">Date</th>
+                                            <th class="">Title</th>
                                             <th class="">Amount</th>
                                             <th class="">Mode</th>
-                                            <th class="">Remarks</th>
-                                            <th class="">Project Reference</th>
+                                            <th class="">Date</th>
+                                            <th class="">GST Status</th>
                                         </tr>
                                     </thead>
 
-                                    <tbody>
+                                    <tbody id="vendor-supplies">
                                         <tr>
                                             <td>1</td>
                                             <td class="text">19-Mar-2024</td>

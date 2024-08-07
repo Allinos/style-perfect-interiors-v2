@@ -15,7 +15,10 @@ exports.getAllVendors = (req, res) => {
     })
 }
 exports.getOneVendor = (req, res) => {
-    let query = 'SELECT name, contact, contact2, email, location, oth_details FROM vendors WHERE id=?';
+    let query = `SELECT id as reference_no, name, contact, contact2, email, location as city, oth_details FROM vendors WHERE id=2;
+    SELECT id, vendor_id, item_name, details,sgst, cgst, total_amount, modeofpay, date, gst_status FROM vendor_supplies WHERE  vendor_id=2;
+    SELECT vendor_payments.id, title, dateofpay, vendor_payments.modeofpay , vendor_payments.amount FROM vendor_supplies RIGHT JOIN vendor_payments on vendor_payments.vendor_supply_id=vendor_supplies.id WHERE  vendor_id=2;`
+   
     db.query(query, [req.params.id], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully Data Retrived', data: results })
