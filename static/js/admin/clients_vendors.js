@@ -200,6 +200,10 @@ function displayVendorRecords(e) {
                 </tr>`
                     paymentsTable.innerHTML += e_tr;
                 })
+            }
+        })
+    }
+
 
 async function displayClientRecords(dealid, target) {
     const reffId = target.parentNode.parentNode.querySelector('.ref').innerText
