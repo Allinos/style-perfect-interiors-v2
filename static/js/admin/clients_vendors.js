@@ -21,7 +21,6 @@ function closeDropdown(e) {
 }
 
 function renderPerClient_vendorData(targetBox, idArr, dataObj, tagType) {
-    console.log(targetBox);
     const targetContainer = document.getElementById(targetBox)
     idArr.forEach((id) => {
         Object.keys(dataObj).forEach((elem) => {
@@ -142,7 +141,7 @@ function displayTableVendor(event) {
     document.querySelector(event).classList.add('table');
 }
 
-function renderClientTablesData(dataArr, tableId, type) {
+function renderClientTablesData(dataArr, tableId, type, totalId) {
     const tableBody = document.getElementById(tableId)
     tableBody.innerHTML = ""
     dataArr.forEach((fin_ex) => {
@@ -157,11 +156,21 @@ function renderClientTablesData(dataArr, tableId, type) {
                 <td class="text">${fin_ex.date ? fin_ex.date : 'N/A'}</td>
                 <td class="text">&#8377; <span>${fin_ex.amount ? fin_ex.amount : 'N/A'}</span></td>
                 <td class="text">${fin_ex.md_type ? fin_ex.md_type : 'N/A'}</td>
-                <td class="text">${fin_ex.title ? fin_ex.title : 'N/A'}</td>
+                <td class="text">${fin_ex.remark ? fin_ex.remark : 'N/A'}</td>
                 <td class="text">${fin_ex.project_id ? fin_ex.project_id : 'N/A'}</td>
                 </tr>`
         tableBody.innerHTML += fin_ex_tr;
     })
+
+    let total = dataArr.reduce((curr, el)=>{ 
+       if (type == 'collection') {
+        if (el.amount_got) { return curr + parseInt(el.amount_got);} 
+       } else {
+        if (el.amount) { return curr + parseInt(el.amount);} 
+       }
+    }, 0)
+    document.getElementById(totalId).innerHTML = total
+
 }
 function displayVendorRecords(e) {
     ReqHandler.GET(window.location.origin + `/admin/user-manager/vendors/getOne/` + e).then((res) => {
@@ -210,8 +219,8 @@ async function displayClientRecords(dealid, target) {
     const data = await method.GET_POST(`admin/user-manager/clients/getOne/${dealid}/${reffId}`, 'GET');
     document.getElementById('client-name').innerHTML = data.data[0][0].deal_name
     renderPerClient_vendorData('per-client-details', ['reference_no', 'contact', 'email', 'total_price', 'agreement_amount', 'city', 'oth_details'], data.data[0][0])
-    renderClientTablesData(data.data[1], 'client-finance', 'collection');
-    renderClientTablesData(data.data[2], 'client-expense');
+    renderClientTablesData(data.data[1], 'client-finance', 'collection', 'client-totalFin');
+    renderClientTablesData(data.data[2], 'client-expense', null, 'client-totalExpense');
 }
 
 
