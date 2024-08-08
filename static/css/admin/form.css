@@ -135,9 +135,9 @@ form .field textarea{
     color: var(--white);
 }
 #newCli{
-    color: var(--secondary-color);
-    background: var(--sec-light-color);
-    outline: 1px dashed var(--sec-outline);
+    color: var(--primary-color);
+    background: var(--primary-light-color);
+    outline: 1px dashed var(--primary-outline);
     width: 100%;
     display: flex;
     justify-content: center;
@@ -147,7 +147,7 @@ form .field textarea{
 #newCli svg{
     width: 20px;
     height: 20px;
-    fill: var(--secondary-color);
+    fill: var(--primary-color);
 }
 
 
