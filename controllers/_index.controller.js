@@ -164,7 +164,7 @@ exports.renderNormalProjectFinance = async (req, res) => {
 
 exports.renderNormalProjectForm = async (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT id FROM clients;`
+        const query = `SELECT id , name ,location FROM clients;`
         await db.query(query, (err, result) => {
             if (!err) {
                 return res.status(200).render('../views/admin/project.form.ejs', { data: result })

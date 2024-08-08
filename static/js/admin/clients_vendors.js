@@ -37,10 +37,10 @@ async function openUpdateClientsVendors(e,type) {
     const editData = await method.GET_POST(`admin/user-manager/${type}s/${dataType}/${e.dataset.id}`, 'GET')
     renderPerClient_vendorData('client-update-form', ['deal_name', 'contact', 'contact2', 'email', 'city', 'oth_details'], editData.data[0], 'input')
     document.querySelector('#update-client-btn').dataset.clid = editData.data[0].id;
+    let inputCtn = document.querySelector('.updateclient')
     // let mainCtn = e.parentElement.parentElement.parentElement;
-    // let inputCtn = document.querySelector('.updateclient')
     // inputCtn.children[0].dataset.id = mainCtn.querySelector('.ref').children[0].innerText
-    // inputCtn.querySelector('#category').value = mainCtn.dataset.type;
+    inputCtn.querySelector('#category').value = type;
     // inputCtn.querySelector('#name').value = (mainCtn.querySelector('.name').children[0].innerText).trim();
     // inputCtn.querySelector('#contact').value = (mainCtn.querySelector('.contact').children[0].innerText).trim();
     // inputCtn.querySelector('#alt_contact').value = (mainCtn.querySelector('.alt_contact').innerText).trim();
@@ -78,7 +78,7 @@ async function AddClientsVendors(e) {
 function UpdateClientsVendors(e) {
     let inputCtn = e.parentElement.parentElement;
     let id = e.dataset.clid;
-    // let cat = inputCtn.querySelector('#category').value;
+    let cat = inputCtn.querySelector('#category').value;
     let name = inputCtn.querySelector('#deal_name').value;
     let contact = inputCtn.querySelector('#contact').value;
     let alt_contact = inputCtn.querySelector('#contact2').value;
@@ -86,7 +86,7 @@ function UpdateClientsVendors(e) {
     let details = inputCtn.querySelector('#oth_details').value;
     let email = inputCtn.querySelector('#email').value;
     data = { name: name, contact: contact, alt_contact: alt_contact, location: location, details: details, email: email };
-    ReqHandler.PUT(window.location.origin + `/admin/user-manager/clients/update/` + id, data)
+    ReqHandler.PUT(window.location.origin + `/admin/user-manager/${cat}s/update/` + id, data)
         .then((res) => {
             if (res.status) {
                 AlertNotify('Success', res.msg, 'success');
