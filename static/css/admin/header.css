@@ -7,13 +7,13 @@
     --black-light-2: rgba(0, 0, 0, 0.8);
 
     --primary-color: hsl(37, 57%, 49%);
-    --primary-outline: hsla(37, 54%, 45%, 0.2);
+    --primary-outline: hsla(37, 54%, 45%, 0.4);
     --primary-light-color: hsl(38, 54%, 95%);
     --primary-bg: hsl(37, 54%, 93%);
     --primary-bgr: hsl(37, 54%, 88%);
 
     --secondary-color: hsl(210, 28%, 25%);
-    --sec-outline: hsla(210, 79%, 51%, 0.2);
+    --sec-outline: hsla(210, 79%, 51%, 0.4);
     --sec-light-color: hsl(210, 92%, 95%);
     --sec-bg: hsl(210, 79%, 93%);
     --sec-bgrd: hsl(210, 79%, 85%);
@@ -532,7 +532,7 @@ nav .nav-lists {
 }
 
 nav .nav-lists hr {
-    outline: 1px solid var(--sec-light-color);
+    outline: 1px solid var(--primary-light-color);
     margin-top: 1rem;
     margin-bottom: 1rem;
 }

@@ -30,9 +30,9 @@
 .userContainer button {
     padding: 8px;
     border-radius: var(--border-radius-1);
-    color: var(--secondary-color);
-    background: var(--sec-light-color);
-    outline: 1px solid var(--sec-outline);
+    color: var(--white);
+    background: var(--primary-color);
+    outline: 1px solid var(--primary-outline);
     font-weight: 600;
     transition: var(--transition-2);
     display: flex;
@@ -47,7 +47,7 @@
 .userContainer button svg {
     width: 20px;
     height: 20px;
-    fill: var(--secondary-color);
+    fill: var(--white);
 }
 
 /* forms  */
