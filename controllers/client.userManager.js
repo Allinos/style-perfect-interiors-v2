@@ -53,8 +53,8 @@ exports.updateClient = (req, res) => {
     })
 }
 exports.deleteClient = (req, res) => {
-    let query = 'DELETE FROM clients WHERE id=?';
-    db.query(query, [req.params.id], (err, results) => {
+    let query = `DELETE FROM deals WHERE deal_name IN (SELECT clients.name FROM clients WHERE id = ${req.params.id});DELETE FROM clients WHERE id=${req.params.id};`;
+    db.query(query, (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully Data Deleted', data: results })
         } else {
