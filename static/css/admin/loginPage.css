@@ -37,7 +37,7 @@ html{
 .login-container h3{
     margin-top: 2rem;
     margin-bottom: 1rem;
-    color: hsl(260, 54%, 45%);
+    color: hsl(37, 54%, 45%);
 }
 .login-container p{
     margin-bottom: 1rem;
@@ -59,10 +59,10 @@ form .field1:hover{
     outline: 1px solid rgba(0, 0, 0, 0.8);
 }
 form .field1:focus-within{
-    outline: 2px solid hsl(208, 79%, 51%);
+    outline: 2px solid hsl(37, 79%, 51%);
 }
 form .field1:focus-within label{
-    color: hsl(208, 79%, 51%);
+    color: hsl(37, 79%, 51%);
 }
 form .field label{
     font-size: 10px;
@@ -106,7 +106,7 @@ form .field i:hover{
 }
 .field span.right{
     float: right;
-    color: hsl(271, 76%, 53%);
+    color: hsl(37, 76%, 53%);
     cursor: pointer;
 }
 .field span.right:hover{
@@ -121,7 +121,7 @@ form .field i:hover{
     border-radius: 5px;
     font-size: 16px;
     font-weight: 600;
-    background: hsl(260, 54%, 45%);
+    background: hsl(37, 54%, 45%);
     color: white;
     cursor: pointer;
     transition: all 300ms ease;
