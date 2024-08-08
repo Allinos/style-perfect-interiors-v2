@@ -175,13 +175,12 @@ function renderClientTablesData(dataArr, tableId, type, totalId) {
 function displayVendorRecords(e) {
     ReqHandler.GET(window.location.origin + `/admin/user-manager/vendors/getOne/` + e).then((res) => {
         if (res) {
-            console.log(res);
             document.getElementById('vendor-name').innerHTML = res.data[0][0].name
             renderPerClient_vendorData('per-vendor-details', ['reference_no', 'contact', 'email', 'total_price', 'city', 'oth_details'], res.data[0][0])
             const suppliesTable = document.getElementById('vendor-supplies')
             const paymentsTable = document.getElementById('vendor-payments')
             let [suppliesSum, paymentsSum] = [0, 0]
-            if (res.data[2] > 0) {
+            if (res.data[2].length > 0) {
                 suppliesTable.innerHTML = "";
                 res.data[1]?.forEach((e) => {
                     suppliesSum += e.total_amount;
@@ -195,10 +194,10 @@ function displayVendorRecords(e) {
                 })
                 document.querySelector('.suppliesSum').innerText = suppliesSum;
             }
-            if (res.data[2] > 0) {
+            if (res.data[2].length > 0) {
                 paymentsTable.innerHTML = "";
                 res.data[2].forEach((e) => {
-                    suppliesSum += e.amount;
+                    paymentsSum += e.amount;
                     const e_tr = `<tr><td>${e.id}</td>
                     <td class="text">${e.title ? e.title : 'N/A'}</td>
                     <td class="text">&#8377; <span>${e.amount ? e.amount : 'N/A'}</span></td>
