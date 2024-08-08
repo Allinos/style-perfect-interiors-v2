@@ -56,7 +56,7 @@ exports.createVendor = (req, res) => {
 exports.updateVendor = (req, res) => {
     let data = req.body;
     let query = 'UPDATE vendors SET name=?, contact=?, contact2=?, email=?, location=?, oth_details=? WHERE id=?;';
-    db.query(query, [data.name,data.contact,data.contact2,data.email,data.location,data.details,req.params.id], (err, results) => {
+    db.query(query, [data.name,data.contact,data.alt_contact,data.email,data.location,data.details,req.params.id], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Successfully Data Updated', data: results })
         } else {

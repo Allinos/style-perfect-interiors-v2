@@ -36,7 +36,7 @@
                             <select name="" id="" onchange="getClientData(this)">
                                 <option value="">Select client reference</option>
                                 <% data?.length > 0 && data.forEach((ref)=> { %>
-                                <option value="<%= ref.id %>"><%= ref.id %> </option>
+                                <option value="<%= ref.id %>"><%= ref.id %> | <%= ref.name %> ( <%= ref.location %> ) </option>
                                 <% }) %>
                             </select>
                         </div>
