@@ -44,7 +44,7 @@
                     <p class="uppercase phead none">Ref. No.</p>
                     <p class="uppercase phead none"> <span id="cumon">Client</span> Name</p>
                     <!-- <p class="uppercase phead none">Contact/Alternate Number</p> -->
-                    <p class="uppercase phead none">Email</p>
+                    <p class="uppercase phead none">Contact Number</p>
                     <p class="uppercase phead none">Address</p>
                     <!-- <p class="uppercase phead none">Other Details</p> -->
                     <!-- ------resposnive class------- -->
@@ -65,14 +65,9 @@
                                         <%= e?.deal_name %>
                                     </span>
                                 </p>
-                                <!-- <p class="contact">
+                                <p class="contact">
                                     <span>
-                                        <%= e?.contact %> /<%= e?.contact2 %>
-                                    </span>
-                                </p> -->
-                                <p class="email">
-                                    <span>
-                                        <%= e?.email %>
+                                        <%= e?.contact %>
                                     </span>
                                 </p>
                                 <p class="location">
@@ -80,12 +75,6 @@
                                         <%= e?.city %>
                                     </span>
                                 </p>
-
-                                <!-- <p class="details none ">
-                                    <span>
-                                        <%= e?.oth_details %>
-                                    </span>
-                                </p> -->
                                 <p class="flexy">
                                     <span class="edit-btn" data-id="<%= e.id %>" onclick="openUpdateClientsVendors(this)">Edit</span>
                                     <span class="butt" onclick="DeleteClientsVendors(this,<%= e?.id %>)"><svg
@@ -102,12 +91,40 @@
                                 </p>
 
                             </div>
+
+                            <!-- ----------open data for accordion---------- -->
+                            <div class="adata data">
+                                <!-- --Dropdown Details-- -->
+                                <div class="finance_expand">
+                                    <div class="installment flex">
+                                        <div class="field">
+                                            <p class="uppercase">Email</p>
+                                            <p class="email">
+                                                <%= e?.email %>
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <p class="uppercase">Alt. Contact</p>
+                                            <p class="alt_contact">
+                                                <%= e?.contact2 %>
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <p class="uppercase">Other Details</p>
+                                            <p class="oth-details">
+                                                <%= e?.oth_details %>
+                                            </p>
+                                        </div>
+                                        <!-- ₹ <%= e?.amount %> /- -->
+                                    </div>
+                                    <!-- ₹ <%= e?.paid %> /- -->
+                                </div>
+                                <!-- ---------------  -->
+                            </div>
                         </div>
                         <% }) %>
                             <!-- ------------------------------ -->
                 </div>
-
-
 
                 <!-- Vendors----------- -->
                 <div class="info-content VendorCtn hide">
@@ -132,11 +149,6 @@
                                 <p class="location">
                                     <span>
                                         <%= e?.location %>
-                                    </span>
-                                </p>
-                                <p class="details none ">
-                                    <span>
-                                        <%= e?.oth_details %>
                                     </span>
                                 </p>
                                 <p class="flexy">
@@ -172,19 +184,22 @@
                                             </p>
                                         </div>
                                         <div class="field">
-                                            <p class="uppercase">Amount</p>
+                                            <p class="uppercase">Other Details</p>
+                                            <p class="oth-details">
+                                                <%= e?.oth_details %>
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <p class="uppercase">Total Purchases</p>
                                             <p class="alt_contact">
                                                 ₹ <%= e?.amount %> /-
                                             </p>
                                         </div>
                                     </div>
                                     <div class="installment flex">
-
                                         <div class="field">
-                                            <p class="uppercase">Paid</p>
-                                            <p class="alt_contact">
-                                                ₹ <%= e?.paid %> /-
-                                            </p>
+                                            <p class="uppercase">Total Payment</p>
+                                            <p class="t-payment">&#8377; <%= e?.paid %> /-</p>
                                         </div>
                                     </div>
                                 </div>
@@ -290,42 +305,31 @@
                 <!-- client render collection and expenses --> 
                 <div class="c-popup hide">
                     <div class="main-popup-container">
-                        <div class="collect-popup" style="background-color: #FFF; box-shadow: none;">
+                        <div class="collect-popup">
                             <button type="button" class="close-c-popup" onclick="closeCpopup(this)">Close</button>
                             <!-- client deatails -->
-                            <div class="main-tables" id="per-client-details"
-                                style="display: flex; flex-direction: column; gap: .6rem; padding: 1rem;">
-                                <h5 style="font-size: 1.2rem; font-weight: 600;" id="client-name">Panchana Deka</h5>
-                                <div class="client-data-x" style="display: flex; gap: 1.5rem">
-                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Reff</span>: <span
-                                            id="reference_no">11223</span>
+                            <div class="main-tables flex" id="per-client-details">
+                                <h2 id="client-name">Panchana Deka</h2>
+                                <div class="client-data-x flex">
+                                    <h5><span>Ref</span>: <span id="reference_no">11223</span>
                                     </h5>
-                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Contact</span>:
+                                    <h5><span>Contact</span>:
                                         <span id="contact">6000192289 | 9988776678</span>
                                     </h5>
                                 </div>
-                                <div class="client-data-x" style="display: flex; gap: 1.8rem">
-                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Email</span>:
+                                <div class="client-data-x flex">
+                                    <h5><span>Email</span>:
                                         <span id="email">Panchanandeka12345678@gmail.com</span>
                                     </h5>
-                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Total Price</span>:
+                                    <h5><span>Total Price</span>:
                                         <span id="total_price">300000</span>
                                     </h5>
-                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Adv. Amount</span>:
+                                    <h5><span>Adv. Amount</span>:
                                         <span id="agreement_amount">50000</span>
                                     </h5>
                                 </div>
-                                <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                        style="font-weight: 600; color: var(--primary-color);">City</span>: <span
-                                        id="city">Guwahati,
-                                        Assam, India, 782001</span></h5>
-                                <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                        style="font-weight: 600; color: var(--primary-color);">Other-details</span>:
+                                <h5><span>City</span>: <span id="city">Guwahati, Assam, India, 782001</span></h5>
+                                <h5><span>Other-details</span>:
                                     <span id="oth_details">need urgent due to shift</span>
                                 </h5>
                             </div>
@@ -405,59 +409,46 @@
                     </div>
                 </div>
 
-
-
-
                 <!-- vendor render supply and payments data -->
                 <div class="c-popup hide" id="vendor-popup">
                     <div class="main-popup-container">
-                        <div class="collect-popup" style="background-color: #FFF; box-shadow: none;">
+                        <div class="collect-popup">
                             <button type="button" class="close-c-popup" onclick="ClosevendorPopup(this)">Close</button>
                             <!-- client deatails -->
-                            <div class="main-tables" id="per-vendor-details"
-                                style="display: flex; flex-direction: column; gap: .6rem; padding: 1rem;">
-                                <h5 style="font-size: 1.2rem; font-weight: 600;" id="vendor-name">Panchana Deka</h5>
-                                <div class="client-data-x" style="display: flex; gap: 1.5rem">
-                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Reff</span>: <span
+                            <div class="main-tables flex" id="per-vendor-details">
+                                <h2 id="vendor-name">Panchana Deka</h2>
+                                <div class="client-data-x flex">
+                                    <h5><span>Reff</span>: <span
                                             id="reference_no">11223</span>
                                     </h5>
-                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Contact</span>:
+                                    <h5><span>Contact</span>:
                                         <span id="contact">6000192289 | 9988776678</span>
                                     </h5>
                                 </div>
-                                <div class="client-data-x" style="display: flex; gap: 1.8rem">
-                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Email</span>:
+                                <div class="client-data-x flex">
+                                    <h5><span>Email</span>:
                                         <span id="email">Panchanandeka12345678@gmail.com</span>
                                     </h5>
-                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Total Price</span>:
+                                    <h5><span>Total Price</span>:
                                         <span id="total_price">300000</span>
                                     </h5>
-                                    <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                            style="font-weight: 600; color: var(--primary-color);">Adv. Amount</span>:
+                                    <h5><span>Adv. Amount</span>:
                                         <span id="agreement_amount">50000</span>
                                     </h5>
                                 </div>
-                                <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                        style="font-weight: 600; color: var(--primary-color);">City</span>: <span
-                                        id="city">Guwahati,
-                                        Assam, India, 782001</span></h5>
-                                <h5 style="font-size: .9rem; font-weight: 500;"><span
-                                        style="font-weight: 600; color: var(--primary-color);">Other-details</span>:
+                                <h5><span>City</span>: <spanid="city">Guwahati, Assam, India, 782001</span></h5>
+                                <h5><span>Other-details</span>:
                                     <span id="oth_details">need urgent due to shift</span>
                                 </h5>
                             </div>
                         </div>
-                        <!-- client finance and expenses -->
-                        <div class="collect-popup second-pop" style="box-shadow: none;">
+                        <!-- Vendor finance and expenses -->
+                        <div class="collect-popup second-pop">
                             <div class="collect-btns flex">
                                 <button type="button" class=""
                                     onclick="displayTableVendor('.vendor-payment-table')">Payments</button>
                                 <button type="button" class=""
-                                    onclick="displayTableVendor('.vendor-supply-table')">Supplies</button>
+                                    onclick="displayTableVendor('.vendor-supply-table')">Purchases</button>
                             </div>
                             <button type="button" class="close-c-popup hide" onclick="closeCpopup(this)">Close</button>
                             <div class="main-tables">
@@ -492,7 +483,7 @@
 
                                 <!-- expenses  -->
                                 <table class="vendor-supply-table hide">
-                                    <caption>Supplies</caption>
+                                    <caption>Purchases</caption>
                                     <thead>
                                         <tr>
                                             <th class="">No.</th>

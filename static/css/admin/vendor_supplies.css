@@ -42,7 +42,7 @@
     right: -42px;
     width: 100px;
     height: 100px;
-    background: hsl(255, 61%, 39%);
+    background: hsl(210, 61%, 39%);
     border-radius: 50%;
     z-index: -1;
 }
@@ -54,7 +54,7 @@
     right: -15px;
     width: 100px;
     height: 100px;
-    background: hsl(255, 61%, 39%);
+    background: hsl(210, 61%, 39%);
     border-radius: 50%;
     z-index: -1;
     opacity: 0.5;
@@ -71,7 +71,7 @@
     right: -42px;
     width: 100px;
     height: 100px;
-    background: hsl(212, 80%, 42%);
+    background: hsl(37, 80%, 42%);
     border-radius: 50%;
     z-index: -1;
 }
@@ -83,7 +83,7 @@
     right: -15px;
     width: 100px;
     height: 100px;
-    background: hsl(212, 80%, 42%);
+    background: hsl(37, 80%, 42%);
     border-radius: 50%;
     z-index: -1;
     opacity: 0.5;
