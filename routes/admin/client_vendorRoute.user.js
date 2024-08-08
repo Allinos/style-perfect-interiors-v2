@@ -20,5 +20,8 @@ userRouter.post('/vendors/create', vendorController.createVendor);
 userRouter.put('/vendors/update/:id', vendorController.updateVendor);
 userRouter.delete('/vendors/delete/:id', vendorController.deleteVendor);
 
+userRouter.get('/vendors/getOneVendorToEdit/:id', vendorController.getOneVendorToEdit);
+
+
 
 module.exports= userRouter;

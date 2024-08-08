@@ -27,6 +27,19 @@ exports.getOneVendor = (req, res) => {
         }
     })
 }
+
+exports.getOneVendorToEdit = (req, res) => {
+    let query = 'SELECT id, name as deal_name , contact, contact2, email, location as city, oth_details FROM vendors WHERE id=?';
+    db.query(query, [req.params.id], (err, results) => {
+        if (!err) {
+            res.status(200).send({ status: true, msg: 'Data retreived successfully', data: results })
+        } else {
+            new errorHandler(501, "Error inside file client.usermanager : 10" + err)
+            res.status(500).send({ status: false, msg: "Internal error occurs!" });
+        }
+    })
+}
+
 exports.createVendor = (req, res) => {
     let data = req.body;
     let query = 'INSERT INTO vendors(name, contact, contact2, email, location, oth_details) VALUES(?,?,?,?,?,?);';

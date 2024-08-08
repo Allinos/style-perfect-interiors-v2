@@ -66,7 +66,7 @@ exports.deleteClient = (req, res) => {
 
 
 exports.getOneClientToEdit = (req, res) => {
-    let query = 'SELECT id, reference_no, deal_name, contact, contact2, agreement_amount, work_name, email, city, oth_details, total_price FROM deals WHERE id=?';
+    let query = 'SELECT id, reference_no, deal_name , contact, contact2, agreement_amount, work_name, email, city, oth_details, total_price FROM deals WHERE id=?';
     db.query(query, [req.params.dealid], (err, results) => {
         if (!err) {
             res.status(200).send({ status: true, msg: 'Data retreived successfully', data: results })

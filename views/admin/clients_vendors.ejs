@@ -76,7 +76,7 @@
                                     </span>
                                 </p>
                                 <p class="flexy">
-                                    <span class="edit-btn" data-id="<%= e.id %>" onclick="openUpdateClientsVendors(this)">Edit</span>
+                                    <span class="edit-btn" data-id="<%= e.id %>" onclick="openUpdateClientsVendors(this,'client')">Edit</span>
                                     <span class="butt" onclick="DeleteClientsVendors(this,<%= e?.id %>)"><svg
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt"
                                             class="icon">
@@ -152,7 +152,7 @@
                                     </span>
                                 </p>
                                 <p class="flexy">
-                                    <span class="edit-btn" onclick="openUpdateClientsVendors(this)">Edit</span>
+                                    <span class="edit-btn"  data-id="<%= e.id %>" onclick="openUpdateClientsVendors(this,'vendor')">Edit</span>
                                     <span class="butt" onclick="DeleteClientsVendors(this,<%= e?.id %>)"><svg
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt"
                                             class="icon">

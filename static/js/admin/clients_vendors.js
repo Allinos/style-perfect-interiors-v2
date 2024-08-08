@@ -31,8 +31,10 @@ function renderPerClient_vendorData(targetBox, idArr, dataObj, tagType) {
     })
 }
 
-async function openUpdateClientsVendors(e) {
-    const editData = await method.GET_POST(`admin/user-manager/clients/getOneClientToEdit/${e.dataset.id}`, 'GET')
+async function openUpdateClientsVendors(e,type) {
+    let dataType = type=='vendor'?'getOneVendorToEdit':'getOneClientToEdit';
+    console.log(`admin/user-manager/${type}s/${dataType}/${e.dataset.id}`);
+    const editData = await method.GET_POST(`admin/user-manager/${type}s/${dataType}/${e.dataset.id}`, 'GET')
     renderPerClient_vendorData('client-update-form', ['deal_name', 'contact', 'contact2', 'email', 'city', 'oth_details'], editData.data[0], 'input')
     document.querySelector('#update-client-btn').dataset.clid = editData.data[0].id;
     // let mainCtn = e.parentElement.parentElement.parentElement;
